@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import { Home } from "./pages/Home";
 import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -18,7 +19,7 @@ function App() {
             </Routes>
           </AnimatePresence>
         </main>
-        {/* <Footer /> */}
+        <Footer />
       </div>
     </Router>
   );

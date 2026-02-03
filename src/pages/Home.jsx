@@ -1,5 +1,6 @@
 import About from "../components/home/About";
 import Blogs from "../components/home/Blogsec";
+import Contact from "../components/home/Contactus";
 import FutureVentures from "../components/home/FutureVentures";
 import Hero from "../components/home/Hero";
 import Services from "../components/home/Service";
@@ -15,6 +16,7 @@ export const Home = () => {
         <WhyChooseUs />
         <FutureVentures />
         <Blogs />
+        <Contact />
       {/* <WhatsAppFloatingButton />
       <CallButton  phoneNumber="+919078713435" /> */}
     </main>
