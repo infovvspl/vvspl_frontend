@@ -5,31 +5,30 @@ import { FiGlobe, FiZap, FiMap, FiSun, FiLayers, FiArrowRight } from 'react-icon
 const FutureVentures = () => {
   const containerVariants = {
     hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1
-      }
-    }
+    visible: { opacity: 1, transition: { staggerChildren: 0.1 } }
   };
 
   const itemVariants = {
     hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.5 }
-    }
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
   };
 
+  const ventures = [
+    { icon: <FiZap />, title: "Power & Energy", desc: "Sustainable infrastructure and renewable distribution networks.", sector: "energy" },
+    { icon: <FiSun />, title: "Organic Agriculture", desc: "Sustainable farming practices and high-yield organic produce.", sector: "agri" },
+    { icon: <FiLayers />, title: "Mining & Minerals", desc: "Responsible extraction and processing of critical mineral resources.", sector: "industrial" },
+    { icon: <FiMap />, title: "Land Development", desc: "Strategic procurement for large-scale industrial projects.", sector: "real_estate" },
+  ];
+
   return (
-    <section className="relative w-full bg-slate-900 overflow-hidden py-24">
-      {/* Background Texture */}
-      <div className="absolute inset-0 z-0 opacity-20 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:24px_24px]"></div>
+    <section className="relative w-full bg-white overflow-hidden py-24">
+      {/* Exact Hero Pattern Background */}
+      <div className="absolute inset-0 z-0 opacity-60">
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#e2e8f0_1px,transparent_1px),linear-gradient(to_bottom,#e2e8f0_1px,transparent_1px)] bg-[size:40px_40px]"></div>
+      </div>
       
-      {/* Ambient Light Orbs */}
-      <div className="absolute top-0 left-0 w-96 h-96 bg-blue-900/20 rounded-full blur-[120px] -z-10"></div>
-      <div className="absolute bottom-0 right-0 w-96 h-96 bg-emerald-900/20 rounded-full blur-[120px] -z-10"></div>
+      {/* Ambient Glows */}
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-50/50 rounded-full blur-[120px] -z-10"></div>
 
       <div className="container mx-auto px-6 relative z-10">
         
@@ -38,148 +37,88 @@ const FutureVentures = () => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center max-w-3xl mx-auto mb-20"
+          className="max-w-3xl mb-16"
         >
-          <span className="inline-block py-1 px-3 rounded-full border border-slate-700 bg-slate-800 text-blue-400 text-xs font-bold tracking-widest uppercase mb-6">
-            Our Future Ventures
-          </span>
-          <h2 className="text-4xl md:text-5xl font-black text-white mb-6 tracking-tight">
-            Expanding Horizons <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-blue-500">
-              Across Industries
+          <div className="flex items-center gap-3 mb-6">
+            <span className="h-[2px] w-12 bg-blue-600"></span>
+            <span className="text-blue-600 text-xs font-bold tracking-[0.3em] uppercase">Diverse Portfolio</span>
+          </div>
+          <h2 className="text-4xl md:text-6xl font-black text-slate-900 mb-6 tracking-tight">
+            Expanding into <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
+              New Frontiers.
             </span>
           </h2>
-          <p className="text-slate-400 text-lg">
-            Beyond software, we are driving growth in critical sectors through sustainable development, resource management, and strategic trade.
+          <p className="text-xl text-slate-500 max-w-2xl leading-relaxed">
+            VVSPL is bridging technology with physical industry. We apply engineering precision to global trade, energy, and resources.
           </p>
         </motion.div>
 
-        {/* Ventures Grid (Bento Style) */}
+        {/* Ventures Grid */}
         <motion.div 
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-50px" }}
+          viewport={{ once: true }}
           className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
         >
           
-          {/* Venture 1: Trade (Large Card) */}
+          {/* Featured: Trade (Large Card) */}
           <motion.div 
             variants={itemVariants}
-            className="lg:col-span-2 group relative bg-slate-800/40 border border-slate-700 rounded-[2rem] p-8 overflow-hidden hover:border-blue-500/50 transition-all duration-500 hover:shadow-2xl hover:shadow-blue-900/20"
+            className="lg:col-span-2 group relative bg-slate-900 rounded-[2.5rem] p-10 overflow-hidden shadow-2xl"
           >
-            <div className="absolute right-0 top-0 w-64 h-full bg-gradient-to-l from-blue-600/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+             <div className="absolute inset-0 opacity-10 bg-[linear-gradient(to_right,#ffffff_1px,transparent_1px),linear-gradient(to_bottom,#ffffff_1px,transparent_1px)] bg-[size:25px_25px]"></div>
             
-            <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between h-full gap-6">
-              <div className="max-w-xl">
-                <div className="w-14 h-14 rounded-2xl bg-blue-600/20 text-blue-400 flex items-center justify-center mb-4 group-hover:bg-blue-600 group-hover:text-white transition-colors">
+            <div className="relative z-10 flex flex-col md:flex-row items-start justify-between h-full gap-8">
+              <div className="max-w-lg">
+                <div className="w-14 h-14 rounded-2xl bg-blue-600 text-white flex items-center justify-center mb-8 shadow-lg shadow-blue-500/20">
                   <FiGlobe size={28} />
                 </div>
-                <h3 className="text-3xl font-bold text-white mb-3">Trade, Import & Export</h3>
-                <p className="text-slate-400 leading-relaxed">
-                  Facilitating global commerce with streamlined logistics, customs brokerage, and international supply chain management. We connect markets.
+                <h3 className="text-3xl font-black text-white mb-4">Trade, Import & Export</h3>
+                <p className="text-slate-400 leading-relaxed text-lg">
+                  Facilitating global commerce with streamlined logistics and international supply chain management. We connect global markets with technical efficiency.
                 </p>
               </div>
               
-              <div className="hidden md:flex gap-2">
-                <span className="px-3 py-1 rounded-full border border-slate-600 text-slate-400 text-xs font-bold">Logistics</span>
-                <span className="px-3 py-1 rounded-full border border-slate-600 text-slate-400 text-xs font-bold">Global</span>
+              <div className="flex flex-col items-end justify-between h-full">
+                <div className="bg-white/10 backdrop-blur-md px-4 py-2 rounded-xl border border-white/10 text-blue-400 font-mono text-xs">
+                  sector: "global_logistics"
+                </div>
+                <button className="mt-8 px-6 py-3 bg-white text-slate-900 rounded-full font-bold hover:bg-blue-50 transition-all flex items-center gap-2">
+                  View Operations <FiArrowRight />
+                </button>
               </div>
             </div>
           </motion.div>
 
-          {/* Venture 2: Power & Energy */}
-          <motion.div 
-            variants={itemVariants}
-            className="group relative bg-slate-800/40 border border-slate-700 rounded-[2rem] p-8 overflow-hidden hover:border-yellow-500/50 transition-all duration-500"
-          >
-            <div className="absolute inset-0 bg-gradient-to-br from-yellow-600/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
-            
-            <div className="relative z-10 h-full flex flex-col justify-between">
-              <div>
-                <div className="w-12 h-12 rounded-xl bg-yellow-500/10 text-yellow-400 flex items-center justify-center mb-6 group-hover:bg-yellow-500 group-hover:text-black transition-colors">
-                  <FiZap size={24} />
-                </div>
-                <h3 className="text-2xl font-bold text-white mb-2">Power & Energy</h3>
-                <p className="text-slate-400 text-sm leading-relaxed">
-                  Sustainable energy distribution and infrastructure projects.
-                </p>
+          {/* Sub Ventures */}
+          {ventures.map((v, i) => (
+            <motion.div 
+              key={i}
+              variants={itemVariants}
+              className="group bg-white border border-slate-200 rounded-[2rem] p-8 shadow-[0_10px_40px_rgba(0,0,0,0.03)] hover:shadow-xl hover:shadow-blue-100/50 transition-all duration-300 relative overflow-hidden"
+            >
+              <div className="absolute top-6 right-8 text-[10px] font-mono text-slate-300 group-hover:text-blue-400 transition-colors">
+                //{v.sector}
               </div>
-              <div className="mt-6 w-8 h-8 rounded-full border border-slate-600 flex items-center justify-center text-slate-400 group-hover:bg-yellow-500 group-hover:text-black group-hover:border-transparent transition-all">
-                <FiArrowRight size={16} />
-              </div>
-            </div>
-          </motion.div>
 
-          {/* Venture 3: Organic Agriculture */}
-          <motion.div 
-            variants={itemVariants}
-            className="group relative bg-slate-800/40 border border-slate-700 rounded-[2rem] p-8 overflow-hidden hover:border-emerald-500/50 transition-all duration-500"
-          >
-            <div className="absolute inset-0 bg-gradient-to-br from-emerald-600/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
-            
-            <div className="relative z-10 h-full flex flex-col justify-between">
-              <div>
-                <div className="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center mb-6 group-hover:bg-emerald-500 group-hover:text-black transition-colors">
-                  <FiSun size={24} />
-                </div>
-                <h3 className="text-2xl font-bold text-white mb-2">Organic Agriculture</h3>
-                <p className="text-slate-400 text-sm leading-relaxed">
-                  Promoting sustainable farming practices and organic produce.
-                </p>
+              <div className="w-12 h-12 rounded-xl bg-slate-50 text-blue-600 flex items-center justify-center mb-6 group-hover:bg-blue-600 group-hover:text-white transition-all shadow-sm">
+                {React.cloneElement(v.icon, { size: 24 })}
               </div>
-              <div className="mt-6 w-8 h-8 rounded-full border border-slate-600 flex items-center justify-center text-slate-400 group-hover:bg-emerald-500 group-hover:text-black group-hover:border-transparent transition-all">
-                <FiArrowRight size={16} />
-              </div>
-            </div>
-          </motion.div>
+              
+              <h3 className="text-2xl font-bold text-slate-900 mb-3 group-hover:text-blue-600 transition-colors">
+                {v.title}
+              </h3>
+              <p className="text-slate-500 text-sm leading-relaxed mb-6">
+                {v.desc}
+              </p>
 
-          {/* Venture 4: Mining & Minerals */}
-          <motion.div 
-            variants={itemVariants}
-            className="group relative bg-slate-800/40 border border-slate-700 rounded-[2rem] p-8 overflow-hidden hover:border-orange-500/50 transition-all duration-500"
-          >
-            <div className="absolute inset-0 bg-gradient-to-br from-orange-600/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
-            
-            <div className="relative z-10 h-full flex flex-col justify-between">
-              <div>
-                <div className="w-12 h-12 rounded-xl bg-orange-500/10 text-orange-400 flex items-center justify-center mb-6 group-hover:bg-orange-500 group-hover:text-black transition-colors">
-                  <FiLayers size={24} />
-                </div>
-                <h3 className="text-2xl font-bold text-white mb-2">Mining & Minerals</h3>
-                <p className="text-slate-400 text-sm leading-relaxed">
-                  Responsible extraction and processing of mineral resources.
-                </p>
+              <div className="flex items-center gap-2 text-xs font-black text-slate-400 group-hover:text-blue-600 transition-all uppercase tracking-widest">
+                Learn More <FiArrowRight />
               </div>
-              <div className="mt-6 w-8 h-8 rounded-full border border-slate-600 flex items-center justify-center text-slate-400 group-hover:bg-orange-500 group-hover:text-black group-hover:border-transparent transition-all">
-                <FiArrowRight size={16} />
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Venture 5: Land Acquisition (Spans 2 cols) */}
-          <motion.div 
-            variants={itemVariants}
-            className="md:col-span-2 lg:col-span-1 group relative bg-slate-800/40 border border-slate-700 rounded-[2rem] p-8 overflow-hidden hover:border-purple-500/50 transition-all duration-500"
-          >
-            <div className="absolute inset-0 bg-gradient-to-br from-purple-600/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
-            
-            <div className="relative z-10 h-full flex flex-col justify-between">
-              <div>
-                <div className="w-12 h-12 rounded-xl bg-purple-500/10 text-purple-400 flex items-center justify-center mb-6 group-hover:bg-purple-500 group-hover:text-white transition-colors">
-                  <FiMap size={24} />
-                </div>
-                <h3 className="text-2xl font-bold text-white mb-2">Land Acquisition & Dev</h3>
-                <p className="text-slate-400 text-sm leading-relaxed">
-                  Strategic land procurement for industrial, commercial, and residential development projects.
-                </p>
-              </div>
-              <div className="mt-6 w-8 h-8 rounded-full border border-slate-600 flex items-center justify-center text-slate-400 group-hover:bg-purple-500 group-hover:text-white group-hover:border-transparent transition-all">
-                <FiArrowRight size={16} />
-              </div>
-            </div>
-          </motion.div>
+            </motion.div>
+          ))}
 
         </motion.div>
       </div>

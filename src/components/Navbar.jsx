@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { FiMenu, FiX, FiArrowRight } from 'react-icons/fi';
+import { FiMenu, FiX, FiArrowRight, FiTerminal } from 'react-icons/fi';
+import Logo from "../assets/logo2.png";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
 
-  // 1. Handle Scroll Effect for Header Background
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
@@ -16,16 +16,9 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // 2. LOCK BODY SCROLL when mobile menu is open
   useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'unset';
-    }
-    return () => {
-      document.body.style.overflow = 'unset';
-    };
+    document.body.style.overflow = isOpen ? 'hidden' : 'unset';
+    return () => { document.body.style.overflow = 'unset'; };
   }, [isOpen]);
 
   const navLinks = [
@@ -37,39 +30,49 @@ const Navbar = () => {
 
   return (
     <>
-      {/* HEADER */}
+      {/* HEADER - Transparent to Glassmorphic */}
       <header
-        className={`fixed w-full top-0 z-50 transition-all duration-300 ${
-          scrolled ? 'bg-white/90 backdrop-blur-md shadow-sm py-4' : 'bg-transparent py-6'
+        className={`fixed w-full top-0 z-[100] transition-all duration-500 ${
+          scrolled 
+            ? 'bg-white/80 backdrop-blur-xl border-b border-slate-200 py-3' 
+            : 'bg-transparent py-6'
         }`}
       >
         <div className="container mx-auto px-6">
           <div className="flex items-center justify-between">
-            
-            {/* Logo */}
-            <Link to="/" className="flex items-center gap-2 z-50 group">
-              <div className="h-10 w-10 bg-slate-900 rounded-xl flex items-center justify-center text-white font-black text-xl group-hover:bg-blue-600 transition-colors">
-                V
+
+            {/* Logo Section */}
+            <Link to="/" className="flex items-center gap-3 z-50 group">
+              <div className="h-12 w-12 rounded-xl bg-white shadow-sm flex items-center justify-center p-1 border border-slate-100 group-hover:border-blue-500 transition-colors">
+                <img
+                  src={Logo}
+                  alt="VVSPL Logo"
+                  className="h-full w-full object-contain"
+                />
               </div>
-              <span className="text-2xl font-black text-slate-900 tracking-tight">
-                VVSPL
-              </span>
+              <div className="flex flex-col">
+                <span className="text-xl font-black text-slate-900 tracking-tighter leading-none">
+                  VVSPL
+                </span>
+                <span className="text-[8px] font-bold text-blue-600 uppercase tracking-[0.2em] mt-1">
+                  Technology Hub
+                </span>
+              </div>
             </Link>
 
-            {/* Desktop Navigation */}
-            <nav className="hidden md:flex items-center gap-8">
+            {/* Desktop Navigation - Documentation Style */}
+            <nav className="hidden md:flex items-center bg-slate-100/50 backdrop-blur-sm p-1 rounded-full border border-slate-200/50">
               {navLinks.map((link) => (
                 <Link
                   key={link.name}
                   to={link.path}
-                  className={`text-sm font-bold transition-colors duration-200 relative ${
-                    location.pathname === link.path ? 'text-blue-600' : 'text-slate-600 hover:text-slate-900'
+                  className={`px-6 py-2 text-[11px] font-black uppercase tracking-widest transition-all rounded-full ${
+                    location.pathname === link.path 
+                      ? 'bg-white text-blue-600 shadow-sm' 
+                      : 'text-slate-500 hover:text-slate-900'
                   }`}
                 >
                   {link.name}
-                  {location.pathname === link.path && (
-                    <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 bg-blue-600 rounded-full"></span>
-                  )}
                 </Link>
               ))}
             </nav>
@@ -78,57 +81,64 @@ const Navbar = () => {
             <div className="hidden md:block">
               <Link
                 to="/contact"
-                className="px-6 py-2.5 bg-slate-900 text-white rounded-full text-sm font-bold hover:bg-blue-600 hover:shadow-lg hover:shadow-blue-200 transition-all flex items-center gap-2 group"
+                className="px-6 py-3 bg-slate-900 text-white rounded-2xl text-[11px] font-black uppercase tracking-widest hover:bg-blue-600 hover:shadow-xl hover:shadow-blue-500/20 transition-all flex items-center gap-3 group"
               >
                 Let's Talk
-                <FiArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+                <FiArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
               </Link>
             </div>
 
-            {/* Mobile Menu Button */}
+            {/* Mobile Toggle */}
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className={`md:hidden z-50 p-2 rounded-lg transition-colors duration-300 ${
-                isOpen ? 'bg-slate-100 text-slate-900' : 'bg-transparent text-slate-900'
-              }`}
+              className="md:hidden z-50 w-10 h-10 flex items-center justify-center bg-slate-900 text-white rounded-xl"
               aria-label="Toggle menu"
             >
-              {isOpen ? <FiX size={28} /> : <FiMenu size={28} />}
+              {isOpen ? <FiX size={20} /> : <FiMenu size={20} />}
             </button>
 
           </div>
         </div>
       </header>
 
-      {/* MOBILE MENU OVERLAY */}
-      {/* Z-index 40 ensures it sits below the header (z-50) so the header stays visible on top, 
-          or you can set z-50 and it covers the header completely. 
-          Here we set z-40 to create a "drawer" effect that doesn't cover the header logo. */}
+      {/* MOBILE MENU OVERLAY - Sync with Landing Page Design */}
       <div
-        className={`fixed inset-0 bg-white/95 backdrop-blur-xl z-40 md:hidden transform transition-all duration-300 ease-in-out flex flex-col items-center justify-center gap-8 overflow-hidden ${
-          isOpen ? 'translate-y-0 opacity-100' : '-translate-y-[100%] opacity-0'
+        className={`fixed inset-0 z-[90] bg-white md:hidden transition-all duration-500 ease-in-out ${
+          isOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
       >
-        {navLinks.map((link) => (
-          <Link
-            key={link.name}
-            to={link.path}
-            onClick={() => setIsOpen(false)}
-            className={`text-3xl font-bold transition-colors ${
-              location.pathname === link.path ? 'text-blue-600' : 'text-slate-800'
-            }`}
-          >
-            {link.name}
-          </Link>
-        ))}
+        {/* Signature Grid Pattern */}
+        <div className="absolute inset-0 opacity-40 bg-[linear-gradient(to_right,#e2e8f0_1px,transparent_1px),linear-gradient(to_bottom,#e2e8f0_1px,transparent_1px)] bg-[size:30px_30px]"></div>
         
-        <Link
-          to="/contact"
-          onClick={() => setIsOpen(false)}
-          className="w-3/4 py-4 bg-slate-900 text-white rounded-2xl text-center font-bold shadow-lg shadow-slate-200/50 hover:bg-blue-600 transition-colors"
-        >
-          Start Project
-        </Link>
+        {/* Background Blobs */}
+        <div className="absolute top-[-10%] right-[-10%] w-64 h-64 bg-blue-100 rounded-full blur-[80px]"></div>
+        <div className="absolute bottom-[-10%] left-[-10%] w-64 h-64 bg-purple-100 rounded-full blur-[80px]"></div>
+
+        <div className="relative h-full flex flex-col items-center justify-center px-6 gap-6">
+          <FiTerminal className="text-blue-600 mb-4" size={40} />
+          
+          {navLinks.map((link, idx) => (
+            <Link
+              key={link.name}
+              to={link.path}
+              onClick={() => setIsOpen(false)}
+              className={`text-4xl font-black tracking-tighter transition-all ${
+                location.pathname === link.path ? 'text-blue-600' : 'text-slate-900'
+              }`}
+              style={{ transitionDelay: `${idx * 50}ms` }}
+            >
+              {link.name}.
+            </Link>
+          ))}
+
+          <Link
+            to="/contact"
+            onClick={() => setIsOpen(false)}
+            className="mt-8 w-full max-w-[280px] py-5 bg-slate-900 text-white rounded-2xl text-center font-black uppercase tracking-widest shadow-xl shadow-blue-500/10"
+          >
+            Start Project
+          </Link>
+        </div>
       </div>
     </>
   );

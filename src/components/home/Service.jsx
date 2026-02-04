@@ -1,33 +1,35 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FiGlobe, FiSmartphone, FiCpu, FiLayers, FiArrowRight, FiCommand } from 'react-icons/fi';
+import { FiGlobe, FiSmartphone, FiCpu, FiLayers, FiArrowRight, FiCommand, FiCode } from 'react-icons/fi';
 
-const ServicesDark = () => {
+const Services = () => {
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: { staggerChildren: 0.15 }
+      transition: { staggerChildren: 0.1 }
     }
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
+    hidden: { opacity: 0, y: 20 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.6, ease: "easeOut" }
+      transition: { duration: 0.5 }
     }
   };
 
   return (
-    <section className="relative w-full bg-slate-950 overflow-hidden py-24">
-      {/* Abstract Background Mesh */}
-      <div className="absolute inset-0 z-0 opacity-40">
-        <div className="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-purple-600/30 rounded-full blur-[120px]"></div>
-        <div className="absolute bottom-[-10%] right-[-10%] w-[500px] h-[500px] bg-blue-600/20 rounded-full blur-[120px]"></div>
-        <div className="absolute top-[40%] left-[40%] w-[300px] h-[300px] bg-indigo-500/20 rounded-full blur-[100px]"></div>
-      </div>
+    <section className="relative w-full bg-white overflow-hidden py-24">
+      {/* Background: Sharp Grid Pattern (Hero Match) */}
+      {/* <div className="absolute inset-0 z-0 opacity-60">
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#e2e8f0_1px,transparent_1px),linear-gradient(to_bottom,#e2e8f0_1px,transparent_1px)] bg-[size:40px_40px]"></div>
+      </div> */}
+
+      {/* Ambient Blue/Purple Glow (Like the Hero's abstract blobs) */}
+      <div className="absolute top-[-10%] left-[-10%] w-[600px] h-[600px] bg-blue-100/40 rounded-full blur-[120px] -z-10"></div>
+      <div className="absolute bottom-[-10%] right-[-10%] w-[400px] h-[400px] bg-purple-100/30 rounded-full blur-[120px] -z-10"></div>
 
       <div className="container mx-auto px-6 relative z-10">
         
@@ -36,145 +38,96 @@ const ServicesDark = () => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center max-w-3xl mx-auto mb-20"
+          className="max-w-3xl mb-16"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-900/50 border border-slate-800 backdrop-blur-sm mb-6">
-            <div className="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></div>
-            <span className="text-blue-400 text-xs font-bold tracking-[0.2em] uppercase">Services</span>
+          <div className="flex items-center gap-3 mb-4">
+             <div className="h-[2px] w-12 bg-blue-600"></div>
+             <span className="text-blue-600 text-xs font-bold tracking-widest uppercase">Expertise</span>
           </div>
           
-          <h2 className="text-4xl md:text-6xl font-black text-white mb-6 tracking-tight">
-            Engineered for <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400">
-              High Performance
+          <h2 className="text-4xl md:text-6xl font-black text-slate-900 mb-6 tracking-tight">
+            Solutions That <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
+              Scale Your Vision
             </span>
           </h2>
-          <p className="text-slate-400 text-lg">
-            We deploy cutting-edge architectures that scale, secure, and accelerate your business trajectory.
-          </p>
         </motion.div>
 
-        {/* Glass Grid */}
+        {/* Services Grid */}
         <motion.div 
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-50px" }}
-          className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
+          viewport={{ once: true }}
+          className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
         >
-          
-          {/* Service Card Component Logic */}
-          {/* Card 1 */}
-          <motion.div 
-            variants={itemVariants}
-            className="group relative bg-slate-900/40 border border-slate-800/50 backdrop-blur-xl rounded-[2rem] p-8 hover:bg-slate-900/60 transition-all duration-500 hover:-translate-y-2 overflow-hidden"
-          >
-            {/* Hover Glow Effect */}
-            <div className="absolute inset-0 bg-gradient-to-br from-blue-600/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
-            
-            <div className="relative z-10">
-              <div className="w-14 h-14 rounded-2xl bg-slate-800 text-blue-400 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-blue-600 group-hover:text-white transition-all duration-300 shadow-[0_0_20px_rgba(59,130,246,0.1)] group-hover:shadow-[0_0_30px_rgba(59,130,246,0.5)]">
-                <FiGlobe size={28} />
+          {/* Card Component */}
+          {[
+            { icon: <FiGlobe />, title: "Web Solutions", desc: "Enterprise-grade web apps built with React/Next.js.", color: "blue" },
+            { icon: <FiSmartphone />, title: "Mobile Apps", desc: "Seamless iOS and Android experiences using Flutter.", color: "purple" },
+            { icon: <FiCommand />, title: "DevOps", desc: "Automated CI/CD pipelines and cloud architecture.", color: "blue" },
+            { icon: <FiLayers />, title: "UI/UX Design", desc: "Modern, high-conversion interfaces that look stunning.", color: "purple" }
+          ].map((service, index) => (
+            <motion.div 
+              key={index}
+              variants={itemVariants}
+              className="group relative bg-white border border-slate-200 p-8 rounded-[2rem] shadow-[0_10px_40px_rgba(0,0,0,0.03)] hover:shadow-xl hover:shadow-blue-100/50 transition-all duration-300"
+            >
+              {/* Terminal-style circle accents */}
+              <div className="absolute top-6 right-8 flex gap-1.5 opacity-30">
+                <div className="w-2 h-2 rounded-full bg-slate-300"></div>
+                <div className="w-2 h-2 rounded-full bg-slate-300"></div>
               </div>
-              <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-blue-200 transition-colors">Web Solutions</h3>
-              <p className="text-slate-400 text-sm leading-relaxed mb-6">
-                Robust web applications built on React and Next.js. From SaaS platforms to high-traffic marketing sites.
-              </p>
-              <div className="flex items-center text-blue-400 font-bold text-sm gap-2 opacity-60 group-hover:opacity-100 transition-opacity">
-                Explore <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
-              </div>
-            </div>
-          </motion.div>
 
-          {/* Card 2 */}
-          <motion.div 
-            variants={itemVariants}
-            className="group relative bg-slate-900/40 border border-slate-800/50 backdrop-blur-xl rounded-[2rem] p-8 hover:bg-slate-900/60 transition-all duration-500 hover:-translate-y-2 overflow-hidden"
-          >
-            <div className="absolute inset-0 bg-gradient-to-br from-purple-600/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
-            
-            <div className="relative z-10">
-              <div className="w-14 h-14 rounded-2xl bg-slate-800 text-purple-400 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-purple-600 group-hover:text-white transition-all duration-300 shadow-[0_0_20px_rgba(147,51,234,0.1)] group-hover:shadow-[0_0_30px_rgba(147,51,234,0.5)]">
-                <FiSmartphone size={28} />
+              <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-8 transition-all duration-300 ${
+                service.color === 'blue' ? 'bg-blue-600 shadow-blue-200' : 'bg-purple-600 shadow-purple-200'
+              } text-white shadow-lg`}>
+                {React.cloneElement(service.icon, { size: 26 })}
               </div>
-              <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-purple-200 transition-colors">Mobile Engineering</h3>
-              <p className="text-slate-400 text-sm leading-relaxed mb-6">
-                Native and cross-platform mobile experiences using Flutter and React Native for seamless iOS/Android performance.
-              </p>
-              <div className="flex items-center text-purple-400 font-bold text-sm gap-2 opacity-60 group-hover:opacity-100 transition-opacity">
-                Explore <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
-              </div>
-            </div>
-          </motion.div>
 
-          {/* Card 3 */}
-          <motion.div 
-            variants={itemVariants}
-            className="group relative bg-slate-900/40 border border-slate-800/50 backdrop-blur-xl rounded-[2rem] p-8 hover:bg-slate-900/60 transition-all duration-500 hover:-translate-y-2 overflow-hidden"
-          >
-            <div className="absolute inset-0 bg-gradient-to-br from-orange-600/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
-            
-            <div className="relative z-10">
-              <div className="w-14 h-14 rounded-2xl bg-slate-800 text-orange-400 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-orange-600 group-hover:text-white transition-all duration-300 shadow-[0_0_20px_rgba(249,115,22,0.1)] group-hover:shadow-[0_0_30px_rgba(249,115,22,0.5)]">
-                <FiCommand size={28} />
-              </div>
-              <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-orange-200 transition-colors">Cloud & DevOps</h3>
-              <p className="text-slate-400 text-sm leading-relaxed mb-6">
-                Scalable infrastructure on AWS and Azure. CI/CD pipelines and serverless architectures for maximum uptime.
+              <h3 className="text-2xl font-bold text-slate-900 mb-4 group-hover:text-blue-600 transition-colors">
+                {service.title}
+              </h3>
+              <p className="text-slate-500 leading-relaxed mb-8">
+                {service.desc}
               </p>
-              <div className="flex items-center text-orange-400 font-bold text-sm gap-2 opacity-60 group-hover:opacity-100 transition-opacity">
-                Explore <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
-              </div>
-            </div>
-          </motion.div>
 
-          {/* Card 4 */}
+              <div className="flex items-center gap-2 text-slate-900 font-bold text-sm group-hover:gap-4 transition-all">
+                Learn More <FiArrowRight className="text-blue-600" />
+              </div>
+            </motion.div>
+          ))}
+
+          {/* Featured Large Card (AI & Intelligence) */}
           <motion.div 
             variants={itemVariants}
-            className="group relative bg-slate-900/40 border border-slate-800/50 backdrop-blur-xl rounded-[2rem] p-8 hover:bg-slate-900/60 transition-all duration-500 hover:-translate-y-2 overflow-hidden"
+            className="md:col-span-2 group relative bg-slate-900 rounded-[2.5rem] p-10 overflow-hidden shadow-2xl"
           >
-            <div className="absolute inset-0 bg-gradient-to-br from-green-600/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+            {/* Darker Grid for contrast in the featured card */}
+            <div className="absolute inset-0 opacity-10 bg-[linear-gradient(to_right,#ffffff_1px,transparent_1px),linear-gradient(to_bottom,#ffffff_1px,transparent_1px)] bg-[size:25px_25px]"></div>
             
-            <div className="relative z-10">
-              <div className="w-14 h-14 rounded-2xl bg-slate-800 text-green-400 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-green-600 group-hover:text-white transition-all duration-300 shadow-[0_0_20px_rgba(34,197,94,0.1)] group-hover:shadow-[0_0_30px_rgba(34,197,94,0.5)]">
-                <FiLayers size={28} />
-              </div>
-              <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-green-200 transition-colors">UI/UX Design</h3>
-              <p className="text-slate-400 text-sm leading-relaxed mb-6">
-                Intuitive, accessible, and beautiful interfaces. We design for engagement and conversion.
-              </p>
-              <div className="flex items-center text-green-400 font-bold text-sm gap-2 opacity-60 group-hover:opacity-100 transition-opacity">
-                Explore <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Card 5 (Span 2) */}
-          <motion.div 
-            variants={itemVariants}
-            className="md:col-span-2 lg:col-span-2 group relative bg-gradient-to-r from-slate-900 to-slate-800 border border-slate-700/50 backdrop-blur-xl rounded-[2rem] p-10 hover:border-slate-600 transition-all duration-500 hover:-translate-y-2 overflow-hidden"
-          >
-            {/* Decorative Grid inside card */}
-            <div className="absolute inset-0 opacity-20" style={{backgroundImage: 'linear-gradient(#333 1px, transparent 1px), linear-gradient(90deg, #333 1px, transparent 1px)', backgroundSize: '20px 20px'}}></div>
-            
-            <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-8">
-              <div className="max-w-2xl">
-                <div className="flex items-center gap-4 mb-4">
-                  <div className="w-12 h-12 rounded-xl bg-indigo-500/20 text-indigo-400 flex items-center justify-center border border-indigo-500/30">
-                    <FiCpu size={24} />
-                  </div>
-                  <span className="text-indigo-400 font-bold tracking-widest text-xs uppercase">Next Gen Services</span>
+            <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-10">
+              <div className="max-w-md">
+                <div className="flex items-center gap-3 mb-6">
+                  <FiCpu className="text-blue-400" size={32} />
+                  <span className="text-blue-400 font-bold uppercase tracking-tighter text-sm">Next-Gen Technology</span>
                 </div>
-                <h3 className="text-3xl font-bold text-white mb-4">AI & Data Intelligence</h3>
+                <h3 className="text-3xl font-black text-white mb-4">AI & Data Intelligence</h3>
                 <p className="text-slate-400 leading-relaxed">
-                  Unlock the potential of your data. We integrate custom Machine Learning models, LLMs (Large Language Models), and predictive analytics to automate workflows and provide deep business insights.
+                  Integrating custom LLMs and predictive models to automate your complex business workflows.
                 </p>
               </div>
               
-              <button className="px-8 py-4 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl font-bold shadow-[0_0_20px_rgba(79,70,229,0.3)] transition-all whitespace-nowrap">
-                Consult Our Experts
-              </button>
+              <div className="flex-shrink-0">
+                <button className="px-8 py-4 bg-white text-slate-950 rounded-full font-bold hover:bg-blue-50 transition-all flex items-center gap-3 shadow-xl">
+                  Consult an Expert <FiArrowRight />
+                </button>
+              </div>
+            </div>
+            
+            {/* Subtle Code Snippet decoration */}
+            <div className="absolute -bottom-4 -right-4 opacity-10">
+               <FiCode size={200} className="text-white" />
             </div>
           </motion.div>
 
@@ -184,4 +137,4 @@ const ServicesDark = () => {
   );
 };
 
-export default ServicesDark;
+export default Services;

@@ -1,37 +1,33 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FiCpu, FiShield, FiZap, FiCheckCircle, FiArrowRight } from 'react-icons/fi';
+import { FiCpu, FiShield, FiZap, FiArrowRight, FiCode, FiLayers } from 'react-icons/fi';
 
 const About = () => {
-  // Animation configuration for staggered children
   const containerVariants = {
     hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2
-      }
-    }
+    visible: { opacity: 1, transition: { staggerChildren: 0.2 } }
   };
 
   const itemVariants = {
     hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.5 }
-    }
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
   };
 
   return (
-    <section className="relative w-full bg-slate-50 overflow-hidden py-24">
-      {/* Background: Subtle Dot Grid Pattern (Consistent with Hero) */}
-      <div className="absolute inset-0 z-0 opacity-40">
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px]"></div>
-      </div>
+    <section className="relative w-full bg-white overflow-hidden py-24">
+      {/* Background: Sharp Grid Pattern (Exact Hero Match) */}
+      {/* <div className="absolute inset-0 z-0 opacity-60">
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#e2e8f0_1px,transparent_1px),linear-gradient(to_bottom,#e2e8f0_1px,transparent_1px)] bg-[size:35px_35px]"></div>
+      </div> */}
       
-      {/* Ambient Glow for Depth */}
-      <div className="absolute top-1/2 left-1/4 w-96 h-96 bg-orange-100/50 rounded-full blur-[100px] -z-10"></div>
+      {/* Floating Decorative Elements (Hero Vibe) */}
+      <motion.div 
+        animate={{ y: [0, -20, 0] }} 
+        transition={{ duration: 4, repeat: Infinity }}
+        className="absolute top-20 right-[10%] text-blue-200 opacity-50 hidden lg:block"
+      >
+        <FiCode size={120} />
+      </motion.div>
 
       <div className="container mx-auto px-6 relative z-10">
         
@@ -40,146 +36,113 @@ const About = () => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center max-w-3xl mx-auto mb-20"
+          className="text-left max-w-3xl mb-20"
         >
-          <span className="inline-block py-1 px-3 rounded-full bg-orange-50 text-orange-600 text-xs font-bold tracking-wider uppercase mb-4 border border-orange-100">
-            About us
-          </span>
-          <h2 className="text-4xl md:text-5xl font-black text-slate-900 mb-6 leading-tight">
-            Building Digital Products with <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-500">
-              Precision & Passion
+          <div className="h-1 w-20 bg-blue-600 mb-6"></div>
+          <h2 className="text-4xl md:text-6xl font-black text-slate-900 mb-6 leading-[1.1]">
+            Engineering the <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-blue-600">
+              Future of Scale.
             </span>
           </h2>
-          <p className="text-lg text-slate-600 leading-relaxed">
-            VVSPL isn't just a software agency; we are your technical partners. We bridge the gap between complex business requirements and elegant, scalable digital solutions.
+          <p className="text-xl text-slate-500 max-w-2xl leading-relaxed">
+            VVSPL architects robust digital platforms. We don't just write code; we build the infrastructure that powers your vision.
           </p>
         </motion.div>
 
-        {/* Features Grid: Our Core Values */}
+        {/* Features Grid */}
         <motion.div 
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          className="grid md:grid-cols-3 gap-8 mb-24"
+          viewport={{ once: true }}
+          className="grid md:grid-cols-3 gap-8 mb-32"
         >
-          {/* Card 1 */}
-          <motion.div 
-            variants={itemVariants}
-            className="group bg-white p-8 rounded-[2rem] shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100 hover:-translate-y-2"
-          >
-            <div className="w-16 h-16 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center mb-6 group-hover:bg-blue-600 group-hover:text-white transition-colors duration-300">
-              <FiZap size={32} />
-            </div>
-            <h3 className="text-xl font-bold text-slate-900 mb-3">Agile Development</h3>
-            <p className="text-slate-500 leading-relaxed text-sm">
-              We adapt quickly to change. Our iterative process ensures your product evolves rapidly with your market needs.
-            </p>
-          </motion.div>
-
-          {/* Card 2 */}
-          <motion.div 
-            variants={itemVariants}
-            className="group bg-white p-8 rounded-[2rem] shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100 hover:-translate-y-2"
-          >
-            <div className="w-16 h-16 rounded-2xl bg-indigo-50 text-indigo-600 flex items-center justify-center mb-6 group-hover:bg-indigo-600 group-hover:text-white transition-colors duration-300">
-              <FiCpu size={32} />
-            </div>
-            <h3 className="text-xl font-bold text-slate-900 mb-3">Future-Ready Tech</h3>
-            <p className="text-slate-500 leading-relaxed text-sm">
-              We build on modern stacks (React, Node, Python) ensuring your software is scalable, secure, and performant.
-            </p>
-          </motion.div>
-
-          {/* Card 3 */}
-          <motion.div 
-            variants={itemVariants}
-            className="group bg-white p-8 rounded-[2rem] shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100 hover:-translate-y-2"
-          >
-            <div className="w-16 h-16 rounded-2xl bg-pink-50 text-pink-600 flex items-center justify-center mb-6 group-hover:bg-pink-600 group-hover:text-white transition-colors duration-300">
-              <FiShield size={32} />
-            </div>
-            <h3 className="text-xl font-bold text-slate-900 mb-3">Enterprise Security</h3>
-            <p className="text-slate-500 leading-relaxed text-sm">
-              Data protection is paramount. We implement industry-standard security protocols to keep your digital assets safe.
-            </p>
-          </motion.div>
+          {[
+            { icon: <FiZap />, title: "Rapid Deployment", color: "blue", desc: "Optimized stacks designed for immediate market impact and speed." },
+            { icon: <FiLayers />, title: "Clean Architecture", color: "purple", desc: "Deeply modular codebases built for long-term maintainability." },
+            { icon: <FiCpu />, title: "Infinite Scaling", color: "blue", desc: "Cloud-native solutions that grow seamlessly with your user base." }
+          ].map((feature, i) => (
+            <motion.div 
+              key={i}
+              variants={itemVariants}
+              className="group bg-white/80 backdrop-blur-sm p-10 rounded-3xl border border-slate-200 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-blue-100 transition-all duration-300"
+            >
+              <div className={`w-14 h-14 rounded-2xl ${feature.color === 'blue' ? 'bg-blue-600' : 'bg-purple-600'} text-white flex items-center justify-center mb-8 shadow-lg shadow-blue-200`}>
+                {React.cloneElement(feature.icon, { size: 28 })}
+              </div>
+              <h3 className="text-2xl font-bold text-slate-900 mb-4">{feature.title}</h3>
+              <p className="text-slate-500 leading-relaxed">{feature.desc}</p>
+            </motion.div>
+          ))}
         </motion.div>
 
-        {/* Split Section: Our Mission & Vision */}
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
+        {/* Split Section */}
+        <div className="grid lg:grid-cols-2 gap-20 items-center">
           
-          {/* Left: Image / Visual */}
+          {/* Left: Interactive-looking Visual */}
           <motion.div 
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
             className="relative"
           >
-            {/* Abstract Shape behind image */}
-            <div className="absolute -top-6 -left-6 w-full h-full border-2 border-slate-200 rounded-[2.5rem] -z-10"></div>
+            {/* The "Terminal" shadow effect from your hero image */}
+            <div className="absolute inset-0 bg-gradient-to-tr from-blue-400/20 to-purple-400/20 rounded-[3rem] blur-3xl -z-10"></div>
             
-            <img 
-              src="https://img.freepik.com/free-vector/programming-coding-development-isometric-flowchart-with-daily-meeting-coding-advertising-template-dev-ops-different-steps_1284-60024.jpg?t=st=1770102719~exp=1770106319~hmac=658d211005a80b55ccc74b51c09651d2185afca778775d2e7050e63d0bd36db1&w=1480" 
-              alt="Team working together" 
-              className="w-full h-auto rounded-[2.5rem] shadow-2xl object-cover"
-            />
-            
-            {/* Floating Stat Card */}
-            <div className="absolute -bottom-8 -right-8 bg-white p-6 rounded-2xl shadow-xl max-w-[200px] border border-slate-100 hidden md:block">
-              <div className="flex items-center gap-3 mb-2">
-                <div className="p-2 bg-green-100 rounded-lg text-green-600">
-                  <FiCheckCircle size={20} />
+            <div className="relative bg-slate-900 rounded-[2.5rem] overflow-hidden shadow-2xl border-8 border-slate-800">
+                <img 
+                src="https://img.freepik.com/free-vector/programming-coding-development-isometric-flowchart-with-daily-meeting-coding-advertising-template-dev-ops-different-steps_1284-60024.jpg?w=1480" 
+                alt="Architecture" 
+                className="w-full h-auto opacity-80"
+                />
+                {/* Floating Overlay Card (Matches Hero Terminal) */}
+                <div className="absolute top-6 right-6 bg-white/90 backdrop-blur-md p-4 rounded-xl shadow-2xl border border-white/50 hidden md:block">
+                    <div className="flex gap-2 mb-2">
+                        <div className="w-3 h-3 rounded-full bg-red-400"></div>
+                        <div className="w-3 h-3 rounded-full bg-yellow-400"></div>
+                        <div className="w-3 h-3 rounded-full bg-green-400"></div>
+                    </div>
+                    <code className="text-[10px] text-blue-600">vvs.deploy(status: "infinite")</code>
                 </div>
-                <span className="font-bold text-slate-900">Success Rate</span>
-              </div>
-              <p className="text-3xl font-black text-slate-900">98%</p>
             </div>
           </motion.div>
 
-          {/* Right: Text Content */}
+          {/* Right: Content */}
           <motion.div
-            initial={{ opacity: 0, x: 50 }}
+            initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
           >
-            <h3 className="text-3xl md:text-4xl font-black text-slate-900 mb-6">
-              Our Mission is to <br /> Simplify Complexity.
+            <h3 className="text-4xl font-black text-slate-900 mb-8 tracking-tight">
+              We build the code that <br /> 
+              <span className="text-blue-600">scales with your vision.</span>
             </h3>
-            <p className="text-slate-600 mb-6 leading-relaxed">
-              At VVSPL, we believe that great software should feel invisible—it should work so seamlessly that the user only notices the results, not the technology behind them. 
-            </p>
-            <p className="text-slate-600 mb-8 leading-relaxed">
-              Founded with a vision to democratize enterprise-grade technology, we have helped startups and Fortune 500 companies alike launch products that define their categories.
-            </p>
-
-            <ul className="space-y-4 mb-10">
+            
+            <div className="space-y-6 mb-10">
               {[
-                "End-to-end product lifecycle management",
-                "Dedicated support & maintenance teams",
-                "Transparent development processes"
-              ].map((item, index) => (
-                <li key={index} className="flex items-center gap-3 text-slate-700 font-medium">
-                  <div className="h-6 w-6 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 text-sm">
+                { t: "Cutting-edge Stacks", d: "React, Node, and Python architected for speed." },
+                { t: "Strategic Growth", d: "We align technical roadmaps with business goals." }
+              ].map((item, i) => (
+                <div key={i} className="flex gap-4">
+                  <div className="mt-1 flex-shrink-0 w-6 h-6 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center">
                     <FiArrowRight size={14} />
                   </div>
-                  {item}
-                </li>
+                  <div>
+                    <h4 className="font-bold text-slate-900">{item.t}</h4>
+                    <p className="text-slate-500 text-sm">{item.d}</p>
+                  </div>
+                </div>
               ))}
-            </ul>
+            </div>
 
-            <button className="px-8 py-3.5 bg-slate-900 text-white rounded-2xl font-bold hover:shadow-lg hover:shadow-blue-200 transition-all flex items-center gap-2">
-              Meet The Team
-              <FiArrowRight size={18} />
+            <button className="group px-10 py-4 bg-blue-600 text-white rounded-full font-bold hover:bg-blue-700 transition-all flex items-center gap-3 shadow-xl shadow-blue-200">
+              Explore Our Ventures
+              <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
             </button>
           </motion.div>
 
         </div>
-
       </div>
     </section>
   );
