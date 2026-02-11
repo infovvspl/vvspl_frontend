@@ -1,128 +1,128 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { FiGlobe, FiZap, FiMap, FiLayers, FiTwitter, FiLinkedin, FiInstagram, FiArrowRight, FiMail, FiTerminal } from 'react-icons/fi';
-import Logo from "../assets/logo2.png"; // Importing the same logo for consistency
+import React from "react";
+import { Link } from "react-router-dom";
+import LogoImg from "../assets/logo2.png";
 
 const Footer = () => {
-  const year = new Date().getFullYear();
+    const currentYear = new Date().getFullYear();
 
-  return (
-    <footer className="relative w-full bg-[#030712] text-white overflow-hidden">
-      {/* Signature Grid Pattern (Dark Mode) */}
-      <div className="absolute inset-0 z-0 opacity-10">
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff_1px,transparent_1px),linear-gradient(to_bottom,#ffffff_1px,transparent_1px)] bg-[size:40px_40px]"></div>
-      </div>
+    const footerLinks = {
+        company: [
+            { name: "About Us", path: "about" },
+            { name: "Our Services", path: "services" },
+            { name: "Ventures", path: "ventures" },
+            { name: "Contact", path: "contact" },
+        ],
+        resources: [
+            { name: "Blogs", path: "blogs" },
+            { name: "Case Studies", path: "ventures" },
+            { name: "Support", path: "contact" },
+            { name: "Privacy Policy", path: "/" },
+        ],
+        social: [
+            { name: "LinkedIn", url: "https://linkedin.com" },
+            { name: "Twitter", url: "https://twitter.com" },
+            { name: "Instagram", url: "https://instagram.com" },
+            { name: "Facebook", url: "https://facebook.com" },
+        ],
+    };
 
-      {/* Top Accent Line */}
-      <div className="h-[2px] w-full bg-gradient-to-r from-transparent via-blue-600 to-transparent relative z-10"></div>
+    const scrollToSection = (id) => {
+        const element = document.getElementById(id);
+        if (element) {
+            element.scrollIntoView({ behavior: "smooth" });
+        }
+    };
 
-      <div className="container mx-auto px-6 pt-20 pb-10 relative z-10">
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-16 mb-20">
-          
-          {/* Column 1: Brand Intelligence */}
-          <div className="space-y-8">
-            <div className="flex items-center gap-3">
-              <div className="h-12 w-12 bg-white rounded-xl p-2">
-                <img src={Logo} alt="VVSPL" className="w-full h-full object-contain" />
-              </div>
-              <div>
-                <span className="text-2xl font-black tracking-tighter block leading-none">VVSPL</span>
-                <span className="text-[10px] font-bold text-blue-500 uppercase tracking-[0.3em]">Conglomerate</span>
-              </div>
+    return (
+        <footer className="bg-white dark:bg-[#050505] text-black dark:text-white pt-20 pb-10 border-t border-slate-200 dark:border-white/5 relative overflow-hidden transition-colors duration-300">
+            {/* Background Glow */}
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-px bg-gradient-to-r from-transparent via-[#0070F0]/50 to-transparent shadow-[0_0_30px_rgba(0,112,240,0.3)] dark:shadow-[0_0_30px_#0070F0]" />
+
+            <div className="container mx-auto px-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+                    {/* Brand Section */}
+                    <div className="lg:col-span-1">
+                        <Link to="/" className="flex items-center gap-3 mb-6" onClick={() => window.scrollTo(0, 0)}>
+                            <img src={LogoImg} alt="VVSPL Logo" className="h-10 w-10 object-contain" />
+                            <span className="text-2xl font-black italic tracking-tighter text-black dark:text-white">VVSPL</span>
+                        </Link>
+                        <p className="text-neutral-600 dark:text-neutral-400 text-sm leading-relaxed mb-6">
+                            Accelerating digital transformation with cutting-edge solutions.
+                            Veteran's Venture where vision meets velocity.
+                        </p>
+                    </div>
+
+                    {/* Quick Links */}
+                    <div>
+                        <h4 className="text-black dark:text-white font-bold uppercase tracking-widest text-xs mb-6 underline decoration-[#0070F0]/40 underline-offset-8">Company</h4>
+                        <ul className="space-y-4">
+                            {footerLinks.company.map((link) => (
+                                <li key={link.name}>
+                                    <button
+                                        onClick={() => scrollToSection(link.path)}
+                                        className="text-neutral-600 dark:text-neutral-400 hover:text-[#0070F0] dark:hover:text-[#0070F0] text-sm transition-colors cursor-pointer"
+                                    >
+                                        {link.name}
+                                    </button>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+
+                    {/* Resources */}
+                    <div>
+                        <h4 className="text-black dark:text-white font-bold uppercase tracking-widest text-xs mb-6 underline decoration-[#0070F0]/40 underline-offset-8">Resources</h4>
+                        <ul className="space-y-4">
+                            {footerLinks.resources.map((link) => (
+                                <li key={link.name}>
+                                    <button
+                                        onClick={() => scrollToSection(link.path)}
+                                        className="text-neutral-600 dark:text-neutral-400 hover:text-[#0070F0] dark:hover:text-[#0070F0] text-sm transition-colors cursor-pointer"
+                                    >
+                                        {link.name}
+                                    </button>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+
+                    {/* Connect */}
+                    <div>
+                        <h4 className="text-black dark:text-white font-bold uppercase tracking-widest text-xs mb-6 underline decoration-[#0070F0]/40 underline-offset-8">Connect</h4>
+                        <div className="flex flex-wrap gap-4 mb-6">
+                            {footerLinks.social.map((link) => (
+                                <a
+                                    key={link.name}
+                                    href={link.url}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="w-10 h-10 rounded-full bg-black/5 dark:bg-white/5 border border-slate-200 dark:border-white/10 flex items-center justify-center text-neutral-600 dark:text-neutral-400 hover:bg-[#0070F0] hover:text-white hover:border-[#0070F0] transition-all transform hover:-translate-y-1"
+                                    aria-label={link.name}
+                                >
+                                    <span className="text-[10px] font-bold uppercase tracking-tighter">{link.name.slice(0, 2)}</span>
+                                </a>
+                            ))}
+                        </div>
+                        <p className="text-neutral-500 text-xs italic">
+                            Stay updated with our latest insights and news.
+                        </p>
+                    </div>
+                </div>
+
+                {/* Bottom Bar */}
+                <div className="pt-10 border-t border-slate-200 dark:border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
+                    <p className="text-neutral-500 text-xs">
+                        © {currentYear} Veterans Venture Software Private Limited. All rights reserved.
+                    </p>
+                    <div className="flex gap-8">
+                        <Link to="/" className="text-neutral-500 hover:text-[#0070F0] text-xs transition-colors">Terms of Service</Link>
+                        <Link to="/" className="text-neutral-500 hover:text-[#0070F0] text-xs transition-colors">Privacy Policy</Link>
+                        <Link to="/" className="text-neutral-500 hover:text-[#0070F0] text-xs transition-colors">Cookie Policy</Link>
+                    </div>
+                </div>
             </div>
-            
-            <p className="text-slate-400 text-sm leading-relaxed max-w-xs">
-              Architecting the digital and industrial future through software precision and sustainable resource management.
-            </p>
-
-            <div className="flex gap-3">
-              {[FiTwitter, FiLinkedin, FiInstagram].map((Icon, i) => (
-                <a key={i} href="#" className="w-10 h-10 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:bg-blue-600 hover:text-white hover:border-blue-600 transition-all group">
-                  <Icon size={18} />
-                </a>
-              ))}
-            </div>
-          </div>
-
-          {/* Column 2: Navigation Protocol */}
-          <div>
-            <h4 className="text-[10px] font-black uppercase tracking-[0.4em] text-blue-500 mb-8">System Links</h4>
-            <ul className="space-y-4">
-              {['Home', 'About Us', 'Services', 'Why Choose Us', 'Contact'].map((item) => (
-                <li key={item}>
-                  <a href="#" className="text-slate-400 hover:text-white text-sm font-bold transition-all flex items-center gap-2 group">
-                    <span className="h-[1px] w-0 bg-blue-600 group-hover:w-4 transition-all duration-300"></span>
-                    {item}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Column 3: Venture Portfolio */}
-          <div>
-            <h4 className="text-[10px] font-black uppercase tracking-[0.4em] text-blue-500 mb-8">Venture Modules</h4>
-            <ul className="space-y-5">
-              {[
-                { name: 'Trade & Logistics', icon: <FiGlobe />, color: 'group-hover:text-blue-400' },
-                { name: 'Power & Energy', icon: <FiZap />, color: 'group-hover:text-yellow-400' },
-                { name: 'Land & Development', icon: <FiMap />, color: 'group-hover:text-emerald-400' },
-                { name: 'Mining & Minerals', icon: <FiLayers />, color: 'group-hover:text-orange-400' },
-              ].map((venture) => (
-                <li key={venture.name}>
-                  <a href="#" className={`text-slate-400 text-sm font-bold flex items-center gap-3 group transition-colors ${venture.color}`}>
-                    <span className="text-slate-700 group-hover:text-inherit transition-colors">{venture.icon}</span>
-                    {venture.name}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Column 4: Newsletter Secure Feed */}
-          <div>
-            <h4 className="text-[10px] font-black uppercase tracking-[0.4em] text-blue-500 mb-8">Newsletter Feed</h4>
-            <p className="text-slate-400 text-sm mb-6 leading-relaxed">
-              Receive encrypted updates on our latest tech deployments.
-            </p>
-            
-            <form className="relative group" onSubmit={(e) => e.preventDefault()}>
-              <input 
-                type="email" 
-                placeholder="root@vvspl.com" 
-                className="w-full pl-4 pr-12 py-4 bg-slate-900/50 border border-slate-800 rounded-2xl text-xs font-mono text-white placeholder:text-slate-700 focus:outline-none focus:border-blue-600 transition-all"
-              />
-              <button className="absolute right-2 top-2 bottom-2 px-4 bg-blue-600 text-white rounded-xl hover:bg-blue-500 transition-all">
-                <FiArrowRight size={18} />
-              </button>
-            </form>
-            <div className="mt-4 flex items-center gap-2 text-[10px] font-bold text-slate-600 uppercase">
-              <FiTerminal size={12} />
-              Status: Ready for input
-            </div>
-          </div>
-        </div>
-
-        {/* System Metadata Bar */}
-        <div className="pt-8 border-t border-slate-900/50 flex flex-col md:flex-row justify-between items-center gap-6">
-          <div className="flex flex-col md:flex-row items-center gap-4 md:gap-8">
-            <p className="text-slate-600 text-[10px] font-bold uppercase tracking-widest">
-              © {year} VVSPL PROTOCOL
-            </p>
-            <div className="flex gap-6">
-              <a href="#" className="text-slate-600 hover:text-blue-500 text-[10px] font-bold uppercase tracking-widest transition-colors">Privacy_Policy</a>
-              <a href="#" className="text-slate-600 hover:text-blue-500 text-[10px] font-bold uppercase tracking-widest transition-colors">Terms_of_Service</a>
-            </div>
-          </div>
-          
-          <div className="flex items-center gap-2 text-[10px] font-bold text-slate-700 uppercase tracking-widest">
-            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-            All Systems Operational
-          </div>
-        </div>
-      </div>
-    </footer>
-  );
+        </footer>
+    );
 };
 
 export default Footer;
