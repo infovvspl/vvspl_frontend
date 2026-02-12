@@ -1,123 +1,91 @@
 import React from 'react';
-import { motion } from 'framer-motion';
-import { FiAward, FiCpu, FiUsers, FiCheckCircle, FiTrendingUp, FiShield, FiTerminal } from 'react-icons/fi';
 
-const WhyChooseUs = () => {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { staggerChildren: 0.1 } }
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
-  };
+const WhyChooseUs = ({ innerRef }) => {
+  const points = [
+    { title: "Hyper-Speed", desc: "Optimized with Vite for near-instant load times and rapid deployment cycles." },
+    { title: "Fluid Motion", desc: "GSAP driven animations for buttery smooth UX that keeps users engaged." },
+    { title: "Scaleable", desc: "Built with modular React components designed for long-term growth and agility." }
+  ];
 
   return (
-    <section className="relative w-full bg-white overflow-hidden py-24">
-      {/* Hero-Match Background Grid */}
-      <div className="absolute inset-0 z-0 opacity-60">
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#e2e8f0_1px,transparent_1px),linear-gradient(to_bottom,#e2e8f0_1px,transparent_1px)] bg-[size:40px_40px]"></div>
+    <section
+      ref={innerRef}
+      className="tunnel-section absolute inset-0 flex items-center justify-center bg-[#050505] text-white overflow-hidden opacity-0"
+    >
+      {/* --- BACKGROUND LAYER: DARK GRID --- */}
+      <div className="absolute inset-0 z-0">
+        <img
+          src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2426"
+          alt="Technical Grid"
+          className="w-full h-full object-cover origin-center opacity-[0.05] grayscale"
+        />
+        {/* Radar/Scanline Effect */}
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#050505] via-transparent to-[#050505]" />
       </div>
-      
-      {/* Blue Ambient Glow (Matches Hero blobs) */}
-      <div className="absolute top-1/4 right-0 w-96 h-96 bg-blue-100/40 rounded-full blur-[120px] -z-10"></div>
 
-      <div className="container mx-auto px-6 relative z-10">
-        
-        {/* Section Header */}
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="max-w-3xl mb-20"
-        >
-          <div className="flex items-center gap-3 mb-6">
-            <span className="h-[2px] w-12 bg-blue-600"></span>
-            <span className="text-blue-600 text-xs font-bold tracking-[0.3em] uppercase">Metrics of Success</span>
-          </div>
-          <h2 className="text-4xl md:text-6xl font-black text-slate-900 mb-6 tracking-tight">
-            Built for <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">Performance.</span><br />
-            Designed for Growth.
-          </h2>
-          <p className="text-xl text-slate-500 leading-relaxed max-w-2xl">
-            We don't just deliver projects; we engineer high-frequency digital assets that give you a competitive edge.
-          </p>
-        </motion.div>
+      <div className="relative z-10 w-full max-w-7xl px-8 md:px-16">
+        <div className="flex flex-col lg:flex-row gap-12 lg:gap-20 items-center">
 
-        {/* Main Content Grid */}
-        <motion.div 
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="grid lg:grid-cols-2 gap-16 items-start"
-        >
-          
-          {/* Left Side: Module-style Stats */}
-          <div className="grid grid-cols-2 gap-6">
-            {[
-              { icon: <FiAward />, label: "Years Exp.", val: "1+", color: "blue" },
-              { icon: <FiCpu />, label: "Deployments", val: "20+", color: "purple" },
-              { icon: <FiUsers />, label: "Global Clients", val: "5+", color: "blue" },
-              { icon: <FiTrendingUp />, label: "Uptime", val: "99.9%", color: "purple" }
-            ].map((stat, i) => (
-              <motion.div 
-                key={i}
-                variants={itemVariants}
-                className="relative bg-white/80 backdrop-blur-md p-8 rounded-[2.5rem] border border-slate-200 shadow-[0_8px_30px_rgb(0,0,0,0.04)] group hover:-translate-y-2 transition-all duration-300 overflow-hidden"
-              >
-                {/* Decorative Terminal Dot */}
-                <div className="absolute top-4 right-6 w-2 h-2 rounded-full bg-slate-200 group-hover:bg-blue-400"></div>
-                
-                <div className={`w-12 h-12 rounded-xl mb-6 flex items-center justify-center ${
-                  stat.color === 'blue' ? 'bg-blue-600 text-white shadow-lg shadow-blue-100' : 'bg-slate-900 text-white shadow-lg shadow-slate-200'
-                }`}>
-                  {React.cloneElement(stat.icon, { size: 24 })}
-                </div>
-                <h3 className="text-4xl font-black text-slate-900 mb-1">{stat.val}</h3>
-                <p className="text-slate-500 text-sm font-bold uppercase tracking-wider">{stat.label}</p>
-              </motion.div>
-            ))}
-          </div>
-
-          {/* Right Side: Feature Set (The "Code" View) */}
-          <motion.div 
-            variants={itemVariants}
-            className="bg-slate-900 rounded-[2.5rem] p-10 shadow-2xl relative overflow-hidden"
-          >
-            {/* Terminal Top Bar */}
-            <div className="flex gap-2 mb-10">
-              <div className="w-3 h-3 rounded-full bg-red-500/50"></div>
-              <div className="w-3 h-3 rounded-full bg-yellow-500/50"></div>
-              <div className="w-3 h-3 rounded-full bg-green-500/50"></div>
-              <span className="ml-4 text-[10px] font-mono text-slate-500 uppercase tracking-widest">vvs_strategic_protocol.v2</span>
+          {/* LEFT: Massive Bold Typography */}
+          <div className="lg:w-1/2">
+            <span className="text-blue-500 font-mono text-[10px] tracking-[1em] uppercase mb-6 block font-bold">
+              // Differentiators
+            </span>
+            <h2 className="text-6xl md:text-[7.5rem] font-black uppercase italic tracking-tighter leading-[0.8] mb-8">
+              Impact <br />
+              <span className="text-transparent" style={{ WebkitTextStroke: '1px rgba(255,255,255,0.3)' }}>Beyond</span> <br />
+              Code.
+            </h2>
+            
+            <div className="max-w-sm space-y-6">
+              <div className="h-[1px] w-full bg-gradient-to-r from-blue-600 to-transparent" />
+              <p className="text-zinc-400 text-sm font-light leading-relaxed italic border-l border-blue-500/50 pl-4">
+                "We don't build software to maintain the status quo. We build it to disrupt it through unmatched velocity."
+              </p>
             </div>
+          </div>
 
-            <div className="space-y-10">
-              {[
-                { title: "Transparent Architecture", icon: <FiCheckCircle />, desc: "Real-time visibility into every sprint via our proprietary dev-portal." },
-                { title: "Security Protocols", icon: <FiShield />, desc: "AES-256 encryption and SOC2 compliant development environments." },
-                { title: "Scale-First Logic", icon: <FiTerminal />, desc: "Microservices-ready codebases designed for 10x traffic spikes." }
-              ].map((reason, i) => (
-                <div key={i} className="flex items-start gap-6 group">
-                  <div className="mt-1 w-10 h-10 rounded-full border border-slate-700 flex items-center justify-center text-blue-400 group-hover:bg-blue-600 group-hover:text-white group-hover:border-blue-600 transition-all duration-300">
-                    {React.cloneElement(reason.icon, { size: 20 })}
+          {/* RIGHT: High-Contrast Grid */}
+          <div className="lg:w-1/2 grid grid-cols-1 md:grid-cols-2 gap-px bg-zinc-800/50 border border-zinc-800 backdrop-blur-xl shadow-2xl">
+            {points.map((point, index) => (
+              <div key={index} className="p-8 md:p-10 bg-[#050505] group hover:bg-zinc-900 transition-colors duration-300">
+                <div className="flex flex-col h-full justify-between space-y-12">
+                  <div className="flex justify-between items-start">
+                    <span className="text-4xl font-black text-zinc-800 group-hover:text-blue-500/20 transition-colors">
+                      0{index + 1}
+                    </span>
+                    <div className="w-8 h-8 rounded-full border border-zinc-800 flex items-center justify-center group-hover:border-blue-500 transition-colors">
+                      <div className="w-1 h-1 bg-blue-500 rounded-full" />
+                    </div>
                   </div>
                   <div>
-                    <h4 className="text-xl font-bold text-white mb-2">{reason.title}</h4>
-                    <p className="text-slate-400 text-sm leading-relaxed">{reason.desc}</p>
+                    <h3 className="text-xl font-bold uppercase tracking-tight text-white mb-3">
+                      {point.title}
+                    </h3>
+                    <p className="text-zinc-500 text-sm leading-relaxed group-hover:text-zinc-300 transition-colors">
+                      {point.desc}
+                    </p>
                   </div>
                 </div>
-              ))}
+              </div>
+            ))}
+
+            {/* Velocity Display Box */}
+            <div className="p-8 md:p-10 bg-blue-600 flex flex-col justify-center items-center text-center">
+              <p className="text-[10px] uppercase tracking-widest text-blue-100 font-bold mb-2">Current Velocity</p>
+              <p className="text-5xl font-black text-white italic tracking-tighter">99.9%</p>
+              <div className="mt-4 w-12 h-1 bg-white/30 rounded-full overflow-hidden">
+                <div className="w-full h-full bg-white animate-pulse" />
+              </div>
             </div>
+          </div>
 
-            {/* Subtle Gradient Overlay */}
-            <div className="absolute -bottom-20 -right-20 w-64 h-64 bg-blue-600/20 rounded-full blur-[100px]"></div>
-          </motion.div>
-
-        </motion.div>
+        </div>
       </div>
+
+      {/* Aesthetic Peripheral Glow */}
+      <div className="absolute -bottom-24 -right-24 w-96 h-96 bg-blue-600/10 rounded-full blur-[100px] pointer-events-none" />
     </section>
   );
 };

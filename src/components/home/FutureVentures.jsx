@@ -1,127 +1,96 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { FiGlobe, FiZap, FiMap, FiSun, FiLayers, FiArrowRight } from 'react-icons/fi';
+import React, { useRef } from 'react';
 
-const FutureVentures = () => {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { staggerChildren: 0.1 } }
-  };
+const FutureVentures = ({ innerRef }) => {
+  const sectionRef = useRef(null);
+  const scrollContainerRef = useRef(null);
 
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
-  };
-
-  const ventures = [
-    { icon: <FiZap />, title: "Power & Energy", desc: "Sustainable infrastructure and renewable distribution networks.", sector: "energy" },
-    { icon: <FiSun />, title: "Organic Agriculture", desc: "Sustainable farming practices and high-yield organic produce.", sector: "agri" },
-    { icon: <FiLayers />, title: "Mining & Minerals", desc: "Responsible extraction and processing of critical mineral resources.", sector: "industrial" },
-    { icon: <FiMap />, title: "Land Development", desc: "Strategic procurement for large-scale industrial projects.", sector: "real_estate" },
+  const sectors = [
+    { title: "Trade Import Export", desc: "Digitalizing global supply chains with real-time tracking.", img: "https://images.unsplash.com/photo-1578575437130-527eed3abbec?q=80&w=2070", icon: "🚢" },
+    { title: "Land Acquisition", desc: "Smart real estate integration using geographic data models.", img: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=2064", icon: "🏗️" },
+    { title: "Mining & Minerals", desc: "Optimizing extraction throughput with specialized AI.", img: "https://images.unsplash.com/photo-1517089596392-fb9a9033e05b?q=80&w=2070", icon: "💎" },
+    { title: "Power & Energy", desc: "Intelligent grid management for the next energy frontier.", img: "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?q=80&w=2070", icon: "⚡" },
+    { title: "AI in Logistics", desc: "Autonomous routing and demand forecasting systems.", img: "https://images.unsplash.com/photo-1606220588913-b38f7c26605e?q=80&w=2070", icon: "🚚" },
+    { title: "Smart City Life", desc: "Urban infrastructure powered by neural network insights.", img: "https://images.unsplash.com/photo-1605810230436-d25d263a1e7c?q=80&w=2070", icon: "🏙️" }
   ];
 
   return (
-    <section className="relative w-full bg-white overflow-hidden py-24">
-      {/* Exact Hero Pattern Background */}
-      <div className="absolute inset-0 z-0 opacity-60">
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#e2e8f0_1px,transparent_1px),linear-gradient(to_bottom,#e2e8f0_1px,transparent_1px)] bg-[size:40px_40px]"></div>
+    <section
+      ref={(el) => {
+        sectionRef.current = el;
+        if (innerRef) innerRef.current = el;
+      }}
+      className="absolute inset-0 flex items-center justify-start bg-zinc-950 overflow-hidden opacity-0"
+    >
+      {/* Background Layer */}
+      <div className="absolute inset-0 z-0">
+        <img
+          src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072"
+          alt="Future Background"
+          className="w-full h-full object-cover origin-center opacity-[0.2]"
+        />
+        <div className="absolute inset-0 bg-black/60" />
       </div>
-      
-      {/* Ambient Glows */}
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-50/50 rounded-full blur-[120px] -z-10"></div>
 
-      <div className="container mx-auto px-6 relative z-10">
-        
-        {/* Section Header */}
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="max-w-3xl mb-16"
-        >
-          <div className="flex items-center gap-3 mb-6">
-            <span className="h-[2px] w-12 bg-blue-600"></span>
-            <span className="text-blue-600 text-xs font-bold tracking-[0.3em] uppercase">Diverse Portfolio</span>
-          </div>
-          <h2 className="text-4xl md:text-6xl font-black text-slate-900 mb-6 tracking-tight">
-            Expanding into <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
-              New Frontiers.
-            </span>
-          </h2>
-          <p className="text-xl text-slate-500 max-w-2xl leading-relaxed">
-            VVSPL is bridging technology with physical industry. We apply engineering precision to global trade, energy, and resources.
-          </p>
-        </motion.div>
+      {/* Header */}
+      <div className="absolute top-16 left-8 md:left-16 z-20">
+        <h2 className="text-blue-500 font-mono text-[10px] md:text-xs tracking-[0.6em] uppercase mb-4">
+          Pipeline
+        </h2>
+        <h3 className="text-white text-5xl md:text-7xl font-black uppercase italic tracking-tighter leading-none">
+          Future <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-white/40">Expansion</span>
+        </h3>
+      </div>
 
-        {/* Ventures Grid */}
-        <motion.div 
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
-        >
-          
-          {/* Featured: Trade (Large Card) */}
-          <motion.div 
-            variants={itemVariants}
-            className="lg:col-span-2 group relative bg-slate-900 rounded-[2.5rem] p-10 overflow-hidden shadow-2xl"
+      {/* Horizontal Scroll Wrapper */}
+      <div
+        ref={scrollContainerRef}
+        id="future-scroll-container"
+        className="flex h-screen items-center px-[10vw] gap-8 md:gap-16 w-fit"
+      >
+        {sectors.map((s, i) => (
+          <div
+            key={i}
+            className="relative w-[85vw] md:w-[45vw] lg:w-[32vw] h-[60vh] md:h-[65vh] flex-shrink-0 group overflow-hidden border border-white/10 bg-zinc-900/40 backdrop-blur-xl"
           >
-             <div className="absolute inset-0 opacity-10 bg-[linear-gradient(to_right,#ffffff_1px,transparent_1px),linear-gradient(to_bottom,#ffffff_1px,transparent_1px)] bg-[size:25px_25px]"></div>
-            
-            <div className="relative z-10 flex flex-col md:flex-row items-start justify-between h-full gap-8">
-              <div className="max-w-lg">
-                <div className="w-14 h-14 rounded-2xl bg-blue-600 text-white flex items-center justify-center mb-8 shadow-lg shadow-blue-500/20">
-                  <FiGlobe size={28} />
-                </div>
-                <h3 className="text-3xl font-black text-white mb-4">Trade, Import & Export</h3>
-                <p className="text-slate-400 leading-relaxed text-lg">
-                  Facilitating global commerce with streamlined logistics and international supply chain management. We connect global markets with technical efficiency.
-                </p>
-              </div>
-              
-              <div className="flex flex-col items-end justify-between h-full">
-                <div className="bg-white/10 backdrop-blur-md px-4 py-2 rounded-xl border border-white/10 text-blue-400 font-mono text-xs">
-                  sector: "global_logistics"
-                </div>
-                <button className="mt-8 px-6 py-3 bg-white text-slate-900 rounded-full font-bold hover:bg-blue-50 transition-all flex items-center gap-2">
-                  View Operations <FiArrowRight />
-                </button>
-              </div>
+            {/* Image Layer */}
+            <div className="absolute inset-0 overflow-hidden">
+              <img
+                src={s.img}
+                alt={s.title}
+                className="w-full h-full object-cover transition-all duration-1000 ease-out"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/40 to-transparent" />
             </div>
-          </motion.div>
 
-          {/* Sub Ventures */}
-          {ventures.map((v, i) => (
-            <motion.div 
-              key={i}
-              variants={itemVariants}
-              className="group bg-white border border-slate-200 rounded-[2rem] p-8 shadow-[0_10px_40px_rgba(0,0,0,0.03)] hover:shadow-xl hover:shadow-blue-100/50 transition-all duration-300 relative overflow-hidden"
-            >
-              <div className="absolute top-6 right-8 text-[10px] font-mono text-slate-300 group-hover:text-blue-400 transition-colors">
-                //{v.sector}
+            {/* Content Layer */}
+            <div className="absolute inset-0 p-8 md:p-12 flex flex-col justify-end">
+              <div className="flex items-center gap-4 mb-6">
+                <div className="w-12 h-12 rounded-full border border-blue-500/30 flex items-center justify-center text-xl bg-blue-500/10 backdrop-blur-md">
+                  {s.icon}
+                </div>
+                <div className="h-px flex-grow bg-white/10" />
               </div>
 
-              <div className="w-12 h-12 rounded-xl bg-slate-50 text-blue-600 flex items-center justify-center mb-6 group-hover:bg-blue-600 group-hover:text-white transition-all shadow-sm">
-                {React.cloneElement(v.icon, { size: 24 })}
-              </div>
-              
-              <h3 className="text-2xl font-bold text-slate-900 mb-3 group-hover:text-blue-600 transition-colors">
-                {v.title}
-              </h3>
-              <p className="text-slate-500 text-sm leading-relaxed mb-6">
-                {v.desc}
+              <h4 className="text-white text-3xl md:text-4xl font-black uppercase tracking-tighter mb-4 leading-none group-hover:text-blue-400 transition-colors">
+                {s.title}
+              </h4>
+              <p className="text-zinc-400 text-sm md:text-lg font-light mb-8 max-w-xs leading-relaxed">
+                {s.desc}
               </p>
 
-              <div className="flex items-center gap-2 text-xs font-black text-slate-400 group-hover:text-blue-600 transition-all uppercase tracking-widest">
-                Learn More <FiArrowRight />
+              <div className="w-full h-1 bg-white/5 relative overflow-hidden">
+                <div className="absolute inset-0 bg-blue-600 w-0 group-hover:w-full transition-all duration-700" />
               </div>
-            </motion.div>
-          ))}
-
-        </motion.div>
+            </div>
+          </div>
+        ))}
       </div>
+
+      {/* Progress Bar */}
+      <div className="absolute bottom-16 left-8 md:left-16 right-8 md:right-16 h-[1px] bg-white/10 overflow-hidden">
+        <div className="h-full bg-blue-500/50 w-full origin-left scale-x-0" id="future-progress-bar" />
+      </div>
+
     </section>
   );
 };

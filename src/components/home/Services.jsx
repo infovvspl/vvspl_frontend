@@ -1,166 +1,123 @@
 import React, { useEffect, useRef } from 'react';
-import gsap from 'gsap';
+import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const services = [
-    { title: "AI / ML Solutions", icon: "🤖", desc: "Intelligent algorithms powering the next generation of automation." },
-    { title: "Cloud Infrastructure", icon: "☁️", desc: "Scalable, secure, and robust cloud architectures." },
-    { title: "E-Commerce", icon: "🛒", desc: "Seamless digital storefronts and payment ecosystems." },
-    { title: "Web Applications", icon: "💻", desc: "High-performance responsive web platforms." },
-    { title: "Mobile Apps", icon: "📱", desc: "Native and cross-platform mobile experiences." },
-];
+const Services = ({ innerRef }) => {
+  const sectionRef = useRef(null);
+  const scrollContainerRef = useRef(null);
+  const headerRef = useRef(null);
 
-const Services = ({ onNextClick }) => {
-    const sectionRef = useRef(null);
-    const trainRef = useRef(null);
-    const headerRef = useRef(null);
-    const cardsRef = useRef([]);
-    const mainTl = useRef(null);
+  const serviceList = [
+    {
+      title: "AI / ML",
+      desc: "Predictive analytics and neural network integration for modern intelligence.",
+      img: "https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=2070"
+    },
+    {
+      title: "Cloud Infrastructure",
+      desc: "High-performance distributed systems for enterprise intelligence.",
+      img: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072"
+    },
+    {
+      title: "Neural Networks",
+      desc: "Deep learning architectures built for complex cognitive tasks.",
+      img: "https://images.unsplash.com/photo-1558494949-ef010cbdcc48?q=80&w=2070"
+    },
+    {
+      title: "Web Engineering",
+      desc: "Modern React & Node architectures for data-intensive applications.",
+      img: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=2072"
+    },
+    {
+      title: "Edge Computing",
+      desc: "Decentralized processing for real-time AI decision making.",
+      img: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2070"
+    }
+  ];
 
-    const handleNext = () => {
-        const tl = gsap.timeline({
-            onComplete: onNextClick
-        });
+  useEffect(() => {
+    // We will handle the scroll animation in the parent Home.jsx for better coordination
+  }, []);
 
-        tl.to(trainRef.current, {
-            x: '-150vw',
-            duration: 1.5,
-            ease: "power2.in"
-        })
-            .to([headerRef.current, ...cardsRef.current], {
-                opacity: 0,
-                y: 30,
-                duration: 0.5,
-                stagger: 0.05
-            }, "-=1.0");
-    };
+  return (
+    <section
+      ref={(el) => {
+        sectionRef.current = el;
+        if (innerRef) innerRef.current = el;
+      }}
+      className="absolute inset-0 flex items-center justify-start bg-zinc-950 overflow-hidden opacity-0"
+    >
+      {/* Background Layer */}
+      <div className="absolute inset-0 z-0">
+        <img
+          src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2070"
+          alt="Services Background"
+          className="w-full h-full object-cover origin-center opacity-[0.2]"
+        />
+        <div className="absolute inset-0 bg-black/60" />
+        <div className="absolute inset-0 bg-gradient-to-b from-zinc-950/50 via-transparent to-zinc-950" />
+      </div>
 
-    useEffect(() => {
-        let ctx = gsap.context(() => {
-            gsap.set(trainRef.current, { x: '100vw', opacity: 1 });
-            gsap.set(headerRef.current, { y: -30, opacity: 0 });
-            gsap.set(cardsRef.current, { y: 50, opacity: 0 });
+      {/* Background Section Header */}
+      <div ref={headerRef} className="absolute top-16 left-8 md:left-16 z-20">
+        <h2 className="text-blue-500 font-mono text-[10px] md:text-xs tracking-[0.6em] uppercase mb-4">
+          Capabilities
+        </h2>
+        <h3 className="text-white text-5xl md:text-7xl font-black uppercase italic tracking-tighter leading-none">
+          Our <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-white/40">Expertise</span>
+        </h3>
+      </div>
 
-            mainTl.current = gsap.timeline({
-                scrollTrigger: {
-                    trigger: sectionRef.current,
-                    start: "top center",
-                    toggleActions: "play none none reset"
-                }
-            });
-
-            mainTl.current
-                .to(trainRef.current, {
-                    x: '0',
-                    duration: 2,
-                    ease: "power2.out"
-                })
-                .to(headerRef.current, {
-                    y: 0,
-                    opacity: 1,
-                    duration: 0.8
-                }, "-=1.5")
-                .to(cardsRef.current, {
-                    y: 0,
-                    opacity: 1,
-                    stagger: 0.1,
-                    duration: 0.6,
-                    ease: "power2.out"
-                }, "-=1.0");
-
-            ScrollTrigger.create({
-                trigger: sectionRef.current,
-                start: "top center",
-                onEnterBack: () => {
-                    mainTl.current.restart();
-                }
-            });
-
-        }, sectionRef);
-
-        return () => ctx.revert();
-    }, []);
-
-    return (
-        <section
-            ref={sectionRef}
-            id="services"
-            className="relative w-full bg-slate-50 dark:bg-[#101010] text-black dark:text-white transition-colors duration-300 overflow-hidden flex flex-col items-center py-16 sm:py-24 lg:py-60"
-        >
-            {/* Background Industrial Elements */}
-            <div className="absolute inset-0 pointer-events-none opacity-20">
-                <div className="absolute top-0 left-0 w-full h-[1px] bg-yellow-500/20" />
-                <div className="absolute bottom-0 left-0 w-full h-[1px] bg-yellow-500/20" />
-                <div className="absolute inset-0 bg-[linear-gradient(to_right,#ccc_1px,transparent_1px),linear-gradient(to_bottom,#ccc_1px,transparent_1px)] dark:bg-[linear-gradient(to_right,#333_1px,transparent_1px),linear-gradient(to_bottom,#333_1px,transparent_1px)] bg-[size:3rem_3rem] sm:bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)]" />
+      {/* Horizontal Scroll Wrapper */}
+      <div
+        ref={scrollContainerRef}
+        id="services-scroll-container"
+        className="flex h-screen items-center px-[10vw] gap-8 md:gap-16 w-fit"
+      >
+        {serviceList.map((s, i) => (
+          <div
+            key={i}
+            className="relative w-[85vw] md:w-[45vw] lg:w-[32vw] h-[60vh] md:h-[65vh] flex-shrink-0 group overflow-hidden border border-white/10 bg-zinc-900/40 backdrop-blur-xl transition-colors duration-500 hover:border-blue-500/50"
+          >
+            {/* Image Layer */}
+            <div className="absolute inset-0 overflow-hidden">
+              <img
+                src={s.img}
+                alt={s.title}
+                className="w-full h-full object-cover transition-all duration-1000 ease-out"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/20 to-transparent" />
             </div>
 
-            {/* Header */}
-            <div ref={headerRef} className="z-20 text-center mb-12 sm:mb-20 px-6">
-                <h2 className="text-yellow-600 dark:text-yellow-500 font-mono text-[10px] sm:text-xs tracking-[0.3em] sm:tracking-[0.5em] uppercase mb-4 border-b border-yellow-500/30 pb-2 inline-block">
-                    Station: Logistics Hub
-                </h2>
-                <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black uppercase tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-neutral-800 to-neutral-400 dark:from-white dark:to-neutral-700">
-                    Services
-                </h1>
+            {/* Content Layer */}
+            <div className="absolute inset-0 p-8 md:p-12 flex flex-col justify-end">
+              {/* <span className="text-blue-400 font-mono text-sm mb-4 block">
+                0{i + 1} //
+              </span> */}
+              <h4 className="text-white text-3xl md:text-5xl font-black uppercase tracking-tighter mb-4 leading-none">
+                {s.title}
+              </h4>
+              <p className="text-zinc-400 text-sm md:text-lg font-light mb-8 max-w-xs leading-relaxed">
+                {s.desc}
+              </p>
+
+              <button className="w-fit flex items-center gap-4 text-white text-[10px] font-black uppercase tracking-[0.4em] group/btn">
+                <span className="group-hover/btn:text-blue-400 transition-colors">Explore</span>
+                <div className="w-12 h-[1px] bg-blue-500 group-hover/btn:w-24 transition-all duration-500" />
+              </button>
             </div>
+          </div>
+        ))}
+      </div>
 
-            {/* Services Cards Container */}
-            <div className="z-20 w-full max-w-7xl px-6 sm:px-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-16 sm:mb-24">
-                {services.map((service, index) => (
-                    <div
-                        key={index}
-                        ref={el => cardsRef.current[index] = el}
-                        className="group relative p-6 sm:p-8 bg-white/80 dark:bg-[#1a1a1a]/80 backdrop-blur-sm border border-neutral-200 dark:border-[#333] hover:border-yellow-500/50 transition-all duration-300 hover:bg-white dark:hover:bg-[#202020] hover:-translate-y-1 shadow-sm dark:shadow-none"
-                    >
-                        {/* Corner Accents */}
-                        <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-yellow-500/50" />
-                        <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-yellow-500/50" />
-                        <div className="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-yellow-500/50" />
-                        <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-yellow-500/50" />
-
-                        <div className="text-3xl sm:text-4xl mb-4 sm:mb-6 grayscale group-hover:grayscale-0 transition-all duration-300">
-                            {service.icon}
-                        </div>
-                        <h3 className="text-xl sm:text-2xl font-bold mb-3 text-neutral-800 dark:text-neutral-200 group-hover:text-yellow-600 dark:group-hover:text-yellow-500 transition-colors">
-                            {service.title}
-                        </h3>
-                        <p className="text-neutral-600 dark:text-neutral-500 leading-relaxed font-mono text-xs sm:text-sm">
-                            {service.desc}
-                        </p>
-                    </div>
-                ))}
-            </div>
-
-            {/* Cargo Train Animation (Bottom Background) */}
-            <div
-                ref={trainRef}
-                className="absolute bottom-0 right-0 w-full h-32 sm:h-48 pointer-events-none z-10 flex items-end justify-end opacity-10 dark:opacity-40"
-            >
-                <div className="relative w-[300px] sm:w-[800px] h-full bg-slate-200 dark:bg-[#151515] border-t-2 border-yellow-500/20 transform skew-x-12 translate-x-16 sm:translate-x-32">
-                    <div className="absolute bottom-0 left-0 w-full h-2 bg-yellow-500/10" />
-                    <div className="absolute top-10 left-10 sm:left-20 w-16 sm:w-32 h-8 sm:h-12 bg-yellow-500/5" />
-                    <div className="absolute top-10 left-32 sm:left-60 w-16 sm:w-32 h-8 sm:h-12 bg-yellow-500/5" />
-                </div>
-            </div>
-
-            {/* Footer Navigation */}
-            <div className="z-30 mt-auto px-6">
-                <button
-                    onClick={handleNext}
-                    className="group flex items-center gap-4 text-yellow-600 dark:text-yellow-500/50 hover:text-yellow-500 transition-colors cursor-pointer"
-                >
-                    <div className="w-2 h-2 rounded-full bg-current group-hover:shadow-[0_0_10px_orange]" />
-                    <span className="font-mono text-xs sm:text-sm tracking-widest uppercase">Next Station: Why Us</span>
-                    <div className="hidden sm:block h-[1px] w-12 bg-current" />
-                </button>
-            </div>
-
-            {/* Noise Texture */}
-            <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-10 pointer-events-none mix-blend-overlay dark:mix-blend-normal" />
-        </section>
-    );
+      {/* Progress Bar (Visual velocity) */}
+      <div className="absolute bottom-16 left-8 md:left-16 right-8 md:right-16 h-[1px] bg-white/10 overflow-hidden">
+        <div className="h-full bg-blue-500/50 w-full origin-left scale-x-0" id="services-progress-bar" />
+      </div>
+    </section>
+  );
 };
 
 export default Services;

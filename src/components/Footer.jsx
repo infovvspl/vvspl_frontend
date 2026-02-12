@@ -1,127 +1,96 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import LogoImg from "../assets/logo2.png";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { Zap, Github, Twitter, Linkedin, ArrowUpRight, Mail } from 'lucide-react';
 
 const Footer = () => {
     const currentYear = new Date().getFullYear();
 
-    const footerLinks = {
-        company: [
-            { name: "About Us", path: "about" },
-            { name: "Our Services", path: "services" },
-            { name: "Ventures", path: "ventures" },
-            { name: "Contact", path: "contact" },
-        ],
-        resources: [
-            { name: "Blogs", path: "blogs" },
-            { name: "Case Studies", path: "ventures" },
-            { name: "Support", path: "contact" },
-            { name: "Privacy Policy", path: "/" },
-        ],
-        social: [
-            { name: "LinkedIn", url: "https://linkedin.com" },
-            { name: "Twitter", url: "https://twitter.com" },
-            { name: "Instagram", url: "https://instagram.com" },
-            { name: "Facebook", url: "https://facebook.com" },
-        ],
-    };
-
-    const scrollToSection = (id) => {
-        const element = document.getElementById(id);
-        if (element) {
-            element.scrollIntoView({ behavior: "smooth" });
-        }
-    };
-
     return (
-        <footer className="bg-white dark:bg-[#050505] text-black dark:text-white pt-20 pb-10 border-t border-slate-200 dark:border-white/5 relative overflow-hidden transition-colors duration-300">
-            {/* Background Glow */}
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-px bg-gradient-to-r from-transparent via-[#0070F0]/50 to-transparent shadow-[0_0_30px_rgba(0,112,240,0.3)] dark:shadow-[0_0_30px_#0070F0]" />
+        <footer className="relative bg-[#050505] text-white pt-24 pb-12 overflow-hidden">
+            {/* Background Decorative Element */}
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-px bg-gradient-to-r from-transparent via-zinc-800 to-transparent" />
+            <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-blue-600/5 rounded-full blur-[100px]" />
 
-            <div className="container mx-auto px-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
-                    {/* Brand Section */}
-                    <div className="lg:col-span-1">
-                        <Link to="/" className="flex items-center gap-3 mb-6" onClick={() => window.scrollTo(0, 0)}>
-                            <img src={LogoImg} alt="VVSPL Logo" className="h-10 w-10 object-contain" />
-                            <span className="text-2xl font-black italic tracking-tighter text-black dark:text-white">VVSPL</span>
-                        </Link>
-                        <p className="text-neutral-600 dark:text-neutral-400 text-sm leading-relaxed mb-6">
-                            Accelerating digital transformation with cutting-edge solutions.
-                            Veteran's Venture where vision meets velocity.
-                        </p>
-                    </div>
+            <div className="max-w-[1400px] mx-auto px-8 md:px-12">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 mb-24">
 
-                    {/* Quick Links */}
-                    <div>
-                        <h4 className="text-black dark:text-white font-bold uppercase tracking-widest text-xs mb-6 underline decoration-[#0070F0]/40 underline-offset-8">Company</h4>
-                        <ul className="space-y-4">
-                            {footerLinks.company.map((link) => (
-                                <li key={link.name}>
-                                    <button
-                                        onClick={() => scrollToSection(link.path)}
-                                        className="text-neutral-600 dark:text-neutral-400 hover:text-[#0070F0] dark:hover:text-[#0070F0] text-sm transition-colors cursor-pointer"
-                                    >
-                                        {link.name}
-                                    </button>
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-
-                    {/* Resources */}
-                    <div>
-                        <h4 className="text-black dark:text-white font-bold uppercase tracking-widest text-xs mb-6 underline decoration-[#0070F0]/40 underline-offset-8">Resources</h4>
-                        <ul className="space-y-4">
-                            {footerLinks.resources.map((link) => (
-                                <li key={link.name}>
-                                    <button
-                                        onClick={() => scrollToSection(link.path)}
-                                        className="text-neutral-600 dark:text-neutral-400 hover:text-[#0070F0] dark:hover:text-[#0070F0] text-sm transition-colors cursor-pointer"
-                                    >
-                                        {link.name}
-                                    </button>
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-
-                    {/* Connect */}
-                    <div>
-                        <h4 className="text-black dark:text-white font-bold uppercase tracking-widest text-xs mb-6 underline decoration-[#0070F0]/40 underline-offset-8">Connect</h4>
-                        <div className="flex flex-wrap gap-4 mb-6">
-                            {footerLinks.social.map((link) => (
-                                <a
-                                    key={link.name}
-                                    href={link.url}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="w-10 h-10 rounded-full bg-black/5 dark:bg-white/5 border border-slate-200 dark:border-white/10 flex items-center justify-center text-neutral-600 dark:text-neutral-400 hover:bg-[#0070F0] hover:text-white hover:border-[#0070F0] transition-all transform hover:-translate-y-1"
-                                    aria-label={link.name}
-                                >
-                                    <span className="text-[10px] font-bold uppercase tracking-tighter">{link.name.slice(0, 2)}</span>
-                                </a>
-                            ))}
+                    {/* Brand & Call to Action */}
+                    <div className="lg:col-span-6 space-y-8">
+                        <div className="flex items-center gap-4">
+                            <div className="w-12 h-12 bg-blue-600 flex items-center justify-center rotate-45">
+                                <Zap className="text-white -rotate-45" size={24} />
+                            </div>
+                            <h2 className="text-3xl font-black uppercase tracking-tighter">
+                                VETERAN <span className="text-transparent" style={{ WebkitTextStroke: '1px #fff' }}>VENTURE</span>
+                            </h2>
                         </div>
-                        <p className="text-neutral-500 text-xs italic">
-                            Stay updated with our latest insights and news.
+
+                        <p className="text-zinc-400 text-xl font-light leading-relaxed max-w-md">
+                            Ready to accelerate your vision? Let’s build the <span className="text-white font-medium italic">next generation</span> of digital infrastructure together.
                         </p>
+
+                        <a
+                            href="mailto:hello@veteranventure.ai"
+                            className="inline-flex items-center gap-4 text-sm font-bold uppercase tracking-[0.3em] group text-blue-500 hover:text-white transition-colors"
+                        >
+                            <Mail size={18} />
+                            Start a Conversation
+                            <ArrowUpRight className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                        </a>
+                    </div>
+
+                    {/* Quick Links Grid */}
+                    <div className="lg:col-span-6 grid grid-cols-2 md:grid-cols-3 gap-12">
+                        <div className="space-y-6">
+                            <h4 className="text-[10px] font-bold uppercase tracking-[0.5em] text-zinc-500">// Navigation</h4>
+                            <ul className="space-y-4">
+                                <li><Link to="/" className="text-sm hover:text-blue-500 transition-colors">Venture</Link></li>
+                                <li><Link to="/about" className="text-sm hover:text-blue-500 transition-colors">Architecture</Link></li>
+                                <li><Link to="/team" className="text-sm hover:text-blue-500 transition-colors">Collective</Link></li>
+                            </ul>
+                        </div>
+
+                        <div className="space-y-6">
+                            <h4 className="text-[10px] font-bold uppercase tracking-[0.5em] text-zinc-500">// Social</h4>
+                            <ul className="space-y-4">
+                                <li><a href="#" className="flex items-center gap-2 text-sm hover:text-blue-500 transition-colors"><Twitter size={14} /> X / Twitter</a></li>
+                                <li><a href="#" className="flex items-center gap-2 text-sm hover:text-blue-500 transition-colors"><Linkedin size={14} /> LinkedIn</a></li>
+                                <li><a href="#" className="flex items-center gap-2 text-sm hover:text-blue-500 transition-colors"><Github size={14} /> Github</a></li>
+                            </ul>
+                        </div>
+
+                        <div className="space-y-6">
+                            <h4 className="text-[10px] font-bold uppercase tracking-[0.5em] text-zinc-500">// Location</h4>
+                            <p className="text-sm text-zinc-400 leading-relaxed">
+                                Remote First / <br />
+                                Global Infrastructure <br />
+                                Node_01
+                            </p>
+                        </div>
                     </div>
                 </div>
 
                 {/* Bottom Bar */}
-                <div className="pt-10 border-t border-slate-200 dark:border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
-                    <p className="text-neutral-500 text-xs">
-                        © {currentYear} Veterans Venture Software Private Limited. All rights reserved.
-                    </p>
-                    <div className="flex gap-8">
-                        <Link to="/" className="text-neutral-500 hover:text-[#0070F0] text-xs transition-colors">Terms of Service</Link>
-                        <Link to="/" className="text-neutral-500 hover:text-[#0070F0] text-xs transition-colors">Privacy Policy</Link>
-                        <Link to="/" className="text-neutral-500 hover:text-[#0070F0] text-xs transition-colors">Cookie Policy</Link>
+                <div className="pt-12 border-t border-zinc-900 flex flex-col md:flex-row justify-between items-center gap-8">
+                    <div className="flex items-center gap-6">
+                        <span className="text-[10px] font-mono text-zinc-600 uppercase tracking-widest">© {currentYear} Veteran Venture</span>
+                        <div className="h-1 w-1 bg-zinc-800 rounded-full" />
+                        <span className="text-[10px] font-mono text-zinc-600 uppercase tracking-widest">All Rights Reserved</span>
+                    </div>
+
+                    <div className="flex gap-8 text-[10px] font-bold uppercase tracking-widest text-zinc-500">
+                        <Link to="/privacy" className="hover:text-white transition-colors">Privacy</Link>
+                        <Link to="/terms" className="hover:text-white transition-colors">Terms</Link>
+                    </div>
+
+                    {/* "System Status" Indicator */}
+                    <div className="flex items-center gap-3">
+                        <div className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse" />
+                        <span className="text-[10px] font-mono text-emerald-500 uppercase tracking-widest">Systems Nominal</span>
                     </div>
                 </div>
             </div>
-        </footer>
+        </footer >
     );
 };
 

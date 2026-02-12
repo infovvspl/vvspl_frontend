@@ -1,115 +1,151 @@
-import React, { useRef, useState, useEffect } from 'react';
+// Home.jsx
+import React, { useEffect, useRef } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Hero from '../components/home/Hero';
 import About from '../components/home/About';
 import Services from '../components/home/Services';
-import WhyChooseUs from '../components/home/WhyChooseUs';
-import Ventures from '../components/home/Ventures';
+import WhyChooseUs from '../components/home/Why';
+import FutureVentures from '../components/home/FutureVentures';
 import Blogs from '../components/home/Blogs';
 import Contact from '../components/home/Contact';
-import StationTrack from '../components/home/StationTrack';
-import FoundingMembers from '../components/home/Members';
+import FoundingMembers from '../components/home/Founders';
+import MissionVision from '../components/home/Mv';
 
-export default function Home() {
+gsap.registerPlugin(ScrollTrigger);
+
+function Home({ setActiveIndex }) {
+  const containerRef = useRef(null);
   const heroRef = useRef(null);
   const aboutRef = useRef(null);
+  const mvRef = useRef(null);
   const servicesRef = useRef(null);
-  const whyUsRef = useRef(null);
-  const venturesRef = useRef(null);
-  const membersRef = useRef(null);
+  const whyRef = useRef(null);
+  const futureRef = useRef(null);
+  const foundersRef = useRef(null);
   const blogsRef = useRef(null);
   const contactRef = useRef(null);
 
-  const [currentStation, setCurrentStation] = useState(0);
-
-  const scrollToSection = (ref) => {
-    if (ref && ref.current) {
-      ref.current.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
-  const handleStationClick = (id) => {
-    const refs = [heroRef, aboutRef, servicesRef, whyUsRef, venturesRef, membersRef, blogsRef, contactRef];
-    const ref = refs[id];
-    if (ref) scrollToSection(ref);
-  };
-
   useEffect(() => {
-    const observerOptions = {
-      root: null,
-      rootMargin: '0px',
-      threshold: 0.5,
-    };
+    const sections = [
+      heroRef.current,
+      aboutRef.current,
+      mvRef.current,
+      servicesRef.current,
+      whyRef.current,
+      futureRef.current,
+      foundersRef.current,
+      blogsRef.current,
+      contactRef.current
+    ];
 
-    const observerCallback = (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          if (entry.target === heroRef.current) setCurrentStation(0);
-          else if (entry.target === aboutRef.current) setCurrentStation(1);
-          else if (entry.target === servicesRef.current) setCurrentStation(2);
-          else if (entry.target === whyUsRef.current) setCurrentStation(3);
-          else if (entry.target === venturesRef.current) setCurrentStation(4);
-          else if (entry.target === membersRef.current) setCurrentStation(5);
-          else if (entry.target === blogsRef.current) setCurrentStation(6);
-          else if (entry.target === contactRef.current) setCurrentStation(7);
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: containerRef.current,
+        start: "top top",
+        end: "+=3500%",
+        scrub: 1,
+        pin: true,
+        onUpdate: (self) => {
+          if (setActiveIndex && self.animation) {
+            const time = self.animation.time();
+            const labels = self.animation.labels;
+            let idx = 0;
+            for (let i = 0; i < sections.length; i++) {
+              if (labels[`section-${i}`] <= time + 0.1) {
+                idx = i;
+              }
+            }
+            setActiveIndex(idx);
+          }
         }
-      });
-    };
+      }
+    });
 
-    const observer = new IntersectionObserver(observerCallback, observerOptions);
+    let currentTime = 0;
 
-    if (heroRef.current) observer.observe(heroRef.current);
-    if (aboutRef.current) observer.observe(aboutRef.current);
-    if (servicesRef.current) observer.observe(servicesRef.current);
-    if (whyUsRef.current) observer.observe(whyUsRef.current);
-    if (venturesRef.current) observer.observe(venturesRef.current);
-    if (membersRef.current) observer.observe(membersRef.current);
-    if (blogsRef.current) observer.observe(blogsRef.current);
-    if (contactRef.current) observer.observe(contactRef.current);
+    sections.forEach((section, index) => {
+      tl.addLabel(`section-${index}`, currentTime);
 
-    return () => observer.disconnect();
-  }, []);
+      if (index === sections.length - 1) return;
+      const nextSection = sections[index + 1];
+
+      let scrollDuration = 0;
+      let targetContainer = null;
+      let progressBar = null;
+
+      // Identify horizontal scroll sections
+      if (index === 3) { // Services
+        targetContainer = section.querySelector("#services-scroll-container");
+        progressBar = section.querySelector("#services-progress-bar");
+      } else if (index === 5) { // Future Ventures
+        targetContainer = section.querySelector("#future-scroll-container");
+        progressBar = section.querySelector("#future-progress-bar");
+      } else if (index === 6) { // Founders
+        targetContainer = section.querySelector(".flex-nowrap");
+      }
+
+      if (targetContainer) {
+        const scrollWidth = targetContainer.scrollWidth;
+        const clientWidth = window.innerWidth;
+        
+        if (scrollWidth > clientWidth) {
+          const amountToScroll = scrollWidth - clientWidth;
+          scrollDuration = 3; // Allocate time for scrolling
+          
+          tl.to(targetContainer, {
+            x: -amountToScroll,
+            ease: "none",
+            duration: scrollDuration
+          }, currentTime);
+          
+          if (progressBar) {
+            tl.to(progressBar, {
+              scaleX: 1,
+              ease: "none",
+              duration: scrollDuration
+            }, currentTime);
+          }
+        }
+      }
+
+      // Advance time for scroll
+      currentTime += scrollDuration;
+
+      // Transition to next section
+      tl.to(section, {
+        scale: 5,
+        opacity: 0,
+        ease: "power1.inOut",
+        duration: 1
+      }, currentTime);
+
+      tl.fromTo(nextSection,
+        { scale: 0.5, opacity: 0 },
+        { scale: 1, opacity: 1, ease: "power1.inOut", duration: 1 },
+        currentTime
+      );
+
+      // Advance time for transition
+      currentTime += 1;
+    });
+
+    return () => ScrollTrigger.getAll().forEach(t => t.kill());
+  }, [setActiveIndex]);
 
   return (
-    <div className="flex flex-col bg-white dark:bg-black transition-colors duration-300">
-      {/* Hero Section */}
-      <div id="hero" ref={heroRef} className="w-full">
-        <Hero onNextClick={() => scrollToSection(aboutRef)} />
-      </div>
-
-      {/* About Section */}
-      <div id="about" ref={aboutRef} className="w-full">
-        <About onNextClick={() => scrollToSection(servicesRef)} />
-      </div>
-
-      {/* Services Section */}
-      <div id="services" ref={servicesRef} className="w-full">
-        <Services onNextClick={() => scrollToSection(whyUsRef)} />
-      </div>
-
-      {/* Why Choose Us Section */}
-      <div id="whyus" ref={whyUsRef} className="w-full">
-        <WhyChooseUs onNextClick={() => scrollToSection(venturesRef)} />
-      </div>
-
-      {/* Ventures Section */}
-      <div id="ventures" ref={venturesRef} className="w-full">
-        <Ventures onNextClick={() => scrollToSection(membersRef)} />
-      </div>
-
-      <div id="members" ref={membersRef} className="w-full">
-        <FoundingMembers onNextClick={() => scrollToSection(blogsRef)} />
-      </div>
-
-      {/* Blogs Section */}
-      <div id="blogs" ref={blogsRef} className="w-full">
-        <Blogs onNextClick={() => scrollToSection(contactRef)} />
-      </div>
-
-      {/* Contact Section */}
-      <div id="contact" ref={contactRef} className="w-full">
-        <Contact />
-      </div>
-      <StationTrack activeIndex={currentStation} onStationClick={handleStationClick} />
+    <div ref={containerRef} className="relative w-full h-screen bg-white overflow-hidden">
+      <Hero innerRef={heroRef} />
+      <About innerRef={aboutRef} />
+      <MissionVision innerRef={mvRef} />
+      <Services innerRef={servicesRef} />
+      <WhyChooseUs innerRef={whyRef} />
+      <FutureVentures innerRef={futureRef} />
+      <FoundingMembers innerRef={foundersRef} />
+      <Blogs innerRef={blogsRef} />
+      <Contact innerRef={contactRef} />
     </div>
   );
 }
+
+export default Home;

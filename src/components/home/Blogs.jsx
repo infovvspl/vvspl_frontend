@@ -1,132 +1,88 @@
-import React, { useEffect, useRef } from 'react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import React from 'react';
 
-gsap.registerPlugin(ScrollTrigger);
-
-const blogs = [
-    { 
-        title: "The Rise of Autonomous Supply Chains", 
-        date: "Oct 12, 2025", 
-        category: "Logistics",
-        image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=800" // Added Image
+const Blogs = ({ innerRef }) => {
+  const posts = [
+    {
+      date: "MAR 12, 2024",
+      title: "The Future of AI Systems",
+      category: "Trends",
+      img: "https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=2070"
     },
-    { 
-        title: "Sustainable Mining: A New Era", 
-        date: "Sep 28, 2025", 
-        category: "Mining",
-        image: "https://anthonyblumberg.com/wp-content/uploads/2025/05/rethinking-global-mining-navigating-a-new-era-of-responsibility-and-innovation-scaled.jpg" // Added Image
+    {
+      date: "FEB 28, 2024",
+      title: "Next-Gen Software Architectures",
+      category: "Development",
+      img: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072"
     },
-    { 
-        title: "AI in Urban Planning", 
-        date: "Sep 15, 2025", 
-        category: "Tech",
-        image: "https://sparkemtech.co.uk/img/e16392e1-b6ab-4269-862c-6055e0762727/urban-planning-ai-optimised.jpg?fm=jpg&q=80&fit=max&crop=1920%2C1078%2C0%2C170&w=1280&h=720" // Added Image
-    },
-];
+    {
+      date: "JAN 15, 2024",
+      title: "Unlocking Business Velocity",
+      category: "Strategy",
+      img: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2426"
+    }
+  ];
 
-const Blogs = ({ onNextClick }) => {
-    const sectionRef = useRef(null);
-    const containerRef = useRef(null);
-    const mainTl = useRef(null);
+  return (
+    <section
+      ref={innerRef}
+      className="tunnel-section absolute inset-0 flex flex-col items-center justify-center bg-zinc-950 text-white overflow-hidden opacity-0 p-4 md:p-8"
+    >
+      {/* Background Layer */}
+      <div className="absolute inset-0 z-0">
+        <img
+          src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?q=80&w=2070"
+          alt="Journal Background"
+          className="w-full h-full object-cover origin-center opacity-[0.2]"
+        />
+        <div className="absolute inset-0 bg-black/60" />
+      </div>
 
-    const handleNext = () => {
-        const tl = gsap.timeline({ onComplete: onNextClick });
-        tl.to(sectionRef.current, {
-            opacity: 0,
-            y: -100,
-            duration: 0.5,
-            ease: "power2.in"
-        });
-    };
+      <div className="relative z-10 w-full max-w-7xl">
+        {/* Header */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-6">
+          <div className="max-w-xl">
+            <p className="text-blue-500 font-mono text-xs tracking-[0.5em] uppercase mb-4">Latest Insights</p>
+            <h2 className="text-5xl md:text-7xl font-black uppercase italic tracking-tighter leading-none text-white">
+              Thought <br /> <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-white/40">Journal.</span>
+            </h2>
+          </div>
+          <button className="text-xs font-bold uppercase tracking-[0.4em] border border-white/10 px-8 py-4 px-10 hover:bg-white/5 transition-colors rounded-sm backdrop-blur-md">
+            View All Posts
+          </button>
+        </div>
 
-    useEffect(() => {
-        let ctx = gsap.context(() => {
-            gsap.set(sectionRef.current, { opacity: 1, y: 0 });
-            gsap.set(containerRef.current.children, { y: 50, opacity: 0 });
+        {/* 3 Box Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {posts.map((post, i) => (
+            <div key={i} className="group relative bg-zinc-900/40 border border-white/10 p-5 backdrop-blur-lg hover:border-blue-500/50 transition-all duration-500">
+              <div className="aspect-[3/2] overflow-hidden mb-6 border border-white/5">
+                <img
+                  src={post.img}
+                  alt={post.title}
+                  className="w-full h-full object-cover grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-110 transition-all duration-1000"
+                />
+              </div>
 
-            mainTl.current = gsap.timeline({
-                scrollTrigger: {
-                    trigger: sectionRef.current,
-                    start: "top center",
-                    toggleActions: "play none none reset"
-                }
-            });
+              <div className="flex items-center gap-4 mb-4">
+                <span className="text-blue-500 font-mono text-[10px] uppercase tracking-widest">{post.category}</span>
+                <div className="h-px flex-grow bg-white/5" />
+                <span className="text-zinc-500 font-mono text-[10px]">{post.date}</span>
+              </div>
 
-            mainTl.current.to(containerRef.current.children, {
-                y: 0,
-                opacity: 1,
-                stagger: 0.2,
-                duration: 0.8,
-                ease: "power2.out"
-            });
+              <h4 className="text-xl md:text-2xl font-bold uppercase tracking-tighter text-white leading-tight mb-4 group-hover:text-blue-400 transition-colors">
+                {post.title}
+              </h4>
 
-            ScrollTrigger.create({
-                trigger: sectionRef.current,
-                start: "top bottom",
-                onEnter: () => gsap.to(sectionRef.current, { opacity: 1, y: 0, duration: 0.3 }),
-                onEnterBack: () => {
-                    mainTl.current.restart();
-                    gsap.to(sectionRef.current, { opacity: 1, y: 0, duration: 0.5 });
-                }
-            });
-        }, sectionRef);
-
-        return () => ctx.revert();
-    }, []);
-
-    return (
-        <section
-            ref={sectionRef}
-            id="blogs"
-            className="relative w-full min-h-[80vh] bg-slate-100 dark:bg-neutral-900 text-black dark:text-white transition-colors duration-300 py-20 flex flex-col items-center"
-        >
-            <div className="text-center mb-16 px-6">
-                <h2 className="text-xs font-mono text-neutral-500 dark:text-neutral-400 mb-2 tracking-[0.3em] uppercase">DAILY BRAIN DUMP</h2>
-                <h1 className="text-4xl sm:text-5xl font-serif italic text-neutral-800 dark:text-white">Latest Intelligence</h1>
+              <div className="flex items-center gap-3 text-[10px] font-black uppercase tracking-[0.3em] overflow-hidden group/link">
+                <span className="group-hover/link:translate-x-0 -translate-x-full opacity-0 group-hover/link:opacity-100 transition-all duration-500">Read Article</span>
+                <div className="w-8 h-[1px] bg-blue-600 transition-all duration-500 group-hover/link:w-16" />
+              </div>
             </div>
-
-            <div ref={containerRef} className="max-w-7xl w-full px-6 sm:px-8 grid grid-cols-1 md:grid-cols-3 gap-8">
-                {blogs.map((blog, i) => (
-                    <div key={i} className="group cursor-pointer">
-                        {/* Image Container */}
-                        <div className="h-48 bg-white dark:bg-neutral-800 mb-4 overflow-hidden relative shadow-md dark:shadow-none rounded-lg">
-                            <img 
-                                src={blog.image} 
-                                alt={blog.title}
-                                className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                            />
-                            {/* Overlay for better text readability if needed */}
-                            <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-500" />
-                            
-                            <div className="absolute top-4 left-4 z-10 bg-neutral-800 dark:bg-white text-white dark:text-black text-[10px] sm:text-xs font-bold px-2 py-1 uppercase tracking-wider">
-                                {blog.category}
-                            </div>
-                        </div>
-
-                        <div className="flex items-center gap-4 text-[10px] sm:text-xs text-neutral-500 mb-2 font-mono">
-                            <span>{blog.date}</span>
-                        </div>
-                        <h3 className="text-lg sm:text-xl font-bold leading-tight group-hover:text-blue-600 dark:group-hover:text-blue-400 group-hover:underline decoration-current underline-offset-4 transition-all">
-                            {blog.title}
-                        </h3>
-                    </div>
-                ))}
-            </div>
-
-            <div className="mt-auto pt-16 px-6">
-                <button
-                    onClick={handleNext}
-                    className="group text-neutral-800 dark:text-white border-b border-black dark:border-white pb-1 hover:opacity-50 transition-all flex items-center gap-2 cursor-pointer font-mono text-xs sm:text-sm uppercase tracking-widest"
-                >
-                    Next Station: Contact
-                    <span className="group-hover:translate-x-1 transition-transform">&rarr;</span>
-                </button>
-            </div>
-
-            <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-10 pointer-events-none mix-blend-overlay dark:mix-blend-normal" />
-        </section>
-    );
+          ))}
+        </div>
+      </div>
+    </section>
+  );
 };
 
 export default Blogs;

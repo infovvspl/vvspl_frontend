@@ -1,149 +1,133 @@
 import React, { useEffect, useRef } from 'react';
-import gsap from 'gsap';
+import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import Img from "../../assets/logo2.png";
+import { ArrowRight } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const Hero = ({ onNextClick }) => {
-    const heroRef = useRef(null);
-    const trainRef = useRef(null);
-    const contentRef = useRef(null);
-    const mainTl = useRef(null);
+const Hero = () => {
+  const sectionRef = useRef(null);
+  const leftContentRef = useRef(null);
+  const rightImageRef = useRef(null);
+  const lineRef = useRef(null);
 
-    const handleNext = () => {
-        const tl = gsap.timeline({
-            onComplete: onNextClick
-        });
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      // 1. PIN THE MASTER CONTAINER
+      const mainTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top top",
+          end: "+=150%", // Increased scroll distance for smoother zoom
+          pin: true,
+          scrub: 1, // Smooth scrub
+          anticipatePin: 1,
+        }
+      });
 
-        tl.to(trainRef.current, {
-            x: '-150vw',
-            duration: 1.5,
-            ease: "power2.in"
-        })
-            .to(contentRef.current, {
-                opacity: 0,
-                y: 20,
-                duration: 0.5
-            }, "-=1.0");
-    };
+      // 2. THE ZOOM (TUNNEL) EFFECT
+      mainTl
+        // Zoom & Fade the Left Content (The "Fly-by" effect)
+        .to(leftContentRef.current, {
+          scale: 1.8,
+          xPercent: -20,
+          opacity: 0,
+          filter: "blur(10px)",
+          ease: "power2.in"
+        }, 0)
+        // Zoom the Right Image (The "Immersive" effect)
+        .to(rightImageRef.current, {
+          scale: 2.5,
+          opacity: 0,
+          filter: "blur(5px)",
+          ease: "power2.in"
+        }, 0);
 
-    useEffect(() => {
-        let ctx = gsap.context(() => {
-            gsap.set(trainRef.current, { x: '-100vw' });
-            gsap.set(contentRef.current.children, { y: 30, opacity: 0 });
+      // 3. ENTRANCE ANIMATION (On Page Load)
+      const introTl = gsap.timeline();
+      introTl.from(".reveal-text", {
+        y: 80,
+        opacity: 0,
+        duration: 1.2,
+        stagger: 0.1,
+        ease: "power4.out"
+      })
+      .fromTo(lineRef.current, 
+        { scaleX: 0 }, 
+        { scaleX: 1, duration: 1, ease: "expo.inOut" }, 
+        "-=0.8"
+      );
 
-            mainTl.current = gsap.timeline();
+    }, sectionRef);
 
-            mainTl.current.to(trainRef.current, {
-                x: '0',
-                duration: 1.5,
-                ease: "power3.out",
-                delay: 0.2
-            })
-                .to(contentRef.current.children, {
-                    y: 0,
-                    opacity: 1,
-                    stagger: 0.15,
-                    duration: 0.8,
-                    ease: "power2.out"
-                }, "-=0.8");
+    return () => ctx.revert();
+  }, []);
 
-            ScrollTrigger.create({
-                trigger: heroRef.current,
-                start: "top center",
-                onEnterBack: () => {
-                    mainTl.current.restart();
-                    gsap.to(contentRef.current, { opacity: 1, y: 0, duration: 0.5 });
-                }
-            });
+  return (
+    <section 
+      ref={sectionRef} 
+      className="relative h-screen w-full flex flex-col md:flex-row bg-white overflow-hidden"
+    >
+      {/* --- LEFT SIDE: THE CONTENT --- */}
+      <div 
+        ref={leftContentRef}
+        className="relative z-20 w-full md:w-1/2 h-full flex flex-col justify-center px-8 md:px-20 bg-white will-change-transform"
+      >
+        <div className="space-y-2 mb-8">
+          <p className="reveal-text text-blue-600 font-bold tracking-[0.3em] text-[10px] uppercase">
+            Established 2024
+          </p>
+          <div ref={lineRef} className="h-1 w-20 bg-blue-600 origin-left" />
+        </div>
 
-            gsap.to(trainRef.current, {
-                y: "+=8",
-                duration: 2,
-                repeat: -1,
-                yoyo: true,
-                ease: "sine.inOut"
-            });
-        }, heroRef);
+        <h1 className="reveal-text text-[15vw] md:text-[8vw] font-black leading-[0.9] tracking-tighter uppercase text-zinc-900">
+          Veteran <br />
+          <span className="text-transparent" style={{ WebkitTextStroke: '2px #18181b' }}>Venture</span>
+        </h1>
 
-        return () => ctx.revert();
-    }, []);
+        <div className="reveal-text mt-12 space-y-8">
+          <h2 className="text-2xl md:text-4xl font-light text-zinc-600 leading-tight">
+            Where Vision <span className="text-zinc-900 font-medium">Meets Velocity.</span>
+          </h2>
+          
+          <p className="max-w-md text-zinc-500 text-lg border-l-2 border-zinc-100 pl-6">
+            Experience driven by purpose. We transform seasoned insight into 
+            impactful ventures at <span className="text-zinc-900 font-semibold">unmatched velocity.</span>
+          </p>
 
-    return (
-        <section
-            ref={heroRef}
-            className="relative w-full bg-slate-50 dark:bg-[#050505] text-black dark:text-white transition-colors duration-300 overflow-hidden flex flex-col lg:flex-row py-20 lg:py-60"
-        >
-            {/* Left Side - Train Engine */}
-            <div className="w-full lg:w-1/2 flex items-center justify-center lg:justify-end lg:pr-10 z-10 relative mb-12 lg:mb-0">
-                {/* Visual Track Line */}
-                <div className="absolute w-full h-[1px] bg-[#0070F0]/30 dark:bg-[#0070F0]/30 top-1/2 lg:top-1/2 shadow-[0_0_15px_rgba(0,112,240,0.3)]" />
+          <div className="flex pt-4">
+            <button className="flex items-center gap-4 px-8 py-5 bg-zinc-900 text-white hover:bg-blue-600 transition-all duration-300 group">
+              <span className="text-xs font-bold uppercase tracking-widest">Get Started</span>
+              <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+            </button>
+          </div>
+        </div>
+      </div>
 
-                <div ref={trainRef} className="relative scale-[0.6] sm:scale-75 md:scale-90 lg:scale-100 origin-center lg:origin-right">
-                    {/* Train Body */}
-                    <div className="relative w-[320px] h-28 sm:w-[450px] sm:h-36 lg:w-[600px] lg:h-48 bg-gradient-to-b from-neutral-100 via-neutral-200 to-neutral-300 dark:from-neutral-800 dark:via-neutral-900 dark:to-black 
-                                rounded-tr-[100px] lg:rounded-tr-[120px] rounded-br-[30px] rounded-bl-[15px] border-r-8 border-[#0070F0] shadow-xl dark:shadow-[0_0_60px_-10px_rgba(0,112,240,0.3)]">
+      {/* --- RIGHT SIDE: THE VISUAL --- */}
+      <div className="relative w-full md:w-1/2 h-1/2 md:h-full overflow-hidden bg-zinc-100">
+        <img
+          ref={rightImageRef}
+          src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?q=80&w=2070"
+          alt="AI Professional"
+          className="w-full h-full object-cover grayscale-[0.2] will-change-transform"
+        />
+        {/* Soft edge mask to blend the image into the white left side */}
+        <div className="absolute inset-0 bg-gradient-to-r from-white via-transparent to-transparent hidden md:block" />
+        
+        {/* Center Vignette for Tunnel Depth */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle,_transparent_30%,_rgba(255,255,255,0.8)_100%)] opacity-0 group-hover:opacity-100 transition-opacity" />
+      </div>
 
-                        {/* Window/Glass effect */}
-                        <div className="absolute top-6 right-10 w-1/3 h-1/2 bg-[#0070F0]/10 border-t border-r border-[#0070F0]/40 rounded-tr-[80px] skew-x-12 backdrop-blur-sm">
-                            <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/20 dark:via-white/5 to-transparent" />
-                        </div>
-
-                        {/* Content inside Train */}
-                        <div className="absolute inset-0 flex items-center justify-start pl-8 lg:pl-12">
-                            <img src={Img} alt="Logo" className="h-12 w-12 sm:h-16 sm:w-16 lg:h-20 lg:w-20 object-contain" />
-                            <h1 className="text-black/70 dark:text-white/70 text-4xl sm:text-5xl lg:text-7xl font-black italic tracking-tighter select-none ml-2">
-                                VVSPL
-                            </h1>
-                        </div>
-
-                        <div className="absolute bottom-6 right-6 lg:bottom-8 lg:right-6">
-                            <div className="w-4 h-2 lg:w-6 lg:h-3 bg-[#0070F0] rounded-full shadow-[0_0_25px_#0070F0] animate-pulse" />
-                        </div>
-                    </div>
-                    {/* Ground Shadow */}
-                    <div className="absolute -bottom-4 right-10 w-2/3 h-4 bg-[#0070F0]/20 blur-md rounded-[50%]" />
-                </div>
-            </div>
-
-            {/* Right Side - Content */}
-            <div className="w-full lg:w-1/2 flex items-center px-6 sm:px-12 lg:px-20 z-20">
-                <div ref={contentRef} className="max-w-xl text-center lg:text-left mx-auto lg:mx-0">
-                    <h2 className="text-[#0070F0] font-mono text-xs sm:text-sm tracking-[0.2em] mb-4 uppercase">
-                        Digital Transformation Engine
-                    </h2>
-                    <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-6">
-                        Veterans's Venture  <br />
-                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-neutral-800 to-neutral-500 dark:from-white dark:to-neutral-500">
-                            where vision meets velocity
-                        </span>
-                    </h1>
-                    <p className="text-neutral-600 dark:text-neutral-400 text-base sm:text-lg mb-8 leading-relaxed max-w-5xl mx-auto lg:mx-0">
-                        Experience driven by purpose, and powered by innovation. Where seasoned visionaries combine strategic insight with bold execution, transforming ideas into impactful ventures at unmatched velocity.
-                    </p>
-
-                    <div className="flex flex-col sm:flex-row justify-center lg:justify-start gap-4 mb-12">
-                        <button className="px-10 py-4 bg-[#0070F0] text-white dark:text-black font-bold rounded uppercase text-sm tracking-widest hover:bg-[#0070F0]/90 transition-all active:scale-95 shadow-lg dark:shadow-[0_0_20px_rgba(0,112,240,0.4)] cursor-pointer">
-                            Start Journey
-                        </button>
-                    </div>
-
-                    <button
-                        onClick={handleNext}
-                        className="group flex items-center justify-center lg:justify-start gap-4 text-neutral-500 dark:text-[#0070F0]/50 hover:text-[#0070F0] transition-colors cursor-pointer w-full lg:w-auto"
-                    >
-                        <div className="hidden sm:block h-[1px] w-12 bg-current" />
-                        <span className="font-mono text-xs sm:text-sm tracking-widest uppercase">Next Station: About Us</span>
-                        <div className="w-2 h-2 rounded-full bg-current" />
-                    </button>
-                </div>
-            </div>
-
-            {/* Background Texture */}
-            <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 pointer-events-none mix-blend-overlay dark:mix-blend-normal" />
-        </section>
-    );
+      {/* Static Scroll Indicator */}
+      {/* <div className="absolute bottom-10 left-8 md:left-20 hidden md:block z-30">
+        <div className="flex flex-col items-center gap-3">
+          <span className="text-[9px] font-bold uppercase tracking-[0.4em] text-zinc-400 rotate-180 [writing-mode:vertical-lr]">Scroll</span>
+          <div className="w-px h-12 bg-gradient-to-b from-blue-600 to-transparent" />
+        </div>
+      </div> */}
+    </section>
+  );
 };
 
 export default Hero;

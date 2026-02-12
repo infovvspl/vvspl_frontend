@@ -1,44 +1,22 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
-import Img from "../assets/logo2.png";
 
-const Load = ({ onComplete }) => {
+const Load = () => {
+  const [isLoading, setIsLoading] = useState(true);
   const trainRef = useRef(null);
   const loaderContainer = useRef(null);
-  const backgroundTrainsRef = useRef([]);
+  const mainContent = useRef(null);
 
   useEffect(() => {
     const tl = gsap.timeline();
 
-    // Background Trains Animation
-    backgroundTrainsRef.current.forEach((train, index) => {
-      if (!train) return;
-      const direction = index % 2 === 0 ? 1 : -1;
-      const startX = direction === 1 ? '-100vw' : '100vw';
-      const endX = direction === 1 ? '100vw' : '-100vw';
-      const duration = 2 + Math.random() * 2;
-      const delay = Math.random() * 1.5;
-
-      gsap.fromTo(train,
-        { x: startX, opacity: 0.3 },
-        {
-          x: endX,
-          opacity: 0.3,
-          duration: duration,
-          repeat: -1,
-          ease: "none",
-          delay: delay
-        }
-      );
-    });
-
     // 1. Entrance & Engine vibration
-    tl.fromTo(trainRef.current,
-      { x: '-120vw', scale: 0.8 },
+    tl.fromTo(trainRef.current, 
+      { x: '-120vw', scale: 0.8 }, 
       { x: '0', scale: 1, duration: 1.5, ease: "expo.out" }
     );
 
-    // Continuous vibration "plasma hum"
+    // Continuous vibration "engine hum"
     gsap.to(trainRef.current, {
       y: "+=1.5",
       repeat: -1,
@@ -46,11 +24,11 @@ const Load = ({ onComplete }) => {
       duration: 0.08
     });
 
-    // 2. Simulate Loading time (3.5 seconds)
+    // 2. Simulate Loading time (3 seconds)
     const timer = setTimeout(() => {
       // 3. Departure Animation
       const exitTl = gsap.timeline({
-        onComplete: onComplete
+        onComplete: () => setIsLoading(false)
       });
 
       exitTl.to(trainRef.current, {
@@ -61,90 +39,91 @@ const Load = ({ onComplete }) => {
         duration: 0.8,
         ease: "power4.in"
       })
-        .to(loaderContainer.current, {
-          opacity: 0,
-          duration: 0.5
-        }, "-=0.3");
+      .to(loaderContainer.current, {
+        opacity: 0,
+        duration: 0.5
+      }, "-=0.3");
 
     }, 3500);
 
     return () => clearTimeout(timer);
-  }, [onComplete]);
+  }, []);
+
+  // Reveal Main Page
+  useEffect(() => {
+    if (!isLoading) {
+      gsap.fromTo(mainContent.current, 
+        { opacity: 0, y: 20 }, 
+        { opacity: 1, y: 0, duration: 1 }
+      );
+    }
+  }, [isLoading]);
 
   return (
-    <div className="bg-black text-white font-sans overflow-hidden">
-      <div ref={loaderContainer} className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#050505]">
+    <div className="bg-black min-h-screen text-white font-sans overflow-hidden">
+      {isLoading ? (
+        <div ref={loaderContainer} className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#050505]">
+          
+          {/* Motion Blur Tracks */}
+          <div className="absolute w-full h-[2px] bg-orange-900/30 top-1/2 mt-12 shadow-[0_0_15px_orange]" />
+          
+          {/* The Train Engine Body */}
+          <div ref={trainRef} className="relative flex items-end">
+            {/* The Engine Head */}
+            <div className="relative w-80 h-28 md:w-[450px] md:h-36 bg-gradient-to-b from-neutral-800 via-neutral-900 to-black 
+              rounded-tr-[100px] rounded-br-[20px] rounded-bl-[10px] border-r-4 border-orange-500 shadow-[20px_0_40px_-10px_rgba(234,88,12,0.5)]">
+              
+              {/* Windshield */}
+              <div className="absolute top-4 right-8 w-1/3 h-1/2 bg-cyan-500/10 border-t border-r border-cyan-400/40 rounded-tr-[60px] skew-x-12 overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-transparent animate-[pulse_2s_infinite]" />
+              </div>
 
-        {/* Background Trains Layer */}
-        <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-          {[...Array(3)].map((_, i) => (
-            <div
-              key={i}
-              ref={el => backgroundTrainsRef.current[i] = el}
-              className="absolute h-12 w-[60vw] bg-gradient-to-r from-transparent via-[#0070F0]/10 to-transparent blur-md"
-              style={{
-                top: `${20 + i * 25}%`,
-                left: 0
-              }}
-            />
-          ))}
-        </div>
+              {/* VVSPL Logo Area */}
+              <div className="absolute inset-0 flex items-center justify-center pr-12">
+                <h1 className="text-orange-500 text-6xl font-black italic tracking-tighter drop-shadow-[0_0_10px_rgba(249,115,22,0.8)]">
+                  VVSPL
+                </h1>
+              </div>
 
-        {/* Motion Blur Tracks - Now Electric Blue */}
-        <div className="absolute w-full h-[1px] bg-[#0070F0]/20 top-1/2 mt-12 shadow-[0_0_20px_#0070F0] z-10" />
-
-        {/* The Train Engine Body */}
-        <div ref={trainRef} className="relative flex items-end z-20">
-          {/* The Engine Head */}
-          <div className="relative w-80 h-28 md:w-[450px] md:h-36 bg-gradient-to-b from-neutral-800 via-neutral-900 to-black 
-                        rounded-tr-[100px] rounded-br-[20px] rounded-bl-[10px] border-r-4 border-[#0070F0] shadow-[25px_0_50px_-10px_rgba(0,112,240,0.4)]">
-
-            {/* Windshield - Deep Cyan/Blue */}
-            <div className="absolute top-4 right-8 w-1/3 h-1/2 bg-[#0070F0]/10 border-t border-r border-[#0070F0]/40 rounded-tr-[60px] skew-x-12 overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-transparent animate-[pulse_2s_infinite]" />
+              {/* Engine Lights */}
+              <div className="absolute bottom-6 right-4 flex gap-2">
+                <div className="w-4 h-2 bg-orange-600 rounded-full shadow-[0_0_15px_orange]" />
+                <div className="w-2 h-2 bg-orange-400 rounded-full animate-pulse" />
+              </div>
             </div>
 
-            {/* VVSPL Logo Area - Electric Blue Glow */}
-            <div className="absolute inset-0 flex items-center justify-start pr-12">
-              <img src={Img} alt="" className="h-20 w-20" />
-              <h1 className="text-[#0070F0] text-6xl font-black italic tracking-tighter drop-shadow-[0_0_15px_rgba(0,112,240,0.9)]">
-                VVSPL
-              </h1>
-            </div>
-
-            {/* Engine Lights - Blue Plasma */}
-            <div className="absolute bottom-6 right-4 flex gap-2">
-              <div className="w-4 h-2 bg-[#0070F0] rounded-full shadow-[0_0_15px_#0070F0]" />
-              <div className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse shadow-[0_0_10px_cyan]" />
-            </div>
+            {/* Trailing Part (blurred) */}
+            <div className="w-20 h-24 bg-neutral-900/50 blur-sm rounded-l-lg -ml-2" />
           </div>
 
-          {/* Trailing Part (blurred) */}
-          <div className="w-20 h-24 bg-neutral-900/50 blur-sm rounded-l-lg -ml-2 border-l border-[#0070F0]/10" />
-        </div>
-
-        {/* Progress Indicator */}
-        <div className="mt-20 flex flex-col items-center z-20">
-          <span className="text-[#0070F0]/60 text-xs tracking-[0.4em] uppercase mb-3 animate-pulse font-mono">
-            LOADING...
-          </span>
-          <div className="w-56 h-[1px] bg-neutral-800 relative">
-            {/* The Loading Fill */}
-            <div className="h-full bg-[#0070F0] shadow-[0_0_15px_#0070F0] animate-[load_3s_ease-in-out_infinite]" />
-
-            {/* Static Blue Glow Point */}
-            <div className="absolute -right-1 -top-1 w-2 h-2 bg-white rounded-full blur-[2px] opacity-50" />
+          {/* Progress Indicator */}
+          <div className="mt-20 flex flex-col items-center">
+            <span className="text-orange-500/50 text-xs tracking-[0.3em] uppercase mb-2 animate-pulse">Initializing Hyperlink</span>
+            <div className="w-48 h-[1px] bg-neutral-800">
+              <div className="h-full bg-orange-500 shadow-[0_0_10px_orange] animate-[load_3s_linear_infinite]" />
+            </div>
           </div>
         </div>
-      </div>
+      ) : (
+        <main ref={mainContent} className="flex flex-col items-center justify-center h-screen p-8 text-center">
+          <h2 className="text-5xl font-bold bg-gradient-to-r from-orange-400 to-red-600 bg-clip-text text-transparent mb-4">
+            Welcome to VVSPL
+          </h2>
+          <p className="text-neutral-400 max-w-md">
+            Your destination has been reached. Experience the future of high-speed connectivity and seamless design.
+          </p>
+          <button className="mt-8 px-8 py-3 border border-orange-500/50 hover:bg-orange-500/10 transition-colors rounded-full text-orange-500">
+            Enter Dashboard
+          </button>
+        </main>
+      )}
 
       <style jsx>{`
-                @keyframes load {
-                    0% { width: 0%; left: 0; }
-                    50% { width: 100%; left: 0; }
-                    100% { width: 0%; left: 100%; }
-                }
-            `}</style>
+        @keyframes load {
+          0% { width: 0%; }
+          100% { width: 100%; }
+        }
+      `}</style>
     </div>
   );
 };

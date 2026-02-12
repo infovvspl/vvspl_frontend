@@ -1,95 +1,105 @@
-import React, { useEffect, useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import React from 'react';
+import { Target, Eye, Zap } from 'lucide-react';
 
-gsap.registerPlugin(ScrollTrigger);
-
-const MissionVision = () => {
-  const sectionRef = useRef(null);
-  const cardsRef = useRef(null);
-
-  useEffect(() => {
-    let ctx = gsap.context(() => {
-      gsap.set(cardsRef.current.children, {
-        y: 60,
-        opacity: 0,
-      });
-
-      gsap.to(cardsRef.current.children, {
-        y: 0,
-        opacity: 1,
-        stagger: 0.25,
-        duration: 1,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 75%",
-        },
-      });
-    }, sectionRef);
-
-    return () => ctx.revert();
-  }, []);
-
-  return (
-    <section
-      ref={sectionRef}
-      className="relative w-full bg-white dark:bg-[#050505] text-black dark:text-white py-24 overflow-hidden transition-colors duration-300"
-    >
-      <div className="max-w-6xl mx-auto px-6 sm:px-12 lg:px-20">
-
-        {/* Section Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-cyan-600 dark:text-cyan-500 font-mono text-xs tracking-[0.3em] uppercase mb-4">
-            Our Core
-          </h2>
-
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold">
-            Mission & Vision
-          </h1>
-        </div>
-
-        {/* Cards */}
-        <div
-          ref={cardsRef}
-          className="grid md:grid-cols-2 gap-10"
+const MissionVision = ({ innerRef }) => {
+    return (
+        <section
+            ref={innerRef}
+            className="tunnel-section absolute inset-0 flex items-center bg-zinc-950 text-white overflow-hidden opacity-0"
         >
-          {/* Mission */}
-          <div className="relative p-10 rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/60 backdrop-blur-lg hover:border-cyan-500/40 transition-all duration-500 group">
-            <div className="absolute top-0 left-0 w-1 h-full bg-cyan-500 rounded-l-2xl shadow-[0_0_15px_cyan]" />
+            {/* --- BACKGROUND: DARK DEPTH --- */}
+            <div className="absolute inset-0 z-0">
+                {/* Subtle grid pattern for technical depth */}
+                <div
+                    className="absolute inset-0 opacity-20"
+                    style={{
+                        backgroundImage: `radial-gradient(circle, #3b82f6 1px, transparent 1px)`,
+                        backgroundSize: '50px 50px'
+                    }}
+                />
 
-            <h3 className="text-2xl font-bold mb-6 text-cyan-600 dark:text-cyan-500">
-              🚀 Our Mission
-            </h3>
+                {/* Large stylized number/letter in the back for parallax zoom */}
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none">
+                    <span className="text-[40vw] font-black text-white/[0.02] leading-none select-none">
+                        02
+                    </span>
+                </div>
 
-            <p className="text-slate-600 dark:text-slate-300 leading-relaxed text-lg">
-              To empower businesses with innovative digital solutions that
-              accelerate growth, enhance efficiency, and deliver measurable
-              impact through technology excellence.
-            </p>
-          </div>
+                {/* Dynamic Glows to break the "Flat" black */}
+                <div className="absolute -top-1/4 -right-1/4 w-[600px] h-[600px] bg-blue-900/20 rounded-full blur-[120px]" />
+                <div className="absolute -bottom-1/4 -left-1/4 w-[600px] h-[600px] bg-zinc-800/20 rounded-full blur-[120px]" />
+            </div>
 
-          {/* Vision */}
-          <div className="relative p-10 rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/60 backdrop-blur-lg hover:border-cyan-500/40 transition-all duration-500 group">
-            <div className="absolute top-0 left-0 w-1 h-full bg-cyan-500 rounded-l-2xl shadow-[0_0_15px_cyan]" />
+            {/* --- CONTENT CONTAINER --- */}
+            <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12">
 
-            <h3 className="text-2xl font-bold mb-6 text-cyan-600 dark:text-cyan-500">
-              🌍 Our Vision
-            </h3>
+                {/* Section Header */}
+                <div className="mb-16 md:mb-24 text-center md:text-left">
+                    <div className="inline-flex items-center gap-3 px-3 py-1 border border-blue-500/30 bg-blue-500/10 rounded-full mb-6">
+                        <Zap size={14} className="text-blue-400" />
+                        <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-blue-400">Strategic Intent</span>
+                    </div>
+                    <h2 className="text-5xl md:text-7xl font-black uppercase tracking-tighter">
+                        The <span className="text-transparent" style={{ WebkitTextStroke: '1px #fff' }}>Blueprint</span>
+                    </h2>
+                </div>
 
-            <p className="text-slate-600 dark:text-slate-300 leading-relaxed text-lg">
-              To become a global leader in digital transformation by building
-              sustainable, scalable, and intelligent systems that redefine the
-              future of industries worldwide.
-            </p>
-          </div>
-        </div>
-      </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
 
-      {/* Subtle Noise Overlay */}
-      <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-10 pointer-events-none mix-blend-overlay dark:mix-blend-normal" />
-    </section>
-  );
+                    {/* MISSION CARD */}
+                    <div className="group relative p-8 lg:p-12 bg-zinc-900/50 border border-white/5 backdrop-blur-sm hover:border-blue-500/50 transition-colors duration-500">
+                        <div className="absolute top-0 right-0 p-6 opacity-10 group-hover:opacity-100 transition-opacity">
+                            <Target size={80} className="text-blue-500" />
+                        </div>
+
+                        <div className="relative z-10">
+                            <h3 className="text-blue-500 font-mono text-sm mb-6 flex items-center gap-2">
+                                <span className="w-8 h-px bg-blue-500" /> 01. OUR MISSION
+                            </h3>
+                            <p className="text-2xl md:text-3xl font-light leading-tight text-zinc-100">
+                                To design and deploy defence-grade, AI-enabled digital architectures that enhance national capability, institutional efficiency, and enterprise competitiveness — delivered with precision engineering and globally competitive cost discipline.
+                            </p>
+                        </div>
+
+                        {/* Animated corner detail */}
+                        <div className="absolute bottom-0 left-0 w-12 h-12 border-b-2 border-l-2 border-blue-500 scale-0 group-hover:scale-100 transition-transform origin-bottom-left duration-500" />
+                    </div>
+
+                    {/* VISION CARD */}
+                    <div className="group relative p-8 lg:p-12 bg-zinc-900/50 border border-white/5 backdrop-blur-sm hover:border-blue-500/50 transition-colors duration-500">
+                        <div className="absolute top-0 right-0 p-6 opacity-10 group-hover:opacity-100 transition-opacity">
+                            <Eye size={80} className="text-blue-500" />
+                        </div>
+
+                        <div className="relative z-10">
+                            <h3 className="text-blue-500 font-mono text-sm mb-6 flex items-center gap-2">
+                                <span className="w-8 h-px bg-blue-500" /> 02. OUR VISION
+                            </h3>
+                            <p className="text-2xl md:text-3xl font-light leading-tight text-zinc-100">
+                                We envision a digitally sovereign ecosystem where:
+
+                                National infrastructure is intelligent.
+                                Industries are autonomous.
+                                Governance is data-driven.
+                                Security is structural — not reactive.
+
+                                Veteran’s Venture exists to architect that transition.
+                            </p>
+                        </div>
+
+                        {/* Animated corner detail */}
+                        <div className="absolute bottom-0 left-0 w-12 h-12 border-b-2 border-l-2 border-blue-500 scale-0 group-hover:scale-100 transition-transform origin-bottom-left duration-500" />
+                    </div>
+
+                </div>
+
+                {/* Bottom Decorative Line (Matching Hero/About style) */}
+                <div className="mt-20 w-full h-px bg-gradient-to-r from-transparent via-zinc-800 to-transparent relative">
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2 h-2 bg-blue-500 rounded-full animate-ping" />
+                </div>
+            </div>
+        </section>
+    );
 };
 
 export default MissionVision;

@@ -1,216 +1,100 @@
-import React, { useEffect, useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import React from 'react';
 
-gsap.registerPlugin(ScrollTrigger);
+const About = ({ innerRef }) => {
+    return (
+        <section
+            ref={innerRef}
+            className="tunnel-section absolute inset-0 flex items-center bg-white text-zinc-900 overflow-hidden opacity-0"
+        >
+            {/* --- BACKGROUND LAYER: DEPTH & TEXTURE --- */}
+            <div className="absolute inset-0 z-0">
+                <img
+                    src="https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=2070"
+                    alt="About Tech Background"
+                    className="w-full h-full object-cover origin-center opacity-[0.5] "
+                />
+                {/* Large Background Watermark - creates 3D depth when zooming */}
+                {/* <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full text-center pointer-events-none">
+          <span className="text-[30vw] font-black text-zinc-50 tracking-tighter leading-none select-none">
+            CORE
+          </span>
+        </div> */}
+                {/* Gradient overlays to keep the edges clean */}
+                <div className="absolute inset-0 bg-gradient-to-b from-white via-transparent to-white" />
+            </div>
 
-const About = ({ onNextClick }) => {
-  const sectionRef = useRef(null);
-  const trainRef = useRef(null);
-  const contentRef = useRef(null);
-  const missionRef = useRef(null);
-  const mainTl = useRef(null);
+            {/* --- CONTENT CONTAINER --- */}
+            <div className="relative z-10 w-full max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
 
-  const handleNext = () => {
-    const tl = gsap.timeline({
-      onComplete: onNextClick,
-    });
-
-    tl.to(trainRef.current, {
-      x: "-150vw",
-      duration: 1.5,
-      ease: "power2.in",
-    }).to(sectionRef.current, {
-      opacity: 0,
-      y: -50, // Slight lift on exit
-      duration: 0.6,
-    }, "-=1");
-  };
-
-  useEffect(() => {
-    let ctx = gsap.context(() => {
-      // 1. Initial State Reset (Wipe out any leftover handleNext styles)
-      gsap.set(sectionRef.current, { opacity: 1, y: 0 });
-      gsap.set(trainRef.current, { x: "100vw", opacity: 1 });
-      gsap.set(contentRef.current.children, { y: 30, opacity: 0 });
-      gsap.set(missionRef.current.children, { y: 50, opacity: 0 });
-
-      // 2. Main Entrance Timeline
-      mainTl.current = gsap.timeline({
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top center",
-          toggleActions: "play none none reset",
-        },
-      });
-
-      mainTl.current
-        .to(trainRef.current, {
-          x: "0",
-          duration: 1.5,
-          ease: "power3.out",
-        })
-        .to(
-          contentRef.current.children,
-          {
-            y: 0,
-            opacity: 1,
-            stagger: 0.15,
-            duration: 0.8,
-            ease: "power2.out",
-          },
-          "-=0.8"
-        );
-
-      // 3. Mission Vision Animation (Separate trigger)
-      gsap.to(missionRef.current.children, {
-        y: 0,
-        opacity: 1,
-        stagger: 0.25,
-        duration: 1,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: missionRef.current,
-          start: "top 85%",
-          toggleActions: "play none none reset", // Added reset for scroll up
-        },
-      });
-
-      // 4. Floating Train Idle
-      gsap.to(trainRef.current, {
-        y: "+=8",
-        duration: 2,
-        repeat: -1,
-        yoyo: true,
-        ease: "sine.inOut",
-      });
-
-      // 5. THE SCROLL BACK FIX
-      ScrollTrigger.create({
-        trigger: sectionRef.current,
-        start: "top bottom",
-        onEnter: () => {
-           // Ensure visibility if coming from a "Next" click reset
-           gsap.to(sectionRef.current, { opacity: 1, y: 0, duration: 0.3 });
-        },
-        onEnterBack: () => {
-          // Force reset positions and restart the entrance
-          gsap.set(sectionRef.current, { opacity: 1, y: 0 });
-          mainTl.current.restart();
-        }
-      });
-
-    }, sectionRef);
-
-    return () => ctx.revert();
-  }, []);
-
-  return (
-    <section
-      ref={sectionRef}
-      id="about"
-      className="relative w-full bg-slate-100 dark:bg-[#080808] text-black dark:text-white transition-colors duration-300 overflow-hidden py-20 lg:py-40"
-    >
-      {/* Top Layout */}
-      <div className="flex flex-col lg:flex-row-reverse items-center">
-
-        {/* Train Side */}
-        <div ref={trainRef} className="w-full lg:w-1/2 flex items-center justify-center lg:justify-start lg:pl-10 z-10 relative mb-12 lg:mb-0">
-          <div className="absolute w-full h-[1px] bg-cyan-500/30 top-1/2 shadow-[0_0_15px_cyan]" />
-
-          <div className="relative w-[320px] h-28 sm:w-[450px] sm:h-36 lg:w-[600px] lg:h-48 bg-gradient-to-b from-slate-100 via-slate-200 to-slate-300 dark:from-slate-900 dark:via-slate-800 dark:to-black 
-                                rounded-tl-[100px] lg:rounded-tl-[120px] rounded-bl-[30px] rounded-br-[15px] border-l-8 border-cyan-500 shadow-xl dark:shadow-[0_0_60px_-10px_rgba(0,255,255,0.2)]">
-
-                        <div className="absolute top-6 left-10 w-1/3 h-1/2 bg-cyan-500/10 border-t border-l border-cyan-500/40 rounded-tl-[80px] skew-x-[-12deg] backdrop-blur-sm">
-                            <div className="absolute inset-0 bg-gradient-to-tl from-transparent via-white/20 dark:via-white/5 to-transparent" />
-                        </div>
-
-                        <div className="absolute inset-0 flex items-center justify-end">
-                            <h1 className="text-black/70 dark:text-white/70 text-5xl sm:text-6xl lg:text-7xl pe-5 font-black italic tracking-tighter select-none">
-                                ABOUT
-                            </h1>
-                        </div>
-
-                        <div className="absolute bottom-6 left-6 lg:bottom-8 lg:left-6">
-                            <div className="w-4 h-2 lg:w-6 lg:h-3 bg-cyan-500 rounded-full shadow-[0_0_25px_cyan] animate-pulse" />
+                    {/* LEFT: Structural Labeling */}
+                    <div className="lg:col-span-1 hidden lg:block">
+                        <div className="flex flex-col items-center gap-8">
+                            {/* <span className="text-[10px] font-bold uppercase tracking-[0.5em] text-blue-600 rotate-180 [writing-mode:vertical-lr]">
+                01 — Mission
+              </span> */}
+                            <div className="w-px h-32 bg-gradient-to-b from-blue-600 to-transparent" />
                         </div>
                     </div>
-        </div>
 
-        {/* About Content */}
-        <div className="w-full lg:w-1/2 flex items-center px-6 sm:px-12 lg:px-20 z-20">
-          <div
-            ref={contentRef}
-            className="max-w-xl text-center lg:text-right mx-auto lg:ml-auto"
-          >
-            <h2 className="text-cyan-600 dark:text-cyan-500 font-mono text-xs tracking-[0.2em] mb-4 uppercase">
-              Station: Central Hub
-            </h2>
+                    {/* RIGHT: High-Contrast Content Block */}
+                    <div className="lg:col-span-11 xl:col-span-10">
+                        <div className="max-w-4xl space-y-10">
 
-            <h1 className="text-4xl sm:text-5xl lg:text-5xl font-bold leading-tight mb-6">
-              We don't just use technology: <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-l from-neutral-800 to-neutral-500 dark:from-white dark:to-slate-500">
-                We make it work for you
-              </span>
-            </h1>
+                            {/* Header with Split Styling */}
+                            <div className="space-y-4">
+                                <h2 className="text-blue-600 text-xs md:text-sm tracking-[0.6em] uppercase font-black">
+                                    The Origin
+                                </h2>
+                                <h3 className="text-5xl md:text-[3vw] font-black leading-[0.9] uppercase tracking-tighter text-zinc-900">
+                                    We don't just use technology: <br />
+                                    <span className="text-transparent" style={{ WebkitTextStroke: '1.5px #18181b' }}>
+                                        We make it work for you
+                                    </span>
+                                </h3>
+                            </div>
 
-            <div className="bg-white/50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 p-6 sm:p-8 rounded-lg backdrop-blur-sm mb-8 border-r-4 border-r-cyan-500/50">
-              <p className="text-slate-600 dark:text-slate-300 text-base sm:text-lg leading-relaxed">
-                We go beyond implementation — we understand your challenges, align with your goals, and turn technology into practical solutions that drive real results and measurable growth.
-              </p>
+                            {/* Main Text with Glass Effect for legibility */}
+                            <div className="relative p-8 md:p-12 bg-white/40 backdrop-blur-md border-l-4 border-zinc-900 shadow-2xl shadow-zinc-200/50">
+                                <p className="text-xl md:text-2xl text-zinc-700 leading-tight font-light italic">
+                                    "Born from the intersection of motion and code, we specialize in
+                                    digital experiences that don't just sit on a screen—
+                                    <span className="text-zinc-900 font-medium not-italic"> they pull you in.</span>"
+                                </p>
+
+                                <p className="mt-8 text-base md:text-lg text-zinc-500 leading-relaxed max-w-2xl font-normal">
+                                    Every pixel is a coordinate; every scroll is a journey. We combine
+                                    industrial-grade speed with visionary design to transform static
+                                    ideas into living, breathing ventures.
+                                </p>
+                            </div>
+
+                            {/* Data Grid Footer */}
+                            <div className="grid grid-cols-2 md:grid-cols-3 gap-8 pt-6 border-t border-zinc-100">
+                                <div className="space-y-1">
+                                    <p className="text-[9px] uppercase tracking-widest text-blue-600 font-bold">Foundation</p>
+                                    <p className="text-lg md:text-xl font-mono text-zinc-900 tracking-tight">Est. 2024</p>
+                                </div>
+                                <div className="space-y-1">
+                                    <p className="text-[9px] uppercase tracking-widest text-blue-600 font-bold">Approach</p>
+                                    <p className="text-lg md:text-xl font-mono text-zinc-900 tracking-tight">Velocity First</p>
+                                </div>
+                                <div className="space-y-1 hidden md:block">
+                                    <p className="text-[9px] uppercase tracking-widest text-blue-600 font-bold">Reach</p>
+                                    <p className="text-lg md:text-xl font-mono text-zinc-900 tracking-tight">Global / Remote</p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
-      </div>
 
-      {/* Mission & Vision Section */}
-      <div
-        ref={missionRef}
-        className="max-w-6xl mx-auto px-6 sm:px-12 lg:px-20 mt-24 grid md:grid-cols-2 gap-10"
-      >
-        {/* Mission */}
-        <div className="relative p-10 rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/60 backdrop-blur-lg hover:border-cyan-500/40 transition-all duration-500">
-          <div className="absolute top-0 left-0 w-1 h-full bg-cyan-500 rounded-l-2xl shadow-[0_0_15px_cyan]" />
-          <h3 className="text-2xl font-bold mb-6 text-cyan-600 dark:text-cyan-500">
-            🚀 Our Mission
-          </h3>
-          <p className="text-slate-600 dark:text-slate-300 leading-relaxed text-lg">
-            Our mission is to bring technology to the unorganized sector and local markets, empowering small businesses with accessible digital solutions. By bridging the gap between innovation and grassroots enterprises, we aim to strengthen local economies, improve operational efficiency, and create sustainable employment opportunities that drive inclusive growth.
-          </p>
-        </div>
-
-        {/* Vision */}
-        <div className="relative p-10 rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/60 backdrop-blur-lg hover:border-cyan-500/40 transition-all duration-500">
-          <div className="absolute top-0 left-0 w-1 h-full bg-cyan-500 rounded-l-2xl shadow-[0_0_15px_cyan]" />
-          <h3 className="text-2xl font-bold mb-6 text-cyan-600 dark:text-cyan-500">
-            🌍 Our Vision
-          </h3>
-          <p className="text-slate-600 dark:text-slate-300 leading-relaxed text-lg">
-            To become a global leader in digital transformation by building
-            sustainable, scalable, and intelligent systems that redefine the
-            future of industries worldwide.
-          </p>
-        </div>
-      </div>
-
-      {/* Next Button */}
-      <div className="flex justify-center mt-20">
-        <button
-          onClick={handleNext}
-          className="group flex items-center gap-4 text-cyan-600 dark:text-cyan-500 hover:text-cyan-500 transition-colors"
-        >
-          <span className="font-mono text-sm tracking-widest uppercase">
-            Next Station: Services
-          </span>
-          <div className="w-8 h-8 rounded-full border border-current flex items-center justify-center group-hover:bg-cyan-500 group-hover:text-black transition-all">
-            →
-          </div>
-        </button>
-      </div>
-
-      <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-10 pointer-events-none mix-blend-overlay dark:mix-blend-normal" />
-    </section>
-  );
+            {/* --- DECORATIVE TECH ELEMENTS (Maintain Hero Style) --- */}
+            <div className="absolute top-10 right-10 w-32 h-32 border-[0.5px] border-zinc-200 rounded-full opacity-50" />
+            <div className="absolute -bottom-20 -left-20 w-[600px] h-[600px] bg-blue-50/30 rounded-full blur-3xl -z-10" />
+        </section>
+    );
 };
 
 export default About;
