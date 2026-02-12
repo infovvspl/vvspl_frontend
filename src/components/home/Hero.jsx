@@ -73,12 +73,12 @@ const Hero = () => {
         ref={leftContentRef}
         className="relative z-20 w-full md:w-1/2 h-full flex flex-col justify-center px-8 md:px-20 bg-white will-change-transform"
       >
-        <div className="space-y-2 mb-8">
+        {/* <div className="space-y-2 mb-8">
           <p className="reveal-text text-blue-600 font-bold tracking-[0.3em] text-[10px] uppercase">
             Established 2024
           </p>
           <div ref={lineRef} className="h-1 w-20 bg-blue-600 origin-left" />
-        </div>
+        </div> */}
 
         <h1 className="reveal-text text-[15vw] md:text-[8vw] font-black leading-[0.9] tracking-tighter uppercase text-zinc-900">
           Veteran <br />

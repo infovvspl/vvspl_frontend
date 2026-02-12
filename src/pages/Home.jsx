@@ -46,6 +46,7 @@ function Home({ setActiveIndex }) {
         end: "+=3500%",
         scrub: 1,
         pin: true,
+        invalidateOnRefresh: true,
         onUpdate: (self) => {
           if (setActiveIndex && self.animation) {
             const time = self.animation.time();
@@ -90,11 +91,10 @@ function Home({ setActiveIndex }) {
         const clientWidth = window.innerWidth;
         
         if (scrollWidth > clientWidth) {
-          const amountToScroll = scrollWidth - clientWidth;
           scrollDuration = 3; // Allocate time for scrolling
           
           tl.to(targetContainer, {
-            x: -amountToScroll,
+            x: () => -(targetContainer.scrollWidth - window.innerWidth),
             ease: "none",
             duration: scrollDuration
           }, currentTime);
@@ -113,18 +113,35 @@ function Home({ setActiveIndex }) {
       currentTime += scrollDuration;
 
       // Transition to next section
-      tl.to(section, {
-        scale: 5,
-        opacity: 0,
-        ease: "power1.inOut",
-        duration: 1
-      }, currentTime);
+      if (index === 1 || index === 5) {
+        // Special transition for About -> MV and Future -> Founders (Normal Scroll / Slide Up)
+        tl.to(section, {
+          yPercent: -100,
+          opacity: 1,
+          ease: "power1.inOut",
+          duration: 1
+        }, currentTime);
 
-      tl.fromTo(nextSection,
-        { scale: 0.5, opacity: 0 },
-        { scale: 1, opacity: 1, ease: "power1.inOut", duration: 1 },
-        currentTime
-      );
+        tl.fromTo(nextSection,
+          { yPercent: 100, opacity: 1, scale: 1 },
+          { yPercent: 0, opacity: 1, scale: 1, ease: "power1.inOut", duration: 1 },
+          currentTime
+        );
+      } else {
+        // Standard Zoom Transition
+        tl.to(section, {
+          scale: 5,
+          opacity: 0,
+          ease: "power1.inOut",
+          duration: 1
+        }, currentTime);
+
+        tl.fromTo(nextSection,
+          { scale: 0.5, opacity: 0 },
+          { scale: 1, opacity: 1, ease: "power1.inOut", duration: 1 },
+          currentTime
+        );
+      }
 
       // Advance time for transition
       currentTime += 1;
