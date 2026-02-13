@@ -4,9 +4,8 @@ import H1 from "../../assets/img1.jpeg";
 import H2 from "../../assets/img2.jpeg";
 import H3 from "../../assets/img3.jpeg";
 
-const FoundingMembers = ({ innerRef }) => {
+const FoundingMembers = ({ innerRef, isPage = false }) => {
   const scrollContainer = useRef(null);
-  
   const members = [
     {
       name: "LT. Col. Anil Tripathi, Sena Medal (Retd.)",
@@ -27,11 +26,12 @@ const FoundingMembers = ({ innerRef }) => {
       img: H3
     }
   ];
+  // ... (member data)
 
   return (
     <section
       ref={innerRef}
-      className="tunnel-section absolute inset-0 flex items-center bg-[#050505] text-white overflow-hidden opacity-0"
+      className={`${isPage ? 'relative py-24' : 'absolute inset-0 opacity-0'} flex items-center bg-zinc-950 text-white overflow-hidden`}
     >
       {/* --- STATIC BACKGROUND ELEMENTS --- */}
       <div className="absolute inset-0 z-0 pointer-events-none">
@@ -42,20 +42,20 @@ const FoundingMembers = ({ innerRef }) => {
       <div className="relative z-10 w-full">
         {/* Header - Stays relatively fixed or fades out early */}
         <div className="px-8 md:px-20 mb-12">
-          <h2 className="text-blue-500 font-mono text-[10px] tracking-[0.6em] uppercase mb-4 font-bold">// Our Team</h2>
+          <h2 className="text-blue-500 font-mono text-[10px] tracking-[0.6em] uppercase mb-4 font-bold opacity-0">// Our Team</h2>
           <h3 className="text-5xl md:text-[6vw] font-black uppercase italic tracking-tighter leading-none">
             The <span className="text-transparent" style={{ WebkitTextStroke: '1px #fff' }}>Leadership.</span>
           </h3>
         </div>
 
         {/* HORIZONTAL CARRIER */}
-        <div 
+        <div
           ref={scrollContainer}
           className="flex flex-nowrap gap-0 w-full px-[10%] md:px-[20%]"
         >
           {members.map((m, i) => (
-            <div 
-              key={i} 
+            <div
+              key={i}
               className="member-card min-w-full md:min-w-[70vw] lg:min-w-[50vw] pr-12 md:pr-24 flex flex-col md:flex-row items-center gap-8 md:gap-16 group"
             >
               {/* Image Frame */}
@@ -75,7 +75,7 @@ const FoundingMembers = ({ innerRef }) => {
               {/* Content */}
               <div className="w-full  space-y-6">
                 <div className="space-y-2">
-                  <span className="text-blue-500 font-mono text-xs font-black italic tracking-widest">0{i + 1}</span>
+                  {/* <span className="text-blue-500 font-mono text-xs font-black italic tracking-widest">0{i + 1}</span> */}
                   <h4 className="text-2xl md:text-4xl font-black uppercase tracking-tight leading-tight text-white break-words">
                     {m.name}
                   </h4>

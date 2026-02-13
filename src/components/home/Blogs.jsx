@@ -1,31 +1,35 @@
 import React from 'react';
 
-const Blogs = ({ innerRef }) => {
+const Blogs = ({ innerRef, isPage = false }) => {
   const posts = [
     {
-      date: "MAR 12, 2026",
-      title: "The Future of AI Systems",
-      category: "Trends",
-      img: "https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=2070"
+      title: "The Future of Defence Logistics: AI-Powered Supply Chains",
+      desc: "How artificial intelligence is revolutionizing military supply chain management, ensuring mission readiness with predictive analytics and autonomous delivery systems.",
+      img: "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=2070",
+      category: "Defence Tech",
+      date: "Oct 26, 2025"
     },
     {
-      date: "FEB 28, 2026",
-      title: "Next-Gen Software Architectures",
-      category: "Development",
-      img: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072"
+      title: "From Battlefield to Boardroom: Leadership Lessons in Innovation",
+      desc: "Insights from military veterans on applying strategic discipline and crisis management to drive business innovation and digital transformation.",
+      img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcStmdghgbG8yN1k6Z9zbnzM8xD-EhpfI-LnQQ&s",
+      category: "Leadership",
+      date: "Oct 20, 2025"
     },
     {
-      date: "JAN 15, 2026",
-      title: "Unlocking Business Velocity With AI",
-      category: "Strategy",
-      img: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2426"
+      title: "Cybersecurity in the Digital Age: Protecting Critical Infrastructure",
+      desc: "A deep dive into modern cybersecurity threats and the advanced solutions needed to safeguard national digital assets and enterprise data.",
+      img: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2070",
+      category: "Cybersecurity",
+      date: "Oct 15, 2025"
     }
   ];
+
 
   return (
     <section
       ref={innerRef}
-      className="tunnel-section absolute inset-0 flex flex-col items-center justify-center bg-zinc-950 text-white overflow-hidden opacity-0 p-4 md:p-8"
+      className={`${isPage ? 'relative py-24' : 'absolute inset-0 opacity-0'} flex flex-col items-center justify-center bg-zinc-950 text-white overflow-hidden p-4 md:p-8`}
     >
       {/* Background Layer */}
       <div className="absolute inset-0 z-0">

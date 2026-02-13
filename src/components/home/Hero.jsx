@@ -1,11 +1,12 @@
 import React, { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const Hero = () => {
+const Hero = ({ innerRef }) => {
   const sectionRef = useRef(null);
   const leftContentRef = useRef(null);
   const rightImageRef = useRef(null);
@@ -52,11 +53,11 @@ const Hero = () => {
         stagger: 0.1,
         ease: "power4.out"
       })
-      .fromTo(lineRef.current, 
-        { scaleX: 0 }, 
-        { scaleX: 1, duration: 1, ease: "expo.inOut" }, 
-        "-=0.8"
-      );
+        .fromTo(lineRef.current,
+          { scaleX: 0 },
+          { scaleX: 1, duration: 1, ease: "expo.inOut" },
+          "-=0.8"
+        );
 
     }, sectionRef);
 
@@ -64,12 +65,15 @@ const Hero = () => {
   }, []);
 
   return (
-    <section 
-      ref={sectionRef} 
+    <section
+      ref={(el) => {
+        sectionRef.current = el;
+        if (innerRef) innerRef.current = el;
+      }}
       className="relative h-screen w-full flex flex-col md:flex-row bg-white overflow-hidden"
     >
       {/* --- LEFT SIDE: THE CONTENT --- */}
-      <div 
+      <div
         ref={leftContentRef}
         className="relative z-20 w-full md:w-1/2 h-full flex flex-col justify-center px-8 md:px-20 bg-white will-change-transform"
       >
@@ -82,25 +86,49 @@ const Hero = () => {
 
         <h1 className="reveal-text text-[15vw] md:text-[8vw] font-black leading-[0.9] tracking-tighter uppercase text-zinc-900">
           Veteran <br />
-          <span className="text-transparent" style={{ WebkitTextStroke: '2px #18181b' }}>Venture</span>
+          <span className="text-transparent" style={{ WebkitTextStroke: '2px #18181b' }}>Ventures</span>
         </h1>
 
         <div className="reveal-text mt-12 space-y-8">
           <h2 className="text-2xl md:text-4xl font-light text-zinc-600 leading-tight">
             Where Vision <span className="text-zinc-900 font-medium">Meets Velocity.</span>
           </h2>
-          
-          <p className="max-w-md text-zinc-500 text-lg border-l-2 border-zinc-100 pl-6">
-            Experience driven by purpose. We transform seasoned insight into 
-            impactful ventures at <span className="text-zinc-900 font-semibold">unmatched velocity.</span>
+
+          <p className="max-w-2xl text-zinc-500 text-lg border-l-2 border-zinc-100 pl-6">
+            Innovation is not just about writing code — it’s about engineering impact. We are a software company built on systems thinking, architectural precision, and disciplined execution. We don’t chase trends or build disposable products. We design, develop, and scale resilient digital ecosystems powered by AI and machine learning, strengthened by robust cybersecurity, and engineered to solve complex problems while creating measurable value.
           </p>
 
-          <div className="flex pt-4">
-            <button className="flex items-center gap-4 px-8 py-5 bg-zinc-900 text-white hover:bg-blue-600 transition-all duration-300 group">
-              <span className="text-xs font-bold uppercase tracking-widest">Get Started</span>
-              <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
-            </button>
+
+          <div className="flex pt-6 gap-4">
+            {/* Primary Link: Get Started */}
+            <Link
+              to="/contact"
+              className="flex items-center gap-3 px-8 py-5 bg-gradient-to-r from-zinc-900 to-zinc-800 text-white hover:from-blue-600 hover:to-blue-500 transition-all duration-300 shadow-lg hover:shadow-blue-600/30 group"
+            >
+              <span className="text-xs font-bold uppercase tracking-widest">
+                Get Started
+              </span>
+              <ArrowRight
+                size={18}
+                className="group-hover:translate-x-1 transition-transform duration-300"
+              />
+            </Link>
+
+            {/* Secondary Link: Our Services */}
+            <Link
+              to="/services"
+              className="flex items-center gap-3 px-8 py-5 border border-zinc-700 text-zinc-900 bg-white hover:bg-zinc-900 hover:text-white hover:border-zinc-900 transition-all duration-300 shadow-md hover:shadow-lg group"
+            >
+              <span className="text-xs font-bold uppercase tracking-widest">
+                Our Services
+              </span>
+              <ArrowRight
+                size={18}
+                className="group-hover:translate-x-1 transition-transform duration-300"
+              />
+            </Link>
           </div>
+
         </div>
       </div>
 
@@ -114,7 +142,7 @@ const Hero = () => {
         />
         {/* Soft edge mask to blend the image into the white left side */}
         <div className="absolute inset-0 bg-gradient-to-r from-white via-transparent to-transparent hidden md:block" />
-        
+
         {/* Center Vignette for Tunnel Depth */}
         <div className="absolute inset-0 bg-[radial-gradient(circle,_transparent_30%,_rgba(255,255,255,0.8)_100%)] opacity-0 group-hover:opacity-100 transition-opacity" />
       </div>
