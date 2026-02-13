@@ -44,7 +44,7 @@ const About = ({ innerRef }) => {
                             {/* Header with Split Styling */}
                             <div className="space-y-4">
                                 <h2 className="text-blue-600 text-xs md:text-sm tracking-[0.6em] uppercase font-black">
-                                    The Origin
+                                    About Us
                                 </h2>
                                 <h3 className="text-5xl md:text-[3vw] font-black leading-[0.9] uppercase tracking-tighter text-zinc-900">
                                     We don't just use technology: <br />

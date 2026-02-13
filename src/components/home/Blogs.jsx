@@ -3,20 +3,20 @@ import React from 'react';
 const Blogs = ({ innerRef }) => {
   const posts = [
     {
-      date: "MAR 12, 2024",
+      date: "MAR 12, 2026",
       title: "The Future of AI Systems",
       category: "Trends",
       img: "https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=2070"
     },
     {
-      date: "FEB 28, 2024",
+      date: "FEB 28, 2026",
       title: "Next-Gen Software Architectures",
       category: "Development",
       img: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072"
     },
     {
-      date: "JAN 15, 2024",
-      title: "Unlocking Business Velocity",
+      date: "JAN 15, 2026",
+      title: "Unlocking Business Velocity With AI",
       category: "Strategy",
       img: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2426"
     }
@@ -59,7 +59,7 @@ const Blogs = ({ innerRef }) => {
                 <img
                   src={post.img}
                   alt={post.title}
-                  className="w-full h-full object-cover grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-110 transition-all duration-1000"
+                  className="w-full h-full object-cover  group-hover:scale-110 transition-all duration-1000"
                 />
               </div>
 

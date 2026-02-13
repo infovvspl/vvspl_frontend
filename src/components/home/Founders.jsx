@@ -42,9 +42,9 @@ const FoundingMembers = ({ innerRef }) => {
       <div className="relative z-10 w-full">
         {/* Header - Stays relatively fixed or fades out early */}
         <div className="px-8 md:px-20 mb-12">
-          <h2 className="text-blue-500 font-mono text-[10px] tracking-[0.6em] uppercase mb-4 font-bold">// Leadership</h2>
+          <h2 className="text-blue-500 font-mono text-[10px] tracking-[0.6em] uppercase mb-4 font-bold">// Our Team</h2>
           <h3 className="text-5xl md:text-[6vw] font-black uppercase italic tracking-tighter leading-none">
-            The <span className="text-transparent" style={{ WebkitTextStroke: '1px #fff' }}>Collective.</span>
+            The <span className="text-transparent" style={{ WebkitTextStroke: '1px #fff' }}>Leadership.</span>
           </h3>
         </div>
 
