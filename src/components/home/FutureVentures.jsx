@@ -24,10 +24,10 @@ const FutureVentures = ({ innerRef, isPage = false }) => {
     {
       title: "Power & Energy",
       desc: "Intelligent grid management for the next energy frontier.",
-      img: "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?q=80&w=2070",
+      img: "https://media.istockphoto.com/id/1158175328/photo/solar-panel-and-wind-turbine-farm-clean-energy.jpg?s=612x612&w=0&k=20&c=ur5kwDnZxGKk_8KluOHkIePz6kiDT5N7dszbYQfPiBw=",
     },
     {
-      title: "Organic Agriculture",
+      title: "Organic Farming",
       desc: "Autonomous routing and demand forecasting systems.",
       img: "https://plus.unsplash.com/premium_photo-1664299231810-29d1caf6f753?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     },

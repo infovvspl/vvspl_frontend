@@ -30,7 +30,7 @@ const Services = ({ innerRef, isPage = false }) => {
     {
       title: "Web Application",
       desc: "Modern, high-performance web platforms built with scalable architectures, seamless UX, and optimized backend systems.",
-      img: "https://images.unsplash.com/photo-1487014679447-9f8336841d58?q=80&w=1605&auto=format&fit=crop"
+      img: "https://img.freepik.com/premium-photo/website-design-software-provide-modish-template-online-retail-business_31965-63159.jpg?semt=ais_hybrid&w=740&q=80"
     },
     {
       title: "Mobile Application",
