@@ -10,7 +10,7 @@ import FutureVentures from '../components/home/FutureVentures';
 import Blogs from '../components/home/Blogs';
 import Contact from '../components/home/Contact';
 import FoundingMembers from '../components/home/Founders';
-import MissionVision from '../components/home/Mv';
+import MissionVision from '../components/home/MV';
 
 gsap.registerPlugin(ScrollTrigger);
 
