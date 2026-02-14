@@ -57,9 +57,9 @@ const About = ({ innerRef, isPage = false }) => {
                             {/* Main Text with Glass Effect for legibility */}
                             <div className="relative p-8 md:p-12 bg-white/40 backdrop-blur-md border-l-4 border-zinc-900 shadow-2xl shadow-zinc-200/50">
                                 <p className="text-xl md:text-2xl text-zinc-700 leading-tight font-light italic">
-  "Innovation means nothing without impact —
-  <span className="text-zinc-900 font-medium not-italic"> we deliver both.</span>"
-</p>
+                                    "Innovation means nothing without impact —
+                                    <span className="text-zinc-900 font-medium not-italic"> we deliver both.</span>"
+                                </p>
 
 
                                 <p className="mt-8 text-base md:text-lg text-zinc-500 leading-relaxed max-w-2xl font-normal">
