@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
-import TunnelNav from "./components/Trackbar";
+// import TunnelNav from "./components/Trackbar";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import About from "./pages/About";
@@ -26,7 +26,7 @@ function App() {
         </div>
       )}
       <div className="flex flex-col">
-        <TunnelNav activeIndex={activeIndex} />
+        {/* <TunnelNav activeIndex={activeIndex} /> */}
         <Navbar />
 
         <main className="flex-1">
