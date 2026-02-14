@@ -1,16 +1,37 @@
 import React from 'react';
 
-const WhyChooseUs = ({ innerRef }) => {
+const WhyChooseUs = ({ innerRef, isPage = false }) => {
   const points = [
-    { title: "Hyper-Speed", desc: "Optimized with Vite for near-instant load times and rapid deployment cycles." },
-    { title: "Fluid Motion", desc: "GSAP driven animations for buttery smooth UX that keeps users engaged." },
-    { title: "Scaleable", desc: "Built with modular React components designed for long-term growth and agility." }
+    {
+      title: "Defence-Grade Precision",
+      desc: "Leveraging military-grade discipline and execution standards to deliver mission-critical reliability."
+    },
+    {
+      title: "Agile Velocity",
+      desc: "Rapid prototyping and deployment cycles that match the speed of modern business evolution."
+    },
+    {
+      title: "Holistic Integration",
+      desc: "Seamlessly blending hardware, software, and human-centric design for complete ecosystem solutions."
+    },
+    // {
+    //   title: "Ethical AI Focus",
+    //   desc: "Building intelligent systems with transparency, security, and human values at the core."
+    // },
+    // {
+    //   title: "Veteran-Led Strategy",
+    //   desc: "Leadership forged in crisis, now driving innovation with strategic foresight and operational excellence."
+    // },
+    // {
+    //   title: "Scalable Architecture",
+    //   desc: "Future-proof infrastructure designed to grow with your vision without compromising performance."
+    // }
   ];
 
   return (
     <section
       ref={innerRef}
-      className="tunnel-section absolute inset-0 flex items-center justify-center bg-[#050505] text-white overflow-hidden opacity-0"
+      className={`${isPage ? 'relative py-24' : 'absolute inset-0 opacity-0'} flex items-center justify-center bg-[#050505] text-white overflow-hidden`}
     >
       {/* --- BACKGROUND LAYER: DARK GRID --- */}
       <div className="absolute inset-0 z-0">
@@ -29,20 +50,21 @@ const WhyChooseUs = ({ innerRef }) => {
 
           {/* LEFT: Massive Bold Typography */}
           <div className="lg:w-1/2">
-            <span className="text-blue-500 font-mono text-[10px] tracking-[1em] uppercase mb-6 block font-bold">
+            {/* <span className="text-blue-500 font-mono text-[10px] tracking-[1em] uppercase mb-6 block font-bold">
               // Differentiators
-            </span>
+            </span> */}
             <h2 className="text-6xl md:text-[7.5rem] font-black uppercase italic tracking-tighter leading-[0.8] mb-8">
               Impact <br />
               <span className="text-transparent" style={{ WebkitTextStroke: '1px rgba(255,255,255,0.3)' }}>Beyond</span> <br />
               Code.
             </h2>
-            
+
             <div className="max-w-sm space-y-6">
               <div className="h-[1px] w-full bg-gradient-to-r from-blue-600 to-transparent" />
-              <p className="text-zinc-400 text-sm font-light leading-relaxed italic border-l border-blue-500/50 pl-4">
-                "We don't build software to maintain the status quo. We build it to disrupt it through unmatched velocity."
+              <p className="text-zinc-400 text-md font-light leading-relaxed italic border-l border-blue-500/50 pl-4">
+                "We don’t maintain the status quo. We architect what comes next — with disciplined speed, intelligent systems, and innovation that moves markets."
               </p>
+
             </div>
           </div>
 
@@ -73,12 +95,17 @@ const WhyChooseUs = ({ innerRef }) => {
 
             {/* Velocity Display Box */}
             <div className="p-8 md:p-10 bg-blue-600 flex flex-col justify-center items-center text-center">
-              <p className="text-[10px] uppercase tracking-widest text-blue-100 font-bold mb-2">Current Velocity</p>
-              <p className="text-5xl font-black text-white italic tracking-tighter">99.9%</p>
+              <p className="text-[10px] uppercase tracking-widest text-blue-100 font-bold mb-2">
+                Innovation Index
+              </p>
+              <p className="text-5xl font-black text-white italic tracking-tighter">
+                AI-Driven
+              </p>
               <div className="mt-4 w-12 h-1 bg-white/30 rounded-full overflow-hidden">
                 <div className="w-full h-full bg-white animate-pulse" />
               </div>
             </div>
+
           </div>
 
         </div>

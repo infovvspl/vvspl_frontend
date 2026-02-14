@@ -1,11 +1,10 @@
 import React, { useRef } from "react";
 import { useNavigate } from "react-router-dom"; // Import navigation
 
-const FutureVentures = ({ innerRef }) => {
+const FutureVentures = ({ innerRef, isPage = false }) => {
   const sectionRef = useRef(null);
   const scrollContainerRef = useRef(null);
   const navigate = useNavigate(); // Initialize the hook
-
   const sectors = [
     {
       title: "Trade & Transport",
@@ -25,10 +24,10 @@ const FutureVentures = ({ innerRef }) => {
     {
       title: "Power & Energy",
       desc: "Intelligent grid management for the next energy frontier.",
-      img: "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?q=80&w=2070",
+      img: "https://media.istockphoto.com/id/1158175328/photo/solar-panel-and-wind-turbine-farm-clean-energy.jpg?s=612x612&w=0&k=20&c=ur5kwDnZxGKk_8KluOHkIePz6kiDT5N7dszbYQfPiBw=",
     },
     {
-      title: "Organic Agriculture",
+      title: "Organic Farming",
       desc: "Autonomous routing and demand forecasting systems.",
       img: "https://plus.unsplash.com/premium_photo-1664299231810-29d1caf6f753?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     },
@@ -39,14 +38,13 @@ const FutureVentures = ({ innerRef }) => {
     const slug = title.toLowerCase().replace(/&/g, "and").replace(/\s+/g, "-");
     navigate(`/ventures/${slug}`);
   };
-
   return (
     <section
       ref={(el) => {
         sectionRef.current = el;
         if (innerRef) innerRef.current = el;
       }}
-      className="absolute inset-0 flex items-center justify-start bg-zinc-950 overflow-hidden opacity-0"
+      className={`${isPage ? 'relative py-24' : 'absolute inset-0 opacity-0'} flex items-center justify-start bg-zinc-950 overflow-hidden`}
     >
       {/* Background Layer */}
       <div className="absolute inset-0 z-0">
@@ -59,8 +57,8 @@ const FutureVentures = ({ innerRef }) => {
       </div>
 
       {/* Header */}
-      <div className="absolute top-16 left-8 md:left-16 z-20">
-        <h2 className="text-blue-500 font-mono text-[10px] md:text-xs tracking-[0.6em] uppercase mb-4">
+      <div className={`${isPage ? 'relative mb-12 translate-y-0 opacity-100' : 'absolute top-16'} left-8 md:left-16 z-20`}>
+        <h2 className="text-blue-500 font-mono text-[10px] md:text-xs tracking-[0.6em] uppercase mb-4 opacity-0">
           Pipeline
         </h2>
         <h3 className="text-white text-5xl md:text-7xl font-black uppercase italic tracking-tighter leading-none">
@@ -75,12 +73,12 @@ const FutureVentures = ({ innerRef }) => {
       <div
         ref={scrollContainerRef}
         id="future-scroll-container"
-        className="flex h-screen items-center px-[10vw] gap-8 md:gap-16 w-fit"
+        className={`${isPage ? 'flex flex-wrap justify-center px-6 h-auto' : 'flex h-screen items-center px-[10vw] gap-8 md:gap-16 w-fit'}`}
       >
         {sectors.map((s, i) => (
           <div
             key={i}
-            className="relative w-[85vw] md:w-[45vw] lg:w-[32vw] h-[60vh] md:h-[65vh] flex-shrink-0 group overflow-hidden border border-white/10 bg-zinc-900/40 backdrop-blur-xl"
+            className={`relative w-[85vw] md:w-[45vw] lg:w-[32vw] h-[60vh] md:h-[65vh] flex-shrink-0 group overflow-hidden border border-white/10 bg-zinc-900/40 backdrop-blur-xl ${isPage ? 'm-4 h-[50vh]' : ''}`}
           >
             {/* Image Layer */}
             <div className="absolute inset-0 overflow-hidden">

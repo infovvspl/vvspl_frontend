@@ -1,10 +1,10 @@
 import React from 'react';
 
-const About = ({ innerRef }) => {
+const About = ({ innerRef, isPage = false }) => {
     return (
         <section
             ref={innerRef}
-            className="tunnel-section absolute inset-0 flex items-center bg-white text-zinc-900 overflow-hidden opacity-0"
+            className={`${isPage ? 'relative py-24' : 'absolute inset-0 opacity-0'} flex items-center bg-white text-zinc-900 overflow-hidden`}
         >
             {/* --- BACKGROUND LAYER: DEPTH & TEXTURE --- */}
             <div className="absolute inset-0 z-0">
@@ -44,7 +44,7 @@ const About = ({ innerRef }) => {
                             {/* Header with Split Styling */}
                             <div className="space-y-4">
                                 <h2 className="text-blue-600 text-xs md:text-sm tracking-[0.6em] uppercase font-black">
-                                    The Origin
+                                    About Us
                                 </h2>
                                 <h3 className="text-5xl md:text-[3vw] font-black leading-[0.9] uppercase tracking-tighter text-zinc-900">
                                     We don't just use technology: <br />
@@ -57,20 +57,19 @@ const About = ({ innerRef }) => {
                             {/* Main Text with Glass Effect for legibility */}
                             <div className="relative p-8 md:p-12 bg-white/40 backdrop-blur-md border-l-4 border-zinc-900 shadow-2xl shadow-zinc-200/50">
                                 <p className="text-xl md:text-2xl text-zinc-700 leading-tight font-light italic">
-                                    "Born from the intersection of motion and code, we specialize in
-                                    digital experiences that don't just sit on a screen—
-                                    <span className="text-zinc-900 font-medium not-italic"> they pull you in.</span>"
-                                </p>
+  "Innovation means nothing without impact —
+  <span className="text-zinc-900 font-medium not-italic"> we deliver both.</span>"
+</p>
+
 
                                 <p className="mt-8 text-base md:text-lg text-zinc-500 leading-relaxed max-w-2xl font-normal">
-                                    Every pixel is a coordinate; every scroll is a journey. We combine
-                                    industrial-grade speed with visionary design to transform static
-                                    ideas into living, breathing ventures.
+                                    We believe innovation should be practical, scalable, and purposeful. From AI-driven systems and intelligent automation to secure, resilient digital infrastructures, we engineer solutions that simplify complexity. Our approach is the simple way to solve complete digital problems — designing integrated ecosystems that connect strategy, technology, and execution into one seamless advantage.
                                 </p>
                             </div>
 
+
                             {/* Data Grid Footer */}
-                            <div className="grid grid-cols-2 md:grid-cols-3 gap-8 pt-6 border-t border-zinc-100">
+                            {/* <div className="grid grid-cols-2 md:grid-cols-3 gap-8 pt-6 border-t border-zinc-100">
                                 <div className="space-y-1">
                                     <p className="text-[9px] uppercase tracking-widest text-blue-600 font-bold">Foundation</p>
                                     <p className="text-lg md:text-xl font-mono text-zinc-900 tracking-tight">Est. 2024</p>
@@ -83,7 +82,7 @@ const About = ({ innerRef }) => {
                                     <p className="text-[9px] uppercase tracking-widest text-blue-600 font-bold">Reach</p>
                                     <p className="text-lg md:text-xl font-mono text-zinc-900 tracking-tight">Global / Remote</p>
                                 </div>
-                            </div>
+                            </div> */}
 
                         </div>
                     </div>

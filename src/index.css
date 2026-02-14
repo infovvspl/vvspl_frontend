@@ -1,1 +1,19 @@
 @import "tailwindcss";
+
+body.loaded {
+  background-color: #333;
+}
+
+#reveal-effect {
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+#page {
+  position: center;
+  z-index: 2;
+  text-align: center;
+  padding-top: 100px;
+  color: white;
+}

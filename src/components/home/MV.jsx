@@ -1,11 +1,11 @@
 import React from 'react';
 import { Target, Eye, Zap } from 'lucide-react';
 
-const MissionVision = ({ innerRef }) => {
+const MissionVision = ({ innerRef, isPage = false }) => {
     return (
         <section
             ref={innerRef}
-            className="tunnel-section absolute inset-0 flex items-center bg-zinc-950 text-white overflow-hidden opacity-0"
+            className={`${isPage ? 'relative py-24' : 'absolute inset-0 opacity-0'} flex items-center bg-zinc-950 text-white overflow-hidden`}
         >
             {/* --- BACKGROUND: DARK DEPTH --- */}
             <div className="absolute inset-0 z-0">
@@ -19,11 +19,11 @@ const MissionVision = ({ innerRef }) => {
                 />
 
                 {/* Large stylized number/letter in the back for parallax zoom */}
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none">
+                {/* <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none">
                     <span className="text-[40vw] font-black text-white/[0.02] leading-none select-none">
                         02
                     </span>
-                </div>
+                </div> */}
 
                 {/* Dynamic Glows to break the "Flat" black */}
                 <div className="absolute -top-1/4 -right-1/4 w-[600px] h-[600px] bg-blue-900/20 rounded-full blur-[120px]" />
@@ -35,10 +35,10 @@ const MissionVision = ({ innerRef }) => {
 
                 {/* Section Header */}
                 <div className="mb-16 md:mb-24 text-center md:text-left">
-                    <div className="inline-flex items-center gap-3 px-3 py-1 border border-blue-500/30 bg-blue-500/10 rounded-full mb-6">
+                    {/* <div className="inline-flex items-center gap-3 px-3 py-1 border border-blue-500/30 bg-blue-500/10 rounded-full mb-6">
                         <Zap size={14} className="text-blue-400" />
                         <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-blue-400">Strategic Intent</span>
-                    </div>
+                    </div> */}
                     <h2 className="text-5xl md:text-7xl font-black uppercase tracking-tighter">
                         The <span className="text-transparent" style={{ WebkitTextStroke: '1px #fff' }}>Blueprint</span>
                     </h2>
@@ -53,7 +53,7 @@ const MissionVision = ({ innerRef }) => {
                         </div>
 
                         <div className="relative z-10">
-                            <h3 className="text-blue-500 font-mono text-sm mb-6 flex items-center gap-2">
+                            <h3 className="text-blue-500 font-mono text-lg mb-6 flex items-center gap-2">
                                 <span className="w-8 h-px bg-blue-500" /> 01. OUR MISSION
                             </h3>
                             <p className="text-2xl md:text-3xl font-light leading-tight text-zinc-100">
@@ -72,18 +72,11 @@ const MissionVision = ({ innerRef }) => {
                         </div>
 
                         <div className="relative z-10">
-                            <h3 className="text-blue-500 font-mono text-sm mb-6 flex items-center gap-2">
+                            <h3 className="text-blue-500 font-mono text-lg mb-6 flex items-center gap-2">
                                 <span className="w-8 h-px bg-blue-500" /> 02. OUR VISION
                             </h3>
                             <p className="text-2xl md:text-3xl font-light leading-tight text-zinc-100">
-                                We envision a digitally sovereign ecosystem where:
-
-                                National infrastructure is intelligent.
-                                Industries are autonomous.
-                                Governance is data-driven.
-                                Security is structural — not reactive.
-
-                                Veteran’s Venture exists to architect that transition.
+                               We envision a digitally sovereign ecosystem where national infrastructure is intelligent, industries operate autonomously, governance is decisively data-driven, and security is structural rather than reactive. Veteran’s Venture exists to architect and accelerate that transition.
                             </p>
                         </div>
 
