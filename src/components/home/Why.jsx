@@ -1,118 +1,97 @@
-import React from 'react';
+import React from "react";
 
 const WhyChooseUs = ({ innerRef, isPage = false }) => {
   const points = [
     {
-      title: "Defence-Grade Precision",
-      desc: "Leveraging military-grade discipline and execution standards to deliver mission-critical reliability."
+      title: "Scalable Architecture",
+      desc: "We build systems designed for hyper-growth, ensuring your infrastructure remains resilient as your user base doubles overnight.",
+      tag: "Infrastructure",
     },
     {
-      title: "Agile Velocity",
-      desc: "Rapid prototyping and deployment cycles that match the speed of modern business evolution."
+      title: "Intelligence First",
+      desc: "Beyond automation, we embed cognitive AI layers into every workflow, turning passive data into proactive business decisions.",
+      tag: "AI & Data",
     },
-    {
-      title: "Holistic Integration",
-      desc: "Seamlessly blending hardware, software, and human-centric design for complete ecosystem solutions."
-    },
-    // {
-    //   title: "Ethical AI Focus",
-    //   desc: "Building intelligent systems with transparency, security, and human values at the core."
-    // },
-    // {
-    //   title: "Veteran-Led Strategy",
-    //   desc: "Leadership forged in crisis, now driving innovation with strategic foresight and operational excellence."
-    // },
-    // {
-    //   title: "Scalable Architecture",
-    //   desc: "Future-proof infrastructure designed to grow with your vision without compromising performance."
-    // }
   ];
 
   return (
     <section
       ref={innerRef}
-      className={`${isPage ? 'relative py-24' : 'absolute inset-0 opacity-0'} flex items-center justify-center bg-[#050505] text-white overflow-hidden`}
+      className={`${isPage ? "relative py-16 md:py-24" : "absolute inset-0 opacity-0"} flex items-center justify-center bg-[#050505] text-white overflow-hidden`}
     >
-      {/* --- BACKGROUND LAYER: DARK GRID --- */}
+      {/* BACKGROUND LAYER */}
       <div className="absolute inset-0 z-0">
-        <img
-          src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2426"
-          alt="Technical Grid"
-          className="w-full h-full object-cover origin-center opacity-[0.05] grayscale"
-        />
-        {/* Radar/Scanline Effect */}
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px]" />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#050505] via-transparent to-[#050505]" />
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:40px_40px] md:bg-[size:60px_60px]" />
       </div>
 
-      <div className="relative z-10 w-full max-w-7xl px-8 md:px-16">
-        <div className="flex flex-col lg:flex-row gap-12 lg:gap-20 items-center">
-
-          {/* LEFT: Massive Bold Typography */}
-          <div className="lg:w-1/2">
-            {/* <span className="text-blue-500 font-mono text-[10px] tracking-[1em] uppercase mb-6 block font-bold">
-              // Differentiators
-            </span> */}
-            <h2 className="text-6xl md:text-[7.5rem] font-black uppercase italic tracking-tighter leading-[0.8] mb-8">
-              Impact <br />
-              <span className="text-transparent" style={{ WebkitTextStroke: '1px rgba(255,255,255,0.3)' }}>Beyond</span> <br />
+      <div className="relative z-10 w-full max-w-7xl px-5 sm:px-10 md:px-16">
+        <div className="flex flex-col lg:flex-row gap-12 lg:gap-20">
+          {/* LEFT: Heading Section */}
+          <div className="w-full lg:w-1/2 flex flex-col justify-center">
+            {/* FLUID TYPOGRAPHY: 
+                - text-6xl for mobile
+                - lg:text-[clamp(5rem,10vw,8rem)] for desktop 
+            */}
+            <h2
+              className="text-3xl sm:text-6xl lg:text-[min(8vw,8rem)] 
+               font-black uppercase italic tracking-tighter 
+               leading-[1] mb-8 
+               whitespace-nowrap sm:whitespace-normal"
+            >
+              Impact{" "}
+              <span
+                className="text-transparent"
+                style={{ WebkitTextStroke: "1px rgba(255, 255, 255, 0.8)" }}
+              >
+                Beyond
+              </span>{" "}
               Code.
             </h2>
 
-            <div className="max-w-sm space-y-6">
-              <div className="h-[1px] w-full bg-gradient-to-r from-blue-600 to-transparent" />
-              <p className="text-zinc-400 text-md font-light leading-relaxed italic border-l border-blue-500/50 pl-4">
-                "We don’t maintain the status quo. We architect what comes next — with disciplined speed, intelligent systems, and innovation that moves markets."
+            <div className="max-w-md space-y-6">
+              <div className="h-[2px] w-16 bg-blue-600" />
+              <p className="text-zinc-300 text-base md:text-lg font-light leading-relaxed border-l-2 border-blue-500/30 pl-4 md:pl-6">
+                "We don’t just ship features. We engineer competitive advantages
+                through disciplined speed and architectural excellence."
               </p>
-
             </div>
           </div>
 
-          {/* RIGHT: High-Contrast Grid */}
-          <div className="lg:w-1/2 grid grid-cols-1 md:grid-cols-2 gap-px bg-zinc-800/50 border border-zinc-800 backdrop-blur-xl shadow-2xl">
+          {/* RIGHT: 2-Card Grid */}
+          <div className="w-full lg:w-1/2 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-4 md:gap-6">
+
             {points.map((point, index) => (
-              <div key={index} className="p-8 md:p-10 bg-[#050505] group hover:bg-zinc-900 transition-colors duration-300">
-                <div className="flex flex-col h-full justify-between space-y-12">
-                  <div className="flex justify-between items-start">
-                    <span className="text-4xl font-black text-zinc-800 group-hover:text-blue-500/20 transition-colors">
+              <div
+                key={index}
+                className="group relative p-4 md:p-6 bg-zinc-900/20 border border-blue-800 backdrop-blur-md rounded-xl md:rounded-2xl transition-all duration-500 hover:border-blue-500"
+              >
+                <div className="flex flex-col h-full justify-between space-y-4">
+                  {/* <div className="flex justify-between items-center">
+                    <span className="text-[10px] md:text-xs font-mono tracking-[0.2em] text-blue-500 uppercase font-bold">
+                      // {point.tag}
+                    </span>
+                    <span className="text-xl md:text-2xl font-black text-zinc-800 group-hover:text-zinc-500 transition-colors">
                       0{index + 1}
                     </span>
-                    <div className="w-8 h-8 rounded-full border border-zinc-800 flex items-center justify-center group-hover:border-blue-500 transition-colors">
-                      <div className="w-1 h-1 bg-blue-500 rounded-full" />
-                    </div>
-                  </div>
+                  </div> */}
+
                   <div>
-                    <h3 className="text-xl font-bold uppercase tracking-tight text-white mb-3">
+                    <h3 className="text-xl md:text-2xl font-bold text-white mb-3 tracking-tight">
                       {point.title}
                     </h3>
-                    <p className="text-zinc-500 text-sm leading-relaxed group-hover:text-zinc-300 transition-colors">
+                    <p className="text-zinc-300 text-sm md:text-base leading-relaxed group-hover:text-zinc-300 transition-colors">
                       {point.desc}
                     </p>
                   </div>
                 </div>
               </div>
             ))}
-
-            {/* Velocity Display Box */}
-            <div className="p-8 md:p-10 bg-blue-600 flex flex-col justify-center items-center text-center">
-              <p className="text-[10px] uppercase tracking-widest text-blue-100 font-bold mb-2">
-                Innovation Index
-              </p>
-              <p className="text-5xl font-black text-white italic tracking-tighter">
-                AI-Driven
-              </p>
-              <div className="mt-4 w-12 h-1 bg-white/30 rounded-full overflow-hidden">
-                <div className="w-full h-full bg-white animate-pulse" />
-              </div>
-            </div>
-
           </div>
-
         </div>
       </div>
 
-      {/* Aesthetic Peripheral Glow */}
-      <div className="absolute -bottom-24 -right-24 w-96 h-96 bg-blue-600/10 rounded-full blur-[100px] pointer-events-none" />
+      {/* Decorative Blur */}
+      <div className="absolute -bottom-24 -right-24 w-64 h-64 md:w-96 md:h-96 bg-blue-600/10 rounded-full blur-[80px] md:blur-[120px] pointer-events-none" />
     </section>
   );
 };

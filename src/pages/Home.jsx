@@ -114,8 +114,8 @@ function Home({ setActiveIndex }) {
         currentTime += scrollDuration;
 
         // Transition to next section
-        if (index === 1 || index === 5) {
-          // Special transition for About -> MV and Future -> Founders (Normal Scroll / Slide Up)
+        if (index === 1 || index === 3 || index === 4 || index === 5) {
+          // Special transition (Normal Scroll / Slide Up)
           tl.to(section, {
             yPercent: -100,
             opacity: 1,
