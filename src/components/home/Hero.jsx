@@ -4,6 +4,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import Vid from "../../assets/vido.mp4"
+import Aud from "../../assets/bgm.mp3"
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -11,6 +12,7 @@ const Hero = ({ innerRef }) => {
   const sectionRef = useRef(null);
   const contentRef = useRef(null);
   const videoRef = useRef(null);
+  const AudioFile = useRef(null);
 
   useEffect(() => {
     let ctx = gsap.context(() => {
@@ -78,6 +80,12 @@ const Hero = ({ innerRef }) => {
           muted
           playsInline
           className="w-full h-full object-cover opacity-100 grayscale-[0.4] will-change-transform"
+        />
+        <audio
+          src={Aud}   // import your audio file like: import AudioFile from "../assets/audio.mp3"
+          autoPlay
+          loop
+          className="hidden"
         />
         {/* Adjusted Gradient: More opaque on mobile for readability */}
         <div className="absolute inset-0 bg-gradient-to-b md:bg-gradient-to-r from-black/90 via-black/50 to-transparent" />

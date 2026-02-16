@@ -115,7 +115,7 @@ export default function Loading({ onComplete }) {
     for (let i = 0; i < nx; i++) {
       for (let j = 0; j < ny; j++) {
         const material = new THREE.MeshBasicMaterial({
-          color: 0x000000,
+          color: 0xffffff,
           transparent: true,
           opacity: 1,
         });

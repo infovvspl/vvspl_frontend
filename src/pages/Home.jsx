@@ -11,6 +11,7 @@ import Blogs from '../components/home/Blogs';
 import Contact from '../components/home/Contact';
 import FoundingMembers from '../components/home/Founders';
 import MissionVision from '../components/home/MV';
+import ScrollBtn from '../components/Scrollbtn';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -69,14 +70,14 @@ function Home({ setActiveIndex }) {
       sections.forEach((section, index) => {
         tl.addLabel(`section-${index}`, currentTime);
 
-        if (!section || index === sections.length - 1) return;
+        if (!section) return;
         const nextSection = sections[index + 1];
 
         let scrollDuration = 0;
         let targetContainer = null;
         let progressBar = null;
 
-        // Identify horizontal scroll sections
+        // Identify horizontal/vertical scroll sections
         if (index === 3) { // Services
           targetContainer = section.querySelector("#services-scroll-container");
           progressBar = section.querySelector("#services-progress-bar");
@@ -84,28 +85,46 @@ function Home({ setActiveIndex }) {
           targetContainer = section.querySelector("#future-scroll-container");
           progressBar = section.querySelector("#future-progress-bar");
         } else if (index === 6) { // Founders
-          targetContainer = section.querySelector(".flex-nowrap");
+          targetContainer = section.querySelector("#founders-content-wrapper");
+        } else if (index === 7) { // Blogs
+          targetContainer = section.querySelector("#blogs-content");
+        } else if (index === 8) { // Contact
+          targetContainer = section.querySelector("#contact-content");
         }
 
         if (targetContainer) {
-          const scrollWidth = targetContainer.scrollWidth;
-          const clientWidth = window.innerWidth;
-
-          if (scrollWidth > clientWidth) {
-            scrollDuration = 3; // Allocate time for scrolling
-
-            tl.to(targetContainer, {
-              x: () => -(targetContainer.scrollWidth - window.innerWidth),
-              ease: "none",
-              duration: scrollDuration
-            }, currentTime);
-
-            if (progressBar) {
-              tl.to(progressBar, {
-                scaleX: 1,
+          if (index === 6 || index === 7 || index === 8) {
+            // Vertical Scroll for Founders, Blogs, Contact
+            const scrollHeight = targetContainer.scrollHeight;
+            const clientHeight = window.innerHeight;
+            if (scrollHeight > clientHeight) {
+              const extraHeight = scrollHeight - clientHeight;
+              scrollDuration = Math.max(1, (extraHeight / clientHeight) * 1.5); // Dynamic duration based on height
+              tl.to(targetContainer, {
+                y: () => -(extraHeight + 100),
                 ease: "none",
                 duration: scrollDuration
               }, currentTime);
+            }
+          } else {
+            // Horizontal Scroll for others
+            const scrollWidth = targetContainer.scrollWidth;
+            const clientWidth = window.innerWidth;
+            if (scrollWidth > clientWidth) {
+              scrollDuration = 3;
+              tl.to(targetContainer, {
+                x: () => -(targetContainer.scrollWidth - window.innerWidth),
+                ease: "none",
+                duration: scrollDuration
+              }, currentTime);
+
+              if (progressBar) {
+                tl.to(progressBar, {
+                  scaleX: 1,
+                  ease: "none",
+                  duration: scrollDuration
+                }, currentTime);
+              }
             }
           }
         }
@@ -114,34 +133,36 @@ function Home({ setActiveIndex }) {
         currentTime += scrollDuration;
 
         // Transition to next section
-        if (index === 1 || index === 3 || index === 4 || index === 5) {
-          // Special transition (Normal Scroll / Slide Up)
-          tl.to(section, {
-            yPercent: -100,
-            opacity: 1,
-            ease: "power1.inOut",
-            duration: 1
-          }, currentTime);
+        if (nextSection) {
+          if (index === 1 || index === 3 || index === 4 || index === 5 || index === 6 || index === 7) {
+            // Special transition (Normal Scroll / Slide Up)
+            tl.to(section, {
+              yPercent: -100,
+              opacity: 1,
+              ease: "power1.inOut",
+              duration: 1
+            }, currentTime);
 
-          tl.fromTo(nextSection,
-            { yPercent: 100, opacity: 1, scale: 1 },
-            { yPercent: 0, opacity: 1, scale: 1, ease: "power1.inOut", duration: 1 },
-            currentTime
-          );
-        } else {
-          // Standard Zoom Transition
-          tl.to(section, {
-            scale: 5,
-            opacity: 0,
-            ease: "power1.inOut",
-            duration: 1
-          }, currentTime);
+            tl.fromTo(nextSection,
+              { yPercent: 100, opacity: 1, scale: 1 },
+              { yPercent: 0, opacity: 1, scale: 1, ease: "power1.inOut", duration: 1 },
+              currentTime
+            );
+          } else {
+            // Standard Zoom Transition
+            tl.to(section, {
+              scale: 5,
+              opacity: 0,
+              ease: "power1.inOut",
+              duration: 1
+            }, currentTime);
 
-          tl.fromTo(nextSection,
-            { scale: 0.5, opacity: 0 },
-            { scale: 1, opacity: 1, ease: "power1.inOut", duration: 1 },
-            currentTime
-          );
+            tl.fromTo(nextSection,
+              { scale: 0.5, opacity: 0 },
+              { scale: 1, opacity: 1, ease: "power1.inOut", duration: 1 },
+              currentTime
+            );
+          }
         }
 
         // Advance time for transition
@@ -167,6 +188,7 @@ function Home({ setActiveIndex }) {
       <FoundingMembers innerRef={foundersRef} />
       <Blogs innerRef={blogsRef} />
       <Contact innerRef={contactRef} />
+      <ScrollBtn />
     </div>
   );
 }
