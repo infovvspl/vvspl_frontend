@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Twitter, Linkedin, Instagram, ArrowUpRight, Mail, Phone, MapPin, ShieldCheck } from 'lucide-react';
+import { ArrowUpRight, Mail, Phone, MapPin, ShieldCheck } from 'lucide-react';
+import { Facebook, Instagram } from "lucide-react";
+import { FaWhatsapp } from "react-icons/fa";
 
 const Footer = () => {
     const currentYear = new Date().getFullYear();
@@ -36,13 +38,24 @@ const Footer = () => {
 
                         <div className="flex gap-4">
                             {[
-                                { icon: <Twitter size={18} />, href: "#" },
-                                { icon: <Linkedin size={18} />, href: "#" },
-                                { icon: <Instagram size={18} />, href: "#" }
+                                {
+                                    icon: <Facebook size={18} />,
+                                    href: "https://www.facebook.com/share/1D4x5YWeff/",
+                                },
+                                {
+                                    icon: <Instagram size={18} />,
+                                    href: "https://www.instagram.com/vvspltech?igsh=cjcyczloZWNuaGZx",
+                                },
+                                {
+                                    icon: <FaWhatsapp size={18} />,
+                                    href: "https://wa.me/7894689818",
+                                },
                             ].map((social, i) => (
                                 <a
                                     key={i}
                                     href={social.href}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
                                     className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-zinc-400 hover:bg-indigo-600 hover:text-white hover:border-indigo-600 transition-all duration-500 hover:-translate-y-1"
                                 >
                                     {social.icon}
