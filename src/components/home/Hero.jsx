@@ -6,6 +6,8 @@ import { ArrowRight } from 'lucide-react';
 import Vid from "../../assets/vido.mp4";
 import Aud from "../../assets/bgm.mp3";
 import Hr from "../../assets/hero-r.png";
+import VidMp4 from "../../assets/vido.mp4"
+import VidWebm from "../../assets/vido.webp"
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -84,10 +86,18 @@ const Hero = ({ innerRef }) => {
       <div className="absolute inset-0 z-0">
         <video
           ref={videoRef}
-          src={Vid}
-          autoPlay loop muted playsInline
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="none"
+          poster="/vido.webp"
           className="w-full h-full object-cover opacity-100 grayscale-[0.4] will-change-transform"
-        />
+        >
+          <source src={VidWebm} type="image/webp" />
+          <source src={VidMp4} type="video/mp4" />
+        </video>
+
         <audio src={Aud} autoPlay loop className="hidden" />
         <div className="absolute inset-0 bg-gradient-to-b md:bg-gradient-to-r from-black/90 via-black/40 to-transparent" />
       </div>
@@ -98,7 +108,7 @@ const Hero = ({ innerRef }) => {
         className="relative z-10 w-full max-w-[1400px] mx-auto px-6 sm:px-12 md:px-24 py-12 md:py-20"
       >
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          
+
           {/* LEFT COLUMN: Text Content (Full width on mobile) */}
           <div className="text-center lg:text-left">
             <h1 className="reveal-text text-[14vw] sm:text-6xl md:text-[7vw] font-black leading-[0.9] tracking-tight uppercase text-white">
@@ -129,14 +139,14 @@ const Hero = ({ innerRef }) => {
 
           {/* RIGHT COLUMN: Hidden on Mobile (hidden), Visible on LG (flex) */}
           <div className="hidden lg:flex justify-center items-center perspective-1000">
-            <div 
+            <div
               ref={rotatingImgRef}
               className="relative w-64 h-64 md:w-96 md:h-96"
               style={{ transformStyle: 'preserve-3d' }}
             >
-              <img 
+              <img
                 src={Hr}
-                alt="Tech Asset" 
+                alt="Tech Asset"
                 className="w-full h-full object-contain filter drop-shadow-[0_0_30px_#88DCD4]"
               />
               <div className="absolute inset-0 bg-blue-500/10 blur-[100px] rounded-full -z-10" />
