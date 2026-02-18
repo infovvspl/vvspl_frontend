@@ -138,7 +138,7 @@ const ServiceDetails = () => {
     if (!service) return null;
 
     return (
-        <div ref={containerRef} className="bg-black text-white py-32 font-sans overflow-hidden">
+        <div ref={containerRef} className="bg-black text-white font-sans overflow-hidden">
             
             {/* ================= HERO SECTION ================= */}
             <section className="relative h-[70vh] md:h-[85vh] flex items-center justify-center px-6 overflow-hidden">

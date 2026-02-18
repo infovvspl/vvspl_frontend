@@ -11,7 +11,7 @@ import ComingSoon from "./components/CS";
 import AboutPage from "./pages/AboutP";
 import ServicesPage from "./pages/ServiceP";
 import FutureVenturesPage from "./pages/Ventures";
-import ContactPage from "./pages/Contact";
+import ContactPage from "./pages/ContactP";
 import ServiceDetails from "./pages/details_page/ServiceD";
 
 function App() {
