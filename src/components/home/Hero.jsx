@@ -3,7 +3,8 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
-import Vid from "../../assets/vido.mp4"
+import VidMp4 from "../../assets/vido.mp4"
+import VidWebm from "../../assets/vido.webp"
 import Aud from "../../assets/bgm.mp3"
 
 gsap.registerPlugin(ScrollTrigger);
@@ -74,13 +75,18 @@ const Hero = ({ innerRef }) => {
       <div className="absolute inset-0 z-0">
         <video
           ref={videoRef}
-          src={Vid}
           autoPlay
           loop
           muted
           playsInline
+          preload="none"
+          poster="/video-thumbnail.webp"
           className="w-full h-full object-cover opacity-100 grayscale-[0.4] will-change-transform"
-        />
+        >
+          <source src={VidWebm} type="image/webp" />
+          <source src={VidMp4} type="video/mp4" />
+        </video>
+
         <audio
           src={Aud}   // import your audio file like: import AudioFile from "../assets/audio.mp3"
           autoPlay
@@ -148,7 +154,6 @@ const Hero = ({ innerRef }) => {
                   />
                 </span>
               </Link>
-
             </div>
           </div>
         </div>
