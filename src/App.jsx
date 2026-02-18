@@ -3,16 +3,16 @@ import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 // import TunnelNav from "./components/Trackbar";
-import Navbar from "./components/Navbar";
+// import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import ScrollToTop from "./components/ScrollToTop";
 import Loading from "./components/Loading";
-import ComingSoon from "./components/CS";
 import AboutPage from "./pages/AboutP";
 import ServicesPage from "./pages/ServiceP";
 import FutureVenturesPage from "./pages/Ventures";
 import ContactPage from "./pages/ContactP";
 import ServiceDetails from "./pages/details_page/ServiceD";
+import ComingSoon from "./components/CS";
 
 function App() {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -29,7 +29,7 @@ function App() {
       )}
       <div className="flex flex-col">
         {/* <TunnelNav activeIndex={activeIndex} /> */}
-        <Navbar />
+        {/* <Navbar /> */}
 
         <main className="flex-1">
           <Routes>
@@ -39,6 +39,7 @@ function App() {
             <Route path="/ventures" element={<FutureVenturesPage />} />
             <Route path="/contact" element={<ContactPage />} />
             <Route path="/services/:id" element={<ServiceDetails />} />
+            <Route path="/cs" element={<ComingSoon />} />
           </Routes>
         </main>
         <Footer />

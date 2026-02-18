@@ -28,7 +28,7 @@ const FoundingMembers = ({ innerRef, isPage = false }) => {
     {
       name: "Priyanka Tripathi Kriech",
       role: "Executive Director",
-      desc: "Based in Horgan, Zurich, Switzerland, and educated at London School of Economics and Political Science (LSE), she combines global financial acumen with a refined understanding of international economic and political dynamics. With over four years of entrepreneurial leadership, she brings specialized expertise in off-market real estate and precious metals, delivering exclusive investment opportunities to a discerning clientele. Drawing on a strong foundation in Salesforce B2B commerce and experience across asset management and sales, she provides tailored, trust-driven solutions rooted in deep brokerage knowledge and multilingual cultural insight, enabling seamless navigation of complex international markets.",
+      desc: "Based in Horgan, Zurich, Switzerland, and educated at London School of Economics and Political Science (LSE), she combines global financial acumen with a refined understanding of international economic and political dynamics. With over four years of entrepreneurial leadership, she brings specialized expertise in off-market in digital world, delivering exclusive investment opportunities to a discerning clientele. Drawing on a strong foundation in Salesforce B2B commerce and experience across asset management and sales, she provides tailored, trust-driven solutions. She has multilingual cultural insight, enabling seamless navigation of complex international markets.",
       img: H4
     }
   ];
@@ -36,17 +36,23 @@ const FoundingMembers = ({ innerRef, isPage = false }) => {
   return (
     <section
       ref={innerRef}
-      className={`${isPage ? 'relative py-24' : 'absolute inset-0 opacity-0'} bg-zinc-950 text-white overflow-hidden pt-14 md:pt-32 pb-14 md:pb-30`}
-
+      className={`${isPage ? 'relative py-24' : 'absolute inset-0 opacity-0'} bg-[#030303] text-white overflow-hidden pt-14 md:pt-32 pb-14 md:pb-30`}
     >
-      {/* --- HERO-STYLE BACKGROUND --- */}
+      {/* ================= BACKGROUND SYSTEM ================= */}
       <div className="absolute inset-0 z-0 pointer-events-none">
-        {/* Top Right Glow */}
-        <div className="absolute -top-[10%] -right-[10%] w-[50%] h-[50%] bg-blue-600/10 blur-[120px] rounded-full" />
-        {/* Bottom Left Glow */}
-        <div className="absolute -bottom-[10%] -left-[10%] w-[50%] h-[50%] bg-indigo-600/10 blur-[120px] rounded-full" />
-        {/* Subtle Grid Pattern to match Hero texture */}
-        <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: `radial-gradient(#fff 1px, transparent 1px)`, backgroundSize: '40px 40px' }} />
+        {/* 1. Precise Dot Grid */}
+        <div
+          className="absolute inset-0 opacity-[0.15]"
+          style={{
+            backgroundImage: `radial-gradient(#ffffff15 1px, transparent 1px)`,
+            backgroundSize: '50px 50px'
+          }}
+        />
+
+        {/* 2. Large Dynamic Mesh Glows */}
+        <div className="absolute top-[-15%] right-[-10%] w-[60%] h-[60%] bg-blue-600/10 blur-[140px] rounded-full animate-pulse" />
+        <div className="absolute bottom-[-20%] left-[-15%] w-[70%] h-[70%] bg-indigo-900/10 blur-[160px] rounded-full" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[80%] bg-purple-500/5 blur-[200px] rounded-full" />
       </div>
 
       <div id="founders-content-wrapper" className="relative z-10 w-full max-w-7xl mx-auto">

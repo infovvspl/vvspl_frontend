@@ -12,6 +12,7 @@ import Contact from '../components/home/Contact';
 import FoundingMembers from '../components/home/Founders';
 import MissionVision from '../components/home/MV';
 import ScrollBtn from '../components/Scrollbtn';
+import Navbar from "../components/Navbar";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -30,164 +31,71 @@ function Home({ setActiveIndex }) {
   useLayoutEffect(() => {
     let ctx = gsap.context(() => {
       const sections = [
-        heroRef.current,
-        aboutRef.current,
-        mvRef.current,
-        servicesRef.current,
-        whyRef.current,
-        futureRef.current,
-        foundersRef.current,
-        blogsRef.current,
-        contactRef.current
+        { ref: heroRef, index: 0 },
+        { ref: aboutRef, index: 1 },
+        { ref: mvRef, index: 2 },
+        { ref: servicesRef, index: 3 },
+        { ref: whyRef, index: 4 },
+        { ref: futureRef, index: 5 },
+        { ref: foundersRef, index: 6 },
+        { ref: blogsRef, index: 7 },
+        { ref: contactRef, index: 8 }
       ];
 
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top top",
-          end: "+=3500%",
-          scrub: 1,
+      // 1. Navigation Sync (Update setActiveIndex on scroll)
+      sections.forEach((item) => {
+        if (!item.ref.current) return;
+        ScrollTrigger.create({
+          trigger: item.ref.current,
+          start: "top 40%",
+          end: "bottom 40%",
+          onToggle: (self) => {
+            if (self.isActive) setActiveIndex(item.index);
+          }
+        });
+      });
+
+      // 2. Stacking Reveal Effect
+      // We pin sections once their BOTTOM reaches the viewport bottom.
+      // This ensures the entire content is visible before being covered.
+      sections.slice(0, -1).forEach((item, i) => {
+        if (!item.ref.current) return;
+
+        // Ensure sections have correct layering
+        gsap.set(item.ref.current, { zIndex: i + 1 });
+
+        ScrollTrigger.create({
+          trigger: item.ref.current,
+          start: "bottom bottom",
           pin: true,
+          pinSpacing: false, // This allows the next section to slide over
           invalidateOnRefresh: true,
-          onUpdate: (self) => {
-            if (setActiveIndex && self.animation) {
-              const time = self.animation.time();
-              const labels = self.animation.labels;
-              let idx = 0;
-              for (let i = 0; i < sections.length; i++) {
-                if (labels[`section-${i}`] <= time + 0.1) {
-                  idx = i;
-                }
-              }
-              setActiveIndex(idx);
-            }
-          }
-        }
+        });
       });
 
-      let currentTime = 0;
+      // Ensure the last section is on top of everything
+      if (sections[sections.length - 1].ref.current) {
+        gsap.set(sections[sections.length - 1].ref.current, { zIndex: sections.length });
+      }
 
-      sections.forEach((section, index) => {
-        tl.addLabel(`section-${index}`, currentTime);
 
-        if (!section) return;
-        const nextSection = sections[index + 1];
+    }, containerRef);
 
-        let scrollDuration = 0;
-        let targetContainer = null;
-        let progressBar = null;
-
-        // Identify horizontal/vertical scroll sections
-        if (index === 3) { // Services
-          targetContainer = section.querySelector("#services-scroll-container");
-          progressBar = section.querySelector("#services-progress-bar");
-        } else if (index === 5) { // Future Ventures
-          targetContainer = section.querySelector("#future-scroll-container");
-          progressBar = section.querySelector("#future-progress-bar");
-        } else if (index === 6) { // Founders
-          targetContainer = section.querySelector("#founders-content-wrapper");
-        } else if (index === 7) { // Blogs
-          targetContainer = section.querySelector("#blogs-content");
-        } else if (index === 8) { // Contact
-          targetContainer = section.querySelector("#contact-content");
-        }
-
-        if (targetContainer) {
-          if (index === 6 || index === 7 || index === 8) {
-            // Vertical Scroll for Founders, Blogs, Contact
-            const scrollHeight = targetContainer.scrollHeight;
-            const clientHeight = window.innerHeight;
-            if (scrollHeight > clientHeight) {
-              const extraHeight = scrollHeight - clientHeight;
-              scrollDuration = Math.max(1, (extraHeight / clientHeight) * 1.5); // Dynamic duration based on height
-              tl.to(targetContainer, {
-                y: () => -(extraHeight + 100),
-                ease: "none",
-                duration: scrollDuration
-              }, currentTime);
-            }
-          } else {
-            // Horizontal Scroll for others
-            const scrollWidth = targetContainer.scrollWidth;
-            const clientWidth = window.innerWidth;
-            if (scrollWidth > clientWidth) {
-              scrollDuration = 3;
-              tl.to(targetContainer, {
-                x: () => -(targetContainer.scrollWidth - window.innerWidth),
-                ease: "none",
-                duration: scrollDuration
-              }, currentTime);
-
-              if (progressBar) {
-                tl.to(progressBar, {
-                  scaleX: 1,
-                  ease: "none",
-                  duration: scrollDuration
-                }, currentTime);
-              }
-            }
-          }
-        }
-
-        // Advance time for scroll
-        currentTime += scrollDuration;
-
-        // Transition to next section
-        if (nextSection) {
-          if (index === 1 || index === 3 || index === 4 || index === 5 || index === 6 || index === 7) {
-            // Special transition (Normal Scroll / Slide Up)
-            tl.to(section, {
-              yPercent: -100,
-              opacity: 1,
-              ease: "power1.inOut",
-              duration: 1
-            }, currentTime);
-
-            tl.fromTo(nextSection,
-              { yPercent: 100, opacity: 1, scale: 1 },
-              { yPercent: 0, opacity: 1, scale: 1, ease: "power1.inOut", duration: 1 },
-              currentTime
-            );
-          } else {
-            // Standard Zoom Transition
-            tl.to(section, {
-              scale: 5,
-              opacity: 0,
-              ease: "power1.inOut",
-              duration: 1
-            }, currentTime);
-
-            tl.fromTo(nextSection,
-              { scale: 0.5, opacity: 0 },
-              { scale: 1, opacity: 1, ease: "power1.inOut", duration: 1 },
-              currentTime
-            );
-          }
-        }
-
-        // Advance time for transition
-        currentTime += 1;
-      });
-    }, containerRef); // Scope to containerRef
-
-    return () => {
-      ctx.revert(); // Robust cleanup: removes all transformations and pin-spacers
-      ScrollTrigger.getAll().forEach(st => st.kill());
-      gsap.killTweensOf("*");
-    };
+    return () => ctx.revert();
   }, [setActiveIndex]);
 
   return (
-    <div ref={containerRef} className="relative w-full h-screen bg-white overflow-hidden">
+    <div ref={containerRef} className="relative w-full bg-white">
+      <Navbar />
       <Hero innerRef={heroRef} />
-      <About innerRef={aboutRef} />
-      <MissionVision innerRef={mvRef} />
-      <Services innerRef={servicesRef} />
-      <WhyChooseUs innerRef={whyRef} />
-      <FutureVentures innerRef={futureRef} />
-      <FoundingMembers innerRef={foundersRef} />
-      <Blogs innerRef={blogsRef} />
-      <Contact innerRef={contactRef} />
+      <About innerRef={aboutRef} isPage={true} />
+      <MissionVision innerRef={mvRef} isPage={true} />
+      <Services innerRef={servicesRef} isPage={true} />
+      <WhyChooseUs innerRef={whyRef} isPage={true} />
+      <FutureVentures innerRef={futureRef} isPage={true} />
+      <FoundingMembers innerRef={foundersRef} isPage={true} />
+      <Blogs innerRef={blogsRef} isPage={true} />
+      <Contact innerRef={contactRef} isPage={true} />
       <ScrollBtn />
     </div>
   );

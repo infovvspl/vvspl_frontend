@@ -17,11 +17,22 @@ const WhyChooseUs = ({ innerRef, isPage = false }) => {
   return (
     <section
       ref={innerRef}
-      className={`${isPage ? "relative py-16 md:py-24" : "absolute inset-0 opacity-0"} flex items-center justify-center bg-[#050505] text-white overflow-hidden`}
+      className={`${isPage ? "relative min-h-screen flex items-center py-16 md:py-24" : "absolute inset-0 opacity-0"} flex items-center justify-center bg-[#030303] text-white overflow-hidden`}
     >
-      {/* BACKGROUND LAYER */}
-      <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:40px_40px] md:bg-[size:60px_60px]" />
+      {/* ================= BACKGROUND SYSTEM ================= */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        {/* 1. Subtle Engineering Grid */}
+        <div
+          className="absolute inset-0 opacity-[0.1]"
+          style={{
+            backgroundImage: `linear-gradient(#ffffff0a 1px, transparent 1px), linear-gradient(90deg, #ffffff0a 1px, transparent 1px)`,
+            backgroundSize: '50px 50px'
+          }}
+        />
+
+        {/* 2. Large Dynamic Mesh Glows */}
+        <div className="absolute top-[-10%] right-[20%] w-[50%] h-[50%] bg-blue-600/10 blur-[130px] rounded-full" />
+        <div className="absolute bottom-[-10%] left-[10%] w-[60%] h-[60%] bg-indigo-600/10 blur-[150px] rounded-full animate-pulse" />
       </div>
 
       <div className="relative z-10 w-full max-w-7xl px-5 sm:px-10 md:px-16">

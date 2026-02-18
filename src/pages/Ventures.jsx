@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import Navbar from '../components/Navbar';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -111,12 +112,12 @@ const ScrollSection = ({ children, className = '', delay = 0 }) => {
    HERO BANNER
 ───────────────────────────────────────── */
 const HeroBanner = () => {
-    const heroRef   = useRef(null);
-    const titleRef  = useRef(null);
-    const subRef    = useRef(null);
-    const lineRef   = useRef(null);
+    const heroRef = useRef(null);
+    const titleRef = useRef(null);
+    const subRef = useRef(null);
+    const lineRef = useRef(null);
     const scrollRef = useRef(null);
-    const tagsRef   = useRef(null);
+    const tagsRef = useRef(null);
 
     useEffect(() => {
         const ctx = gsap.context(() => {
@@ -127,22 +128,22 @@ const HeroBanner = () => {
                 { y: 90, opacity: 0, skewY: 5 },
                 { y: 0, opacity: 1, skewY: 0, duration: 1.2, stagger: 0.11 }
             )
-            .fromTo(lineRef.current,
-                { scaleX: 0, transformOrigin: 'left center' },
-                { scaleX: 1, duration: 0.8, ease: 'power3.inOut' }, '-=0.6'
-            )
-            .fromTo(subRef.current,
-                { y: 30, opacity: 0 },
-                { y: 0, opacity: 1, duration: 0.9 }, '-=0.5'
-            )
-            .fromTo(tagsRef.current.children,
-                { y: 20, opacity: 0 },
-                { y: 0, opacity: 1, duration: 0.6, stagger: 0.09 }, '-=0.4'
-            )
-            .fromTo(scrollRef.current,
-                { opacity: 0, y: -10 },
-                { opacity: 1, y: 0, duration: 0.5 }, '-=0.2'
-            );
+                .fromTo(lineRef.current,
+                    { scaleX: 0, transformOrigin: 'left center' },
+                    { scaleX: 1, duration: 0.8, ease: 'power3.inOut' }, '-=0.6'
+                )
+                .fromTo(subRef.current,
+                    { y: 30, opacity: 0 },
+                    { y: 0, opacity: 1, duration: 0.9 }, '-=0.5'
+                )
+                .fromTo(tagsRef.current.children,
+                    { y: 20, opacity: 0 },
+                    { y: 0, opacity: 1, duration: 0.6, stagger: 0.09 }, '-=0.4'
+                )
+                .fromTo(scrollRef.current,
+                    { opacity: 0, y: -10 },
+                    { opacity: 1, y: 0, duration: 0.5 }, '-=0.2'
+                );
 
             gsap.to(scrollRef.current, {
                 y: 10, duration: 1.4, ease: 'sine.inOut',
@@ -273,15 +274,15 @@ const VisionStrip = () => {
     ];
 
     return (
-        <section className="py-20 border-y border-white/5">
+        <section className="py-20 border-y border-zinc-200">
             <div ref={ref} className="max-w-[1300px] mx-auto px-6 md:px-12 lg:px-20">
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
                     {items.map((item) => (
-                        <div key={item.label} className="vstrip-item flex flex-col items-center text-center gap-1 p-8 rounded-2xl border border-white/8 bg-white/4 backdrop-blur-sm">
-                            <span className="text-2xl md:text-3xl font-black bg-gradient-to-r from-emerald-400 to-amber-400 bg-clip-text text-transparent">
+                        <div key={item.label} className="vstrip-item flex flex-col items-center text-center gap-1 p-8 rounded-2xl border border-zinc-200 bg-white shadow-sm hover:shadow-md transition-shadow duration-300">
+                            <span className="text-2xl md:text-3xl font-black bg-gradient-to-r from-emerald-600 to-amber-600 bg-clip-text text-transparent">
                                 {item.label}
                             </span>
-                            <span className="text-xs text-zinc-500 tracking-widest uppercase">{item.sub}</span>
+                            <span className="text-xs text-zinc-500 tracking-widest uppercase font-bold">{item.sub}</span>
                         </div>
                     ))}
                 </div>
@@ -294,10 +295,10 @@ const VisionStrip = () => {
    VENTURE CARD (alternating layout)
 ───────────────────────────────────────── */
 const VentureCard = ({ venture, index }) => {
-    const ref     = useRef(null);
-    const imgRef  = useRef(null);
+    const ref = useRef(null);
+    const imgRef = useRef(null);
     const textRef = useRef(null);
-    const isEven  = index % 2 === 0;
+    const isEven = index % 2 === 0;
 
     useEffect(() => {
         const ctx = gsap.context(() => {
@@ -329,7 +330,7 @@ const VentureCard = ({ venture, index }) => {
 
     return (
         <div ref={ref} className="relative py-20 md:py-28">
-            <div className="absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/8 to-transparent" />
+            <div className="absolute inset-x-0 top-0 h-[1px] bg-zinc-200" />
 
             <div className="max-w-[1300px] mx-auto px-6 md:px-12 lg:px-20">
                 <div className={`grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center`}>
@@ -341,28 +342,28 @@ const VentureCard = ({ venture, index }) => {
                     >
                         {/* Number + tag */}
                         <div className="flex items-center gap-4 mb-6">
-                            <span className={`text-5xl font-black bg-gradient-to-r ${venture.accent} bg-clip-text text-transparent opacity-25 leading-none`}>
+                            <span className={`text-5xl font-black bg-gradient-to-r ${venture.accent} bg-clip-text text-transparent opacity-20 leading-none`}>
                                 {venture.id}
                             </span>
-                            <span className={`px-3 py-1 rounded-full text-[10px] tracking-[0.3em] uppercase font-semibold bg-gradient-to-r ${venture.accent} bg-clip-text text-transparent border border-white/10`}>
+                            <span className={`px-3 py-1 rounded-full text-[10px] tracking-[0.3em] uppercase font-bold bg-gradient-to-r ${venture.accent} bg-clip-text text-transparent border border-zinc-200`}>
                                 {venture.tag}
                             </span>
                         </div>
 
                         <div className="flex items-center gap-3 mb-3">
                             <span className="text-3xl">{venture.icon}</span>
-                            <p className={`text-[10px] tracking-[0.5em] uppercase font-semibold bg-gradient-to-r ${venture.accent} bg-clip-text text-transparent`}>
+                            <p className={`text-[10px] tracking-[0.5em] uppercase font-bold bg-gradient-to-r ${venture.accent} bg-clip-text text-transparent`}>
                                 {venture.short}
                             </p>
                         </div>
 
-                        <h2 className="text-3xl md:text-5xl font-black leading-[1.1] tracking-tight mb-5 text-white">
+                        <h2 className="text-3xl md:text-5xl font-black leading-[1.1] tracking-tight mb-5 text-zinc-900">
                             {venture.title}
                         </h2>
 
                         <div className={`w-16 h-[3px] rounded-full bg-gradient-to-r ${venture.accent} mb-6`} />
 
-                        <p className="text-zinc-400 text-sm md:text-base leading-relaxed mb-8">
+                        <p className="text-zinc-600 font-medium text-sm md:text-base leading-relaxed mb-8">
                             {venture.description}
                         </p>
 
@@ -371,7 +372,7 @@ const VentureCard = ({ venture, index }) => {
                             {venture.features.map((f) => (
                                 <span
                                     key={f}
-                                    className="px-3 py-1.5 rounded-full border border-white/10 bg-white/5 text-xs text-zinc-300 backdrop-blur-sm"
+                                    className="px-3 py-1.5 rounded-full border border-zinc-200 bg-white text-xs text-zinc-600 font-medium shadow-sm"
                                 >
                                     {f}
                                 </span>
@@ -383,7 +384,7 @@ const VentureCard = ({ venture, index }) => {
                             <button className={`px-7 py-3.5 rounded-full bg-gradient-to-r ${venture.accent} text-white font-semibold text-sm tracking-wider hover:opacity-85 transition-opacity duration-300 shadow-lg`}>
                                 Express Interest →
                             </button>
-                            <span className="px-4 py-3.5 rounded-full border border-white/15 text-xs text-zinc-400 tracking-widest uppercase">
+                            <span className="px-4 py-3.5 rounded-full border border-zinc-200 text-xs text-zinc-500 tracking-widest uppercase font-bold">
                                 Coming Soon
                             </span>
                         </div>
@@ -394,9 +395,9 @@ const VentureCard = ({ venture, index }) => {
                         ref={imgRef}
                         className={`relative ${isEven ? 'lg:order-2' : 'lg:order-1'}`}
                     >
-                        <div className={`absolute -inset-4 ${venture.glow} rounded-3xl blur-3xl`} />
+                        <div className={`absolute -inset-4 ${venture.glow} rounded-3xl blur-3xl opacity-40`} />
 
-                        <div className="relative rounded-3xl overflow-hidden border border-white/10 shadow-[0_40px_80px_-20px_rgba(0,0,0,0.8)]">
+                        <div className="relative rounded-3xl overflow-hidden border border-zinc-200 shadow-xl">
                             <img
                                 src={venture.img}
                                 alt={venture.title}
@@ -406,13 +407,13 @@ const VentureCard = ({ venture, index }) => {
                         </div>
 
                         {/* Floating badge */}
-                        <div className={`absolute -bottom-5 ${isEven ? '-right-4' : '-left-4'} hidden md:flex items-center gap-3 bg-black/80 backdrop-blur-md border border-white/10 rounded-2xl px-5 py-3 shadow-xl`}>
+                        <div className={`absolute -bottom-5 ${isEven ? '-right-4' : '-left-4'} hidden md:flex items-center gap-3 bg-white/90 backdrop-blur-md border border-zinc-200 rounded-2xl px-5 py-3 shadow-lg`}>
                             <span className="text-2xl">{venture.icon}</span>
                             <div>
-                                <p className={`text-[10px] tracking-widest uppercase bg-gradient-to-r ${venture.accent} bg-clip-text text-transparent font-semibold`}>
+                                <p className={`text-[10px] tracking-widest uppercase bg-gradient-to-r ${venture.accent} bg-clip-text text-transparent font-bold`}>
                                     {venture.tag}
                                 </p>
-                                <p className="text-white text-sm font-bold">{venture.short}</p>
+                                <p className="text-zinc-900 text-sm font-black">{venture.short}</p>
                             </div>
                         </div>
                     </div>
@@ -448,13 +449,13 @@ const OverviewGrid = () => {
     }, []);
 
     return (
-        <section className="py-24 border-y border-white/5">
+        <section className="py-24 border-y border-zinc-200">
             <div className="max-w-[1300px] mx-auto px-6 md:px-12 lg:px-20">
                 <ScrollSection className="text-center mb-14">
-                    <p className="text-[10px] md:text-xs tracking-[0.5em] uppercase font-semibold bg-gradient-to-r from-emerald-400 to-amber-400 bg-clip-text text-transparent mb-4">
+                    <p className="text-[10px] md:text-xs tracking-[0.5em] uppercase font-bold bg-gradient-to-r from-emerald-600 to-amber-600 bg-clip-text text-transparent mb-4">
                         Our Ventures
                     </p>
-                    <h2 className="text-4xl md:text-5xl font-black tracking-tight">
+                    <h2 className="text-4xl md:text-5xl font-black tracking-tight text-zinc-900">
                         Building the Physical World
                     </h2>
                 </ScrollSection>
@@ -463,10 +464,10 @@ const OverviewGrid = () => {
                     {VENTURES.map((v) => (
                         <div
                             key={v.id}
-                            className={`ov-card group flex flex-col items-center text-center gap-3 p-6 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm ${v.border} hover:bg-white/8 transition-all duration-500 cursor-default`}
+                            className={`ov-card group flex flex-col items-center text-center gap-3 p-6 rounded-2xl border border-zinc-200 bg-white shadow-sm ${v.border} hover:bg-zinc-50 transition-all duration-500 cursor-default hover:shadow-md`}
                         >
                             <span className="text-3xl">{v.icon}</span>
-                            <span className={`text-xs font-semibold bg-gradient-to-r ${v.accent} bg-clip-text text-transparent tracking-wide leading-snug`}>
+                            <span className={`text-xs font-bold bg-gradient-to-r ${v.accent} bg-clip-text text-transparent tracking-wide leading-snug`}>
                                 {v.short}
                             </span>
                         </div>
@@ -481,9 +482,9 @@ const OverviewGrid = () => {
    CTA
 ───────────────────────────────────────── */
 const CTASection = () => (
-    <section className="relative py-28 md:py-40 overflow-hidden">
+    <section className="relative py-28 md:py-40 overflow-hidden bg-zinc-900">
         <div className="absolute inset-0 z-0">
-            <div className="absolute inset-0 bg-gradient-to-br from-emerald-950/40 via-black to-black" />
+            <div className="absolute inset-0 bg-gradient-to-br from-emerald-950/40 via-zinc-900 to-zinc-900" />
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-emerald-600/8 rounded-full blur-3xl" />
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-amber-500/8 rounded-full blur-2xl" />
         </div>
@@ -491,7 +492,7 @@ const CTASection = () => (
             <p className="text-[10px] md:text-xs tracking-[0.5em] uppercase font-semibold bg-gradient-to-r from-emerald-400 to-amber-400 bg-clip-text text-transparent mb-6">
                 Invest in What's Next
             </p>
-            <h2 className="text-4xl md:text-6xl font-black leading-tight tracking-tight mb-4">
+            <h2 className="text-4xl md:text-6xl font-black leading-tight tracking-tight mb-4 text-white">
                 Partner with us to{' '}
                 <span
                     className="text-transparent"
@@ -521,7 +522,8 @@ const CTASection = () => (
 ───────────────────────────────────────── */
 const FutureVenturesPage = () => {
     return (
-        <div className="bg-black text-white font-sans">
+        <div className="bg-zinc-50 text-zinc-900 font-sans">
+            <Navbar />
 
             {/* 1 ── HERO */}
             <HeroBanner />

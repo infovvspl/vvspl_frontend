@@ -6,7 +6,7 @@ import {
   MapPin,
   ArrowRight
 } from "lucide-react";
-import { Facebook, Instagram } from "lucide-react"; 
+import { Facebook, Instagram } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
 
 const Contact = ({ innerRef, isPage = false }) => {
@@ -47,26 +47,33 @@ const Contact = ({ innerRef, isPage = false }) => {
         containerRef.current = el;
         if (innerRef) innerRef.current = el;
       }}
-      className={`${isPage ? 'relative py-24 md:py-40' : 'absolute inset-0 opacity-0 overflow-hidden'} sm:pt-20 lg:pt-10 pt-0 md:flex md:items-center md:justify-center bg-black text-white`}
+      className="relative min-h-screen w-full bg-[#030303] text-white py-20 px-6 sm:px-12 md:px-16 overflow-hidden"
     >
-      {/* ================= BACKGROUND ARCHITECTURE ================= */}
-      <div className="absolute inset-0 z-0">
+      {/* ================= BACKGROUND SYSTEM ================= */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
         <img
           src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072"
           alt="Tech Network"
-          className="w-full h-full object-cover opacity-[0.9] scale-110"
+          className="w-full h-full object-cover opacity-30 grayscale-[0.3] scale-110"
         />
-        {/* Dark Overlays */}
-        {/* <div className="absolute inset-0 bg-gradient-to-b from-black via-black/90 to-black" /> */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black via-transparent to-black opacity-80" />
 
-        {/* Ambient Glows */}
-        <div className="absolute top-1/2 left-0 -translate-y-1/2 w-[500px] h-[500px] bg-indigo-600/10 rounded-full blur-[120px]" />
-        <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-cyan-500/10 rounded-full blur-[120px]" />
+        {/* Gradient Mesh & Glows */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black opacity-60" />
+        <div className="absolute top-[-10%] left-[-10%] w-[60%] h-[60%] bg-indigo-600/15 blur-[140px] rounded-full animate-pulse" />
+        <div className="absolute bottom-[-10%] right-[-10%] w-[60%] h-[60%] bg-cyan-500/15 blur-[140px] rounded-full" />
+
+        {/* Subtle Scanline/Grid Grid */}
+        <div
+          className="absolute inset-0 opacity-[0.2]"
+          style={{
+            backgroundImage: `linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px)`,
+            backgroundSize: '80px 80px'
+          }}
+        />
       </div>
 
-      <div id="contact-content" className="relative z-10 w-full max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20 pt-24 pb-12 md:py-0 will-change-transform">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-start">
+      <div id="contact-content" className="relative z-10 w-full max-w-7xl mx-auto pt-10">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
 
           {/* LEFT: Heading & Info */}
           <div className="space-y-10 md:space-y-16">
@@ -75,7 +82,7 @@ const Contact = ({ innerRef, isPage = false }) => {
                 // System_Contact
               </span> */}
 
-              <h2 className="text-5xl md:text-6xl font-black uppercase italic tracking-tighter leading-[0.85] text-white">
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-black uppercase italic tracking-tighter leading-none text-white">
                 Start Your <br />
                 <span className="text-transparent" style={{ WebkitTextStroke: '1px rgba(255,255,255,0.6)' }}>
                   Journey.
@@ -87,54 +94,48 @@ const Contact = ({ innerRef, isPage = false }) => {
             <div className="space-y-4 md:space-y-8">
               {/* Email */}
               <div className="contact-info-item group flex items-center gap-6 cursor-pointer">
-                <div className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center group-hover:border-indigo-500/50 transition-colors">
-                  <Mail className="w-5 h-5 text-indigo-400" />
+                <div className="w-10 h-10 md:w-12 md:h-12 flex-shrink-0 rounded-full border border-white/10 flex items-center justify-center group-hover:border-indigo-500/50 transition-colors">
+                  <Mail className="w-4 h-4 md:w-5 md:h-5 text-indigo-400" />
                 </div>
-                <div>
-                  {/* <p className="text-zinc-500 font-mono text-[9px] uppercase tracking-widest mb-2">Primary_Email</p> */}
-                  <a href="mailto:info@vvspltech.com">
-                    <h4 className="text-xl md:text-2xl font-bold text-white group-hover:text-cyan-400 transition-colors cursor-pointer">
+                <div className="flex-1">
+                  <a href="mailto:info@vvspltech.com" className="block truncate">
+                    <h4 className="text-lg md:text-xl lg:text-2xl font-bold text-white group-hover:text-cyan-400 transition-colors cursor-pointer overflow-hidden text-ellipsis">
                       info@vvspltech.com
                     </h4>
                   </a>
-
                 </div>
               </div>
 
               {/* Phone */}
               <div className="contact-info-item group flex items-center gap-6 cursor-pointer">
-                <div className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center group-hover:border-indigo-500/50 transition-colors">
-                  <Phone className="w-5 h-5 text-indigo-400" />
+                <div className="w-10 h-10 md:w-12 md:h-12 flex-shrink-0 rounded-full border border-white/10 flex items-center justify-center group-hover:border-indigo-500/50 transition-colors">
+                  <Phone className="w-4 h-4 md:w-5 md:h-5 text-indigo-400" />
                 </div>
-                <div>
-                  {/* <p className="text-zinc-500 font-mono text-[9px] uppercase tracking-widest mb-2">Comms_Line</p> */}
+                <div className="flex-1">
                   <a
                     href="tel:+917894689818"
-                    className="text-xl md:text-2xl font-bold text-white group-hover:text-cyan-400 transition-colors cursor-pointer"
+                    className="text-lg md:text-xl lg:text-2xl font-bold text-white group-hover:text-cyan-400 transition-colors cursor-pointer"
                   >
                     +91 78946 89818
                   </a>
-
                 </div>
               </div>
 
               {/* Address */}
-              <div className="contact-info-item group flex items-center gap-6 cursor-pointer">
-                <div className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center group-hover:border-indigo-500/50 transition-colors">
-                  <MapPin className="w-5 h-5 text-indigo-400" />
+              <div className="contact-info-item group flex items-start gap-6 cursor-pointer">
+                <div className="w-10 h-10 md:w-12 md:h-12 flex-shrink-0 rounded-full border border-white/10 flex items-center justify-center group-hover:border-indigo-500/50 transition-colors">
+                  <MapPin className="w-4 h-4 md:w-5 md:h-5 text-indigo-400" />
                 </div>
-                <div>
-                  {/* <p className="text-zinc-500 font-mono text-[9px] uppercase tracking-widest mb-2">HQ_Coordinates</p> */}
+                <div className="flex-1">
                   <a
                     href="https://www.google.com/maps/search/?api=1&query=Block-309/310+ODYSSA+Business+Center+Rasulgarh+Bhubaneswar+751010"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-xl md:text-2xl font-bold text-white leading-snug group-hover:text-cyan-400 transition-colors cursor-pointer"
+                    className="text-lg md:text-xl lg:text-2xl font-bold text-white leading-snug group-hover:text-cyan-400 transition-colors cursor-pointer break-words"
                   >
-                    Block-309/310, ODYSSA Business Center, <br />
+                    Block-309/310, ODYSSA Business Center, <br className="hidden md:block" />
                     Rasulgarh, Bhubaneswar, 751010
                   </a>
-
                 </div>
               </div>
 

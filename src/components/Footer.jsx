@@ -74,7 +74,7 @@ const Footer = () => {
                                     { name: "About", path: "/about" },
                                     { name: "Services", path: "/services" },
                                     { name: "Ventures", path: "/ventures" },
-                                    { name: "Leadership", path: "/team" }
+                                    { name: "Leadership", path: "/cs" }
                                 ].map((link) => (
                                     <li key={link.name}>
                                         <Link to={link.path} className="text-sm text-zinc-400 hover:text-cyan-400 transition-colors flex items-center group w-fit">
@@ -88,7 +88,7 @@ const Footer = () => {
                         <div className="space-y-8">
                             {/* <h4 className="text-[10px] font-bold uppercase tracking-[0.5em] text-indigo-400 font-mono">// Tech_Stacks</h4> */}
                             <ul className="space-y-4">
-                                {["AI / ML Ops", "Cyber Security", "Cloud Systems", "Web Engineering", "Mobile Defense"].map((service) => (
+                                {["AI / ML Ops", "Cyber Security", "Cloud Systems", "Web Apps", "Mobile Apps"].map((service) => (
                                     <li key={service}>
                                         <button className="text-sm text-zinc-400 hover:text-cyan-400 transition-colors text-left">
                                             {service}

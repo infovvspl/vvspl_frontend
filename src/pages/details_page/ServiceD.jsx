@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import Navbar from '../../components/Navbar';
 
 // Assuming SERVICES data is imported or in the same file
 // import { SERVICES } from './ServicesPage'; 
@@ -116,9 +117,9 @@ const ServiceDetails = () => {
 
             // Hero Animation
             tl.fromTo(".hero-bg", { scale: 1.2, opacity: 0 }, { scale: 1, opacity: 0.4, duration: 2 })
-              .fromTo(".back-btn", { x: -20, opacity: 0 }, { x: 0, opacity: 1 }, "-=1.5")
-              .fromTo(".hero-text > *", { y: 60, opacity: 0 }, { y: 0, opacity: 1, stagger: 0.2 }, "-=1.2")
-              .fromTo(".feature-tag", { scale: 0.8, opacity: 0 }, { scale: 1, opacity: 1, stagger: 0.1 }, "-=1");
+                .fromTo(".back-btn", { x: -20, opacity: 0 }, { x: 0, opacity: 1 }, "-=1.5")
+                .fromTo(".hero-text > *", { y: 60, opacity: 0 }, { y: 0, opacity: 1, stagger: 0.2 }, "-=1.2")
+                .fromTo(".feature-tag", { scale: 0.8, opacity: 0 }, { scale: 1, opacity: 1, stagger: 0.1 }, "-=1");
 
             // Scroll Reveal for body content
             gsap.from(".detail-card", {
@@ -139,15 +140,16 @@ const ServiceDetails = () => {
 
     return (
         <div ref={containerRef} className="bg-black text-white font-sans overflow-hidden">
-            
+            <Navbar />
+
             {/* ================= HERO SECTION ================= */}
             <section className="relative h-[70vh] md:h-[85vh] flex items-center justify-center px-6 overflow-hidden">
                 {/* Background */}
                 <div className="absolute inset-0 z-0">
-                    <img 
-                        src={service.img} 
-                        className="hero-bg w-full h-full object-cover" 
-                        alt={service.title} 
+                    <img
+                        src={service.img}
+                        className="hero-bg w-full h-full object-cover"
+                        alt={service.title}
                     />
                     <div className={`absolute inset-0 bg-gradient-to-b from-black/60 via-black/80 to-black`} />
                     <div className={`absolute inset-0 bg-gradient-to-r ${service.accent} opacity-20`} />
@@ -181,7 +183,7 @@ const ServiceDetails = () => {
             <section className="relative z-10 py-24 px-6">
                 <div className="max-w-7xl mx-auto">
                     <div className="details-grid grid grid-cols-1 lg:grid-cols-3 gap-8">
-                        
+
                         {/* Capabilities Column */}
                         <div className="detail-card lg:col-span-2 space-y-12">
                             <div>
@@ -215,7 +217,7 @@ const ServiceDetails = () => {
                                 <button className="w-full py-4 rounded-full border border-white/10 text-white font-bold tracking-wider hover:bg-white/5 transition-colors">
                                     Download Stack PDF
                                 </button>
-                                
+
                                 <div className="mt-12 pt-8 border-t border-white/5">
                                     <p className="text-[10px] tracking-widest uppercase text-zinc-500 mb-4">Technologies we use</p>
                                     <div className="flex flex-wrap gap-2">

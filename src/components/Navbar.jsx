@@ -1,15 +1,30 @@
 import React, { useState, useEffect } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useLocation } from 'react-router-dom';
 import Logo from "../assets/logo2.png";
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [isLightBg, setIsLightBg] = useState(false);
+    const location = useLocation();
 
     // Prevent background scrolling when menu is open
     useEffect(() => {
         document.body.style.overflow = isOpen ? 'hidden' : 'unset';
     }, [isOpen]);
+
+    const scrollToTop = () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    };
+
+    const handleLinkClick = (path) => {
+        setIsOpen(false);
+        if (location.pathname === path) {
+            scrollToTop();
+        }
+    };
 
     // Detect scroll position (adjust 600 based on your hero height)
     useEffect(() => {
@@ -40,7 +55,7 @@ const Navbar = () => {
                 {/* LOGO */}
                 <Link
                     to="/"
-                    onClick={() => setIsOpen(false)}
+                    onClick={() => handleLinkClick("/")}
                     className="relative z-[210] flex items-center"
                 >
                     <img
@@ -68,14 +83,12 @@ const Navbar = () => {
 
                     <div className="flex flex-col gap-2 items-end">
                         <div
-                            className={`h-[1px] w-7 transition-all duration-500 ${
-                                isOpen ? "rotate-45 translate-y-[4px]" : ""
-                            } ${isLightBg ? "bg-white" : "bg-white/80"}`}
+                            className={`h-[1px] w-7 transition-all duration-500 ${isOpen ? "rotate-45 translate-y-[4px]" : ""
+                                } ${isLightBg ? "bg-white" : "bg-white/80"}`}
                         />
                         <div
-                            className={`h-[1px] transition-all duration-500 ${
-                                isOpen ? "w-7 -rotate-45 -translate-y-[4px]" : "w-4"
-                            } ${isLightBg ? "bg-white" : "bg-white/80"}`}
+                            className={`h-[1px] transition-all duration-500 ${isOpen ? "w-7 -rotate-45 -translate-y-[4px]" : "w-4"
+                                } ${isLightBg ? "bg-white" : "bg-white/80"}`}
                         />
                     </div>
                 </button>
@@ -93,7 +106,7 @@ const Navbar = () => {
                         <NavLink
                             key={link.name}
                             to={link.path}
-                            onClick={() => setIsOpen(false)}
+                            onClick={() => handleLinkClick(link.path)}
                             className="group"
                         >
                             <span
