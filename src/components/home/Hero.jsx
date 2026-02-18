@@ -6,6 +6,8 @@ import { ArrowRight } from 'lucide-react';
 import Vid from "../../assets/vido.mp4";
 import Aud from "../../assets/bgm.mp3";
 import Hr from "../../assets/hero-r.png";
+import VidMp4 from "../../assets/vido.mp4"
+import VidWebm from "../../assets/vido.webp"
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -29,7 +31,8 @@ const Hero = ({ innerRef }) => {
           scrollTrigger: {
             trigger: sectionRef.current,
             start: "top top",
-            end: "bottom top",
+            end: "+=120%",
+            pin: true,
             scrub: 1,
             invalidateOnRefresh: true,
           }
@@ -37,9 +40,9 @@ const Hero = ({ innerRef }) => {
 
         mainTl
           .to(contentRef.current, {
-            y: -100,
+            xPercent: isMobile ? 0 : -30, // Removed horizontal shift on mobile for better centering
             opacity: 0,
-            scale: isMobile ? 0.95 : 1.05,
+            scale: isMobile ? 0.95 : 1.1,
             filter: "blur(10px)",
             ease: "power2.in"
           }, 0)
@@ -83,10 +86,18 @@ const Hero = ({ innerRef }) => {
       <div className="absolute inset-0 z-0">
         <video
           ref={videoRef}
-          src={Vid}
-          autoPlay loop muted playsInline
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="none"
+          poster="/vido.webp"
           className="w-full h-full object-cover opacity-100 grayscale-[0.4] will-change-transform"
-        />
+        >
+          <source src={VidWebm} type="image/webp" />
+          <source src={VidMp4} type="video/mp4" />
+        </video>
+
         <audio src={Aud} autoPlay loop className="hidden" />
         <div className="absolute inset-0 bg-gradient-to-b md:bg-gradient-to-r from-black/90 via-black/40 to-transparent" />
       </div>
@@ -100,12 +111,9 @@ const Hero = ({ innerRef }) => {
 
           {/* LEFT COLUMN: Text Content (Full width on mobile) */}
           <div className="text-center lg:text-left">
-            <h1 className="reveal-text text-[14vw] sm:text-6xl md:text-[7vw] font-black leading-[0.9] tracking-tighter uppercase text-white italic">
+            <h1 className="reveal-text text-[14vw] sm:text-6xl md:text-[7vw] font-black leading-[0.9] tracking-tight uppercase text-white">
               Veteran <br />
-              <span
-                className="text-transparent"
-                style={{ WebkitTextStroke: '1px rgba(255, 255, 255, 0.7)' }}
-              >
+              <span className="text-transparent" style={{ WebkitTextStroke: '1px white' }}>
                 Ventures
               </span>
             </h1>
@@ -113,49 +121,19 @@ const Hero = ({ innerRef }) => {
             <div className="reveal-text mt-6 space-y-6">
               <h2 className="text-lg sm:text-2xl md:text-3xl font-light text-zinc-300">
                 Vision <span className="text-white font-medium">Meets Velocity.</span>
-                <div className="w-16 md:w-20 h-[3px] rounded-full bg-gradient-to-r from-indigo-500 to-cyan-500" />
               </h2>
               <p className="max-w-xl mx-auto lg:mx-0 text-zinc-200 text-sm md:text-base leading-relaxed opacity-80">
                 Innovation is not just about writing code — it’s about engineering impact. We are a software company built on systems thinking, architectural precision, and disciplined execution. We don’t chase trends or build disposable products. We design, develop, and scale resilient digital ecosystems powered by AI and machine learning, strengthened by robust cybersecurity, and engineered to solve complex problems while creating measurable value.
               </p>
 
               <div className="flex flex-col sm:flex-row items-center lg:items-start gap-4 pt-4">
-
-                {/* Primary Gradient Button */}
-                <Link
-                  to="/contact"
-                  className="group relative w-full sm:w-auto px-8 py-4 rounded-md font-semibold uppercase tracking-wider text-xs text-white overflow-hidden transition-all duration-300 hover:-translate-y-1"
-                >
-                  <span className="absolute inset-0 bg-gradient-to-r from-indigo-500 to-cyan-500 rounded-md"></span>
-
-                  {/* Glow Effect */}
-                  <span className="absolute inset-0 bg-gradient-to-r from-indigo-500 to-cyan-500 blur-xl opacity-0 group-hover:opacity-60 transition duration-500"></span>
-
-                  <span className="relative z-10 flex items-center justify-center gap-2">
-                    Get Started
-                    <ArrowRight
-                      size={16}
-                      className="transition-transform duration-300 group-hover:translate-x-1"
-                    />
-                  </span>
+                <Link to="/contact" className="group relative w-full sm:w-auto px-8 py-4 bg-white text-black font-semibold uppercase tracking-wider text-xs rounded-md transition-all hover:bg-blue-600 hover:text-white">
+                  <span className="flex items-center justify-center gap-2">Get Started <ArrowRight size={16} /></span>
                 </Link>
-
-                {/* Secondary Glass Button */}
-                <Link
-                  to="/services"
-                  className="group relative w-full sm:w-auto px-8 py-4 rounded-md font-semibold uppercase tracking-wider text-xs text-white border border-indigo-400/40 backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:border-cyan-400/70 hover:shadow-lg hover:shadow-cyan-500/20"
-                >
-                  <span className="flex items-center justify-center gap-2">
-                    Our Services
-                    <ArrowRight
-                      size={16}
-                      className="transition-transform duration-300 group-hover:translate-x-1"
-                    />
-                  </span>
+                <Link to="/services" className="group w-full sm:w-auto px-8 py-4 border border-white/30 text-white font-semibold uppercase tracking-wider text-xs rounded-md backdrop-blur-md hover:bg-white hover:text-black">
+                  <span className="flex items-center justify-center gap-2">Our Services <ArrowRight size={16} /></span>
                 </Link>
-
               </div>
-
             </div>
           </div>
 
