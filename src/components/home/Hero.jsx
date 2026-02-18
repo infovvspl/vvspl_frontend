@@ -91,7 +91,7 @@ const Hero = ({ innerRef }) => {
           muted
           playsInline
           preload="none"
-          poster="/video-thumbnail.webp"
+          poster="/vido.webp"
           className="w-full h-full object-cover opacity-100 grayscale-[0.4] will-change-transform"
         >
           <source src={VidWebm} type="image/webp" />
