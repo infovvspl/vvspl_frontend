@@ -36,7 +36,7 @@ const FoundingMembers = ({ innerRef, isPage = false }) => {
   return (
     <section
       ref={innerRef}
-      className={`${isPage ? 'relative py-24' : 'absolute inset-0 opacity-0'} bg-zinc-950 text-white overflow-hidden pt-24 md:pt-32`}
+      className={`${isPage ? 'relative py-24' : 'absolute inset-0 opacity-0'} bg-zinc-950 text-white overflow-hidden pt-14 md:pt-32 pb-14 md:pb-30`}
 
     >
       {/* --- HERO-STYLE BACKGROUND --- */}

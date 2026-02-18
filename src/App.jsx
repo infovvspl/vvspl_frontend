@@ -5,12 +5,14 @@ import Home from "./pages/Home";
 // import TunnelNav from "./components/Trackbar";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
-import About from "./pages/About";
-import Team from "./pages/Team";
-import Ventures from "./pages/Ventures";
-import Contact from "./pages/Contact";
 import ScrollToTop from "./components/ScrollToTop";
 import Loading from "./components/Loading";
+import ComingSoon from "./components/CS";
+import AboutPage from "./pages/AboutP";
+import ServicesPage from "./pages/ServiceP";
+import FutureVenturesPage from "./pages/Ventures";
+import ContactPage from "./pages/Contact";
+import ServiceDetails from "./pages/details_page/ServiceD";
 
 function App() {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -32,10 +34,11 @@ function App() {
         <main className="flex-1">
           <Routes>
             <Route path="/" element={<Home setActiveIndex={setActiveIndex} />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/team" element={<Team />} />
-            <Route path="/ventures" element={<Ventures />} />
-            <Route path="/contact" element={<Contact />} />
+            <Route path="/about" element={<AboutPage />} />
+            <Route path="/services" element={<ServicesPage />} />
+            <Route path="/ventures" element={<FutureVenturesPage />} />
+            <Route path="/contact" element={<ContactPage />} />
+            <Route path="/services/:id" element={<ServiceDetails />} />
           </Routes>
         </main>
         <Footer />

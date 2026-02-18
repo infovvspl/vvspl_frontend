@@ -4,11 +4,10 @@ import {
   Mail,
   Phone,
   MapPin,
-  Twitter,
-  Linkedin,
-  Instagram,
   ArrowRight
 } from "lucide-react";
+import { Facebook, Instagram } from "lucide-react"; 
+import { FaWhatsapp } from "react-icons/fa";
 
 const Contact = ({ innerRef, isPage = false }) => {
   const containerRef = useRef(null);
@@ -141,11 +140,34 @@ const Contact = ({ innerRef, isPage = false }) => {
 
               {/* Socials */}
               <div className="contact-info-item flex flex-col gap-6">
-                <p className="text-zinc-2500 font-mono text-[12px] uppercase tracking-widest italic">Social Links</p>
+                <p className="text-zinc-2500 font-mono text-[12px] uppercase tracking-widest italic">
+                  Social Links
+                </p>
+
                 <div className="flex gap-8">
-                  {[Twitter, Linkedin, Instagram].map((Icon, idx) => (
-                    <Icon key={idx} className="w-5 h-5 text-zinc-400 hover:text-cyan-400 transition-all cursor-pointer transform hover:-translate-y-1" />
-                  ))}
+                  <a
+                    href="https://www.facebook.com/share/1D4x5YWeff/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Facebook className="w-5 h-5 text-zinc-400 hover:text-cyan-400 transition-all cursor-pointer transform hover:-translate-y-1" />
+                  </a>
+
+                  <a
+                    href="https://www.instagram.com/vvspltech?igsh=cjcyczloZWNuaGZx"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Instagram className="w-5 h-5 text-zinc-400 hover:text-cyan-400 transition-all cursor-pointer transform hover:-translate-y-1" />
+                  </a>
+
+                  <a
+                    href="https://wa.me/7894689818"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <FaWhatsapp className="w-5 h-5 text-zinc-300 hover:text-cyan-400 transition-all cursor-pointer transform hover:-translate-y-1" />
+                  </a>
                 </div>
               </div>
             </div>
