@@ -6,6 +6,8 @@ import { ArrowRight } from 'lucide-react';
 import Vid from "../../assets/vido.mp4";
 import Aud from "../../assets/bgm.mp3";
 import Hr from "../../assets/hero-r.png";
+import VidMp4 from "../../assets/vido.mp4"
+import VidWebm from "../../assets/vido.webp"
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -83,10 +85,18 @@ const Hero = ({ innerRef }) => {
       <div className="absolute inset-0 z-0">
         <video
           ref={videoRef}
-          src={Vid}
-          autoPlay loop muted playsInline
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="none"
+          poster="/vido.webp"
           className="w-full h-full object-cover opacity-100 grayscale-[0.4] will-change-transform"
-        />
+        >
+          <source src={VidWebm} type="image/webp" />
+          <source src={VidMp4} type="video/mp4" />
+        </video>
+
         <audio src={Aud} autoPlay loop className="hidden" />
         <div className="absolute inset-0 bg-gradient-to-b md:bg-gradient-to-r from-black/90 via-black/40 to-transparent" />
       </div>
