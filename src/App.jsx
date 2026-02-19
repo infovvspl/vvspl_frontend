@@ -1,5 +1,5 @@
 // App.jsx
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 // import TunnelNav from "./components/Trackbar";
@@ -17,10 +17,53 @@ import ComingSoon from "./components/CS";
 function App() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [loadingDone, setLoadingDone] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const audioRef = useRef(null);
+
+  // Try autoplay after first user interaction
+  useEffect(() => {
+    const enableAudio = () => {
+      if (audioRef.current) {
+        audioRef.current.volume = 0.3; // soft background volume
+        audioRef.current.play().then(() => {
+          setIsPlaying(true);
+        }).catch(() => { });
+      }
+      window.removeEventListener("click", enableAudio);
+    };
+
+    window.addEventListener("click", enableAudio);
+    return () => window.removeEventListener("click", enableAudio);
+  }, []);
+
+  const toggleMusic = () => {
+    if (!audioRef.current) return;
+
+    if (isPlaying) {
+      audioRef.current.pause();
+    } else {
+      audioRef.current.play();
+    }
+
+    setIsPlaying(!isPlaying);
+  };
 
   return (
     <Router>
       <ScrollToTop />
+
+      {/* 🎵 Background Music */}
+      <audio ref={audioRef} loop>
+        <source src="/bgm.mp3" type="audio/mpeg" />
+      </audio>
+
+      {/* Music Toggle Button */}
+      <button
+        onClick={toggleMusic}
+        className="fixed bottom-5 right-5 z-[9999] bg-black text-white px-4 py-2 rounded-full shadow-lg"
+      >
+        {isPlaying ? "Pause Music" : "Play Music"}
+      </button>
       {/* SHOW LOADER FIRST */}
       {!loadingDone && (
         <div className="fixed inset-0 z-[9999]">
