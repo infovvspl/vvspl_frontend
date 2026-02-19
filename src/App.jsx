@@ -13,6 +13,9 @@ import FutureVenturesPage from "./pages/Ventures";
 import ContactPage from "./pages/ContactP";
 import ServiceDetails from "./pages/details_page/ServiceD";
 import ComingSoon from "./components/CS";
+import VentureDetails from "./pages/details_page/VentureDetails";
+import BlogsPage from "./pages/BlogsPage";
+import BlogDetails from "./pages/details_page/BlogDetails";
 
 function App() {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -81,7 +84,10 @@ function App() {
             <Route path="/services" element={<ServicesPage />} />
             <Route path="/ventures" element={<FutureVenturesPage />} />
             <Route path="/contact" element={<ContactPage />} />
+            <Route path="/blogs" element={<BlogsPage />} />
             <Route path="/services/:id" element={<ServiceDetails />} />
+            <Route path="/ventures/:id" element={<VentureDetails />} />
+            <Route path="/blogs/:id" element={<BlogDetails />} />
             <Route path="/cs" element={<ComingSoon />} />
           </Routes>
         </main>

@@ -458,13 +458,30 @@ const CTASection = () => (
                 Tell us about your challenge and we'll map the right technology to the right outcome — no jargon, no fluff.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <button className="px-8 py-4 rounded-full bg-gradient-to-r from-indigo-600 to-cyan-600 text-white font-semibold text-sm tracking-wider hover:opacity-90 transition-opacity duration-300 shadow-[0_0_40px_-8px_rgba(99,102,241,0.6)]">
+
+                <Link
+                    to="/contact"
+                    className="px-8 py-4 text-center rounded-full 
+               bg-gradient-to-r from-indigo-600 to-cyan-600 
+               text-white font-semibold text-sm tracking-wider 
+               hover:opacity-90 transition-opacity duration-300 
+               shadow-[0_0_40px_-8px_rgba(99,102,241,0.6)]"
+                >
                     Book a Free Consultation
-                </button>
-                <button className="px-8 py-4 rounded-full border border-white/20 text-white font-semibold text-sm tracking-wider hover:bg-white/5 transition-colors duration-300">
+                </Link>
+
+                <Link
+                    to="/blogs"
+                    className="px-8 py-4 text-center rounded-full 
+               border border-white/20 text-white 
+               font-semibold text-sm tracking-wider 
+               hover:bg-white/5 transition-colors duration-300"
+                >
                     View Case Studies
-                </button>
+                </Link>
+
             </div>
+
         </ScrollSection>
     </section>
 );

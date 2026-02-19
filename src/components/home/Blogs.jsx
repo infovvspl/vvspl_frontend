@@ -15,7 +15,7 @@ const Blogs = ({ innerRef, isPage = false }) => {
       img: "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=800",
       category: "Defence Tech",
       date: "Jan 26, 2026",
-      link: "/cs"
+      link: "/blogs/1"
     },
     {
       title: "From Battlefield to Boardroom: Leadership Lessons in Innovation",
@@ -23,7 +23,7 @@ const Blogs = ({ innerRef, isPage = false }) => {
       img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcStmdghgbG8yN1k6Z9zbnzM8xD-EhpfI-LnQQ&s",
       category: "Leadership",
       date: "Jan 20, 2026",
-      link: "/cs"
+      link: "/blogs/1"
     },
     {
       title: "Cybersecurity in the Digital Age: Protecting Critical Infrastructure",
@@ -31,7 +31,7 @@ const Blogs = ({ innerRef, isPage = false }) => {
       img: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=800",
       category: "Cybersecurity",
       date: "Jan 15, 2026",
-      link: "/cs"
+      link: "/blogs/1"
     }
   ];
 

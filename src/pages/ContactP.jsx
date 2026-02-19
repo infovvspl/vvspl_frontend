@@ -289,7 +289,13 @@ const ContactPage = () => {
                     <h2 className="text-3xl md:text-5xl font-black leading-tight mb-8">
                         Book a free <span className="text-transparent" style={{ WebkitTextStroke: '1.5px rgba(255,255,255,0.38)' }}>30-min discovery call.</span>
                     </h2>
-                    <button className="px-8 py-4 rounded-full bg-gradient-to-r from-indigo-600 to-cyan-600 text-white font-semibold text-sm shadow-[0_0_40px_-8px_rgba(99,102,241,0.5)] hover:opacity-90 transition-all">Schedule a Call →</button>
+                    <a
+                        href="tel:+917894689818"
+                        className="px-8 py-4 rounded-full bg-gradient-to-r from-indigo-600 to-cyan-600 text-white font-semibold text-sm shadow-[0_0_40px_-8px_rgba(99,102,241,0.5)] hover:opacity-90 transition-all"
+                    >
+                        Schedule a Call →
+                    </a>
+
                 </div>
             </section>
         </div>

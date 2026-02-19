@@ -280,7 +280,7 @@ const AboutPage = () => {
                             Start a Project
                         </Link>
 
-                        <Link to="/work" className="px-8 py-4 rounded-full border border-white/20 font-semibold text-sm text-white hover:bg-white/5 transition-colors duration-300 text-center"
+                        <Link to="/cs" className="px-8 py-4 rounded-full border border-white/20 font-semibold text-sm text-white hover:bg-white/5 transition-colors duration-300 text-center"
                         >
                             Explore Our Work
                         </Link>

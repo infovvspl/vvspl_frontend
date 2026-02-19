@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
+import Navbar from './Navbar';
 
 const ComingSoon = ({ innerRef, isPage = true }) => {
     const containerRef = useRef(null);
@@ -42,6 +43,7 @@ const ComingSoon = ({ innerRef, isPage = true }) => {
             }}
             className={`relative flex items-center justify-center bg-black text-white overflow-hidden min-h-screen w-full`}
         >
+            <Navbar />
             {/* ================= BACKGROUND ELEMENTS ================= */}
             <div className="absolute inset-0 z-0">
                 {/* Dark Mesh Overlay */}

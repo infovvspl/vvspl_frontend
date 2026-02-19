@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Navbar from '../components/Navbar';
+import { Link } from 'react-router-dom';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -381,12 +382,14 @@ const VentureCard = ({ venture, index }) => {
 
                         {/* "Coming Soon" badge */}
                         <div className="self-start flex items-center gap-3">
-                            <button className={`px-7 py-3.5 rounded-full bg-gradient-to-r ${venture.accent} text-white font-semibold text-sm tracking-wider hover:opacity-85 transition-opacity duration-300 shadow-lg`}>
-                                Express Interest →
-                            </button>
-                            <span className="px-4 py-3.5 rounded-full border border-zinc-200 text-xs text-zinc-500 tracking-widest uppercase font-bold">
+                            <Link to={`/ventures/${venture.id}`}>
+                                <button className={`px-7 py-3.5 rounded-full bg-gradient-to-r ${venture.accent} text-white font-semibold text-sm tracking-wider hover:opacity-85 transition-opacity duration-300 shadow-lg`}>
+                                    Express Interest →
+                                </button>
+                            </Link>
+                            {/* <span className="px-4 py-3.5 rounded-full border border-zinc-200 text-xs text-zinc-500 tracking-widest uppercase font-bold">
                                 Coming Soon
-                            </span>
+                            </span> */}
                         </div>
                     </div>
 
@@ -506,13 +509,30 @@ const CTASection = () => (
                 the industries of tomorrow — from the ground up.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <button className="px-8 py-4 rounded-full bg-gradient-to-r from-emerald-600 to-amber-500 text-white font-semibold text-sm tracking-wider hover:opacity-90 transition-opacity duration-300 shadow-[0_0_40px_-8px_rgba(16,185,129,0.5)]">
-                    Express Partnership Interest
-                </button>
-                <button className="px-8 py-4 rounded-full border border-white/20 text-white font-semibold text-sm tracking-wider hover:bg-white/5 transition-colors duration-300">
-                    Download Prospectus
-                </button>
+
+                <Link
+                    to="/contact"
+                    className="w-full sm:w-auto px-8 py-4 text-center rounded-full 
+               bg-gradient-to-r from-emerald-600 to-amber-500 
+               text-white font-semibold text-sm tracking-wider 
+               hover:opacity-90 transition-opacity duration-300 
+               shadow-[0_0_40px_-8px_rgba(16,185,129,0.5)]"
+                >
+                    Contact us now
+                </Link>
+
+                <Link
+                    to="/services"
+                    className="w-full sm:w-auto px-8 py-4 text-center rounded-full 
+               border border-white/20 text-white 
+               font-semibold text-sm tracking-wider 
+               hover:bg-white/5 transition-colors duration-300"
+                >
+                    Explore services
+                </Link>
+
             </div>
+
         </ScrollSection>
     </section>
 );
