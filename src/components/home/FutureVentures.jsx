@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 const FutureVentures = ({ innerRef, isPage = false }) => {
     const sectionRef = useRef(null);
     const headerRef = useRef(null);
+    const buttonRef = useRef(null);
 
     // 2. Add manual links to your data array
     const sectors = [
@@ -12,32 +13,32 @@ const FutureVentures = ({ innerRef, isPage = false }) => {
             title: "Trade & Transport",
             desc: "Digitalizing global supply chains with real-time tracking and logistics automation.",
             img: "https://images.unsplash.com/photo-1578575437130-527eed3abbec?q=80&w=2070",
-            path: "/cs"
+            path: "/ventures/01"
         },
         {
             title: "Land Acquisition",
             desc: "Smart real estate integration using geographic data models and sustainable development.",
             img: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=2064",
-            path: "/cs"
+            path: "/ventures/02"
         },
         {
             title: "Mining & Minerals",
             desc: "Optimizing extraction throughput with specialized AI and precision engineering.",
             img: "https://images.unsplash.com/photo-1517089596392-fb9a9033e05b?q=80&w=2070",
-            path: "/cs"
+            path: "/ventures/03"
         },
-        {
-            title: "Power & Energy",
-            desc: "Intelligent grid management for the next energy frontier and renewable integration.",
-            img: "https://media.istockphoto.com/id/1158175328/photo/solar-panel-and-wind-turbine-farm-clean-energy.jpg?s=612x612&w=0&k=20&c=ur5kwDnZxGKk_8KluOHkIePz6kiDT5N7dszbYQfPiBw=",
-            path: "/cs"
-        },
-        {
-            title: "Organic Farming",
-            desc: "Autonomous routing and demand forecasting systems for modern agriculture.",
-            img: "https://plus.unsplash.com/premium_photo-1664299231810-29d1caf6f753?q=80&w=1170&auto=format&fit=crop",
-            path: "/cs"
-        },
+        // {
+        //     title: "Power & Energy",
+        //     desc: "Intelligent grid management for the next energy frontier and renewable integration.",
+        //     img: "https://media.istockphoto.com/id/1158175328/photo/solar-panel-and-wind-turbine-farm-clean-energy.jpg?s=612x612&w=0&k=20&c=ur5kwDnZxGKk_8KluOHkIePz6kiDT5N7dszbYQfPiBw=",
+        //     path: "/cs"
+        // },
+        // {
+        //     title: "Organic Farming",
+        //     desc: "Autonomous routing and demand forecasting systems for modern agriculture.",
+        //     img: "https://plus.unsplash.com/premium_photo-1664299231810-29d1caf6f753?q=80&w=1170&auto=format&fit=crop",
+        //     path: "/cs"
+        // },
     ];
 
     return (
@@ -119,6 +120,20 @@ const FutureVentures = ({ innerRef, isPage = false }) => {
                             </div>
                         </div>
                     ))}
+                </div>
+
+                {/* ================= BOTTOM CTA BUTTON ================= */}
+                <div ref={buttonRef} className="flex justify-center mt-12">
+                    <Link
+                        to="/ventures"
+                        className="group relative px-10 py-5 bg-zinc-900 overflow-hidden rounded-full transition-all duration-300 hover:shadow-[0_10px_30px_rgba(0,0,0,0.2)]"
+                    >
+                        <span className="relative z-10 text-xs md:text-sm font-black uppercase tracking-[0.2em] text-white transition-colors duration-300">
+                            Explore More
+                        </span>
+                        {/* Gradient Slide-in Effect */}
+                        <div className="absolute inset-0 z-0 bg-gradient-to-r from-indigo-600 to-blue-600 translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-500 ease-out" />
+                    </Link>
                 </div>
             </div>
         </section>

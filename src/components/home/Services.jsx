@@ -38,6 +38,12 @@ const Services = ({ innerRef, isPage = false }) => {
             img: "https://images.unsplash.com/photo-1558655146-6c222b05fce4?q=80&w=764&auto=format&fit=crop",
             link: "/services/05"
         },
+        {
+            title: "E-Commerce",
+            desc: "Scalable online stores designed to maximize conversions, streamline operations, and deliver seamless shopping experiences.",
+            img: "https://images.unsplash.com/photo-1658297063569-162817482fb6?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+            link: "/services/06"
+        },
     ];
 
     return (

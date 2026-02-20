@@ -16,6 +16,8 @@ import ComingSoon from "./components/CS";
 import VentureDetails from "./pages/details_page/VentureDetails";
 import BlogsPage from "./pages/BlogsPage";
 import BlogDetails from "./pages/details_page/BlogDetails";
+import GalleryPage from "./pages/Gallery";
+import TeamPage from "./pages/Team";
 
 function App() {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -63,7 +65,7 @@ function App() {
       {/* Music Toggle Button */}
       <button
         onClick={toggleMusic}
-        className="fixed bottom-5 right-5 z-[9999] bg-black text-white px-4 py-2 rounded-full shadow-lg"
+        className="fixed bottom-5 left-5 z-[9999] bg-black text-white px-4 py-2 rounded-full shadow-lg"
       >
         {isPlaying ? "Pause Music" : "Play Music"}
       </button>
@@ -83,6 +85,8 @@ function App() {
             <Route path="/about" element={<AboutPage />} />
             <Route path="/services" element={<ServicesPage />} />
             <Route path="/ventures" element={<FutureVenturesPage />} />
+            <Route path="/gallery" element={<GalleryPage />} />
+            <Route path="/team" element={<TeamPage />} />
             <Route path="/contact" element={<ContactPage />} />
             <Route path="/blogs" element={<BlogsPage />} />
             <Route path="/services/:id" element={<ServiceDetails />} />

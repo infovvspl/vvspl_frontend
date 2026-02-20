@@ -97,7 +97,7 @@ const Hero = ({ innerRef }) => {
           <source src={VidMp4} type="video/mp4" />
         </video>
 
-        <audio src={Aud} autoPlay loop className="hidden" />
+        {/* <audio src={Aud} autoPlay loop className="hidden" /> */}
         <div className="absolute inset-0 bg-gradient-to-b md:bg-gradient-to-r from-black/90 via-black/40 to-transparent" />
       </div>
 

@@ -3,84 +3,85 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Navbar from '../components/Navbar';
 import { Link } from 'react-router-dom';
+import { VENTURES } from '../data/venturesData';
 
 gsap.registerPlugin(ScrollTrigger);
 
 /* ─────────────────────────────────────────
    VENTURES DATA
 ───────────────────────────────────────── */
-const VENTURES = [
-    {
-        id: '01',
-        title: 'Trade & Transport',
-        short: 'Global Logistics',
-        icon: '🚢',
-        accent: 'from-cyan-500 to-blue-600',
-        glow: 'bg-cyan-500/15',
-        border: 'hover:border-cyan-500/40',
-        tag: 'Connectivity',
-        description:
-            'Building intelligent trade corridors and next-generation logistics networks that move goods faster, smarter, and more transparently. From freight tech platforms to cross-border trade infrastructure, were engineering the arteries of tomorrows global economy.',
-        features: ['Freight Tech Platforms', 'Cross-border Trade', 'Supply Chain Visibility', 'Port & Warehouse Ops', 'Fleet Management', 'Trade Finance Integration'],
-        img: 'https://images.unsplash.com/photo-1578575437130-527eed3abbec?q=80&w=1200',
-    },
-    {
-        id: '02',
-        title: 'Land Acquisition',
-        short: 'Real Estate & Land',
-        icon: '🏔️',
-        accent: 'from-stone-400 to-amber-600',
-        glow: 'bg-amber-600/15',
-        border: 'hover:border-amber-500/40',
-        tag: 'Foundation',
-        description:
-            'Strategic land acquisition and development across high-growth corridors. We identify, evaluate, and secure land assets for industrial, agricultural, and infrastructure purposes — backed by geospatial intelligence and rigorous due diligence.',
-        features: ['Geospatial Analysis', 'Due Diligence & Valuation', 'Regulatory Clearances', 'Industrial Zones', 'Agricultural Land', 'Infrastructure Corridors'],
-        img: 'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?q=80&w=1200',
-    },
-    {
-        id: '03',
-        title: 'Mining & Minerals',
-        short: 'Resource Extraction',
-        icon: '⛏️',
-        accent: 'from-orange-500 to-red-600',
-        glow: 'bg-orange-500/15',
-        border: 'hover:border-orange-500/40',
-        tag: 'Resources',
-        description:
-            'Responsible exploration and extraction of critical minerals powering the modern world — from rare earths and lithium to industrial aggregates. We integrate digital surveying, ESG compliance frameworks, and community-first operating models.',
-        features: ['Mineral Exploration', 'ESG-Compliant Ops', 'Critical Minerals', 'Digital Surveying', 'Processing & Refining', 'Community Engagement'],
-        img: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?q=80&w=1200',
-    },
-    {
-        id: '04',
-        title: 'Power & Energy',
-        short: 'Clean Energy',
-        icon: '⚡',
-        accent: 'from-yellow-400 to-orange-500',
-        glow: 'bg-yellow-500/15',
-        border: 'hover:border-yellow-400/40',
-        tag: 'Sustainability',
-        description:
-            'Developing scalable energy infrastructure for a decarbonised future — solar farms, wind projects, battery storage systems, and smart grid solutions. We partner with governments and enterprises to accelerate the energy transition at scale.',
-        features: ['Solar & Wind Projects', 'Battery Storage Systems', 'Smart Grid Solutions', 'Energy Trading', 'Carbon Credits', 'EPC Partnerships'],
-        img: 'https://images.unsplash.com/photo-1466611653911-95081537e5b7?q=80&w=1200',
-    },
-    {
-        id: '05',
-        title: 'Organic Farming',
-        short: 'Agri & Food Tech',
-        icon: '🌿',
-        accent: 'from-emerald-400 to-green-600',
-        glow: 'bg-emerald-500/15',
-        border: 'hover:border-emerald-500/40',
-        tag: 'Regenerative',
-        description:
-            'Cultivating the future of food through regenerative organic agriculture — from large-scale certified organic farms to precision agri-tech platforms that optimise yield, water use, and soil health. We grow what the planet needs, the way it deserves.',
-        features: ['Certified Organic Farms', 'Precision Agriculture', 'Soil Health Monitoring', 'Water Optimisation', 'Farm-to-Market Supply', 'Agri-Tech Integration'],
-        img: 'https://images.unsplash.com/photo-1625246333195-78d9c38ad449?q=80&w=1200',
-    },
-];
+// const VENTURES = [
+//     {
+//         id: '01',
+//         title: 'Trade & Transport',
+//         short: 'Global Logistics',
+//         icon: '🚢',
+//         accent: 'from-cyan-500 to-blue-600',
+//         glow: 'bg-cyan-500/15',
+//         border: 'hover:border-cyan-500/40',
+//         tag: 'Connectivity',
+//         description:
+//             'Building intelligent trade corridors and next-generation logistics networks that move goods faster, smarter, and more transparently. From freight tech platforms to cross-border trade infrastructure, were engineering the arteries of tomorrows global economy.',
+//         features: ['Freight Tech Platforms', 'Cross-border Trade', 'Supply Chain Visibility', 'Port & Warehouse Ops', 'Fleet Management', 'Trade Finance Integration'],
+//         img: 'https://images.unsplash.com/photo-1578575437130-527eed3abbec?q=80&w=1200',
+//     },
+//     {
+//         id: '02',
+//         title: 'Land Acquisition',
+//         short: 'Real Estate & Land',
+//         icon: '🏔️',
+//         accent: 'from-stone-400 to-amber-600',
+//         glow: 'bg-amber-600/15',
+//         border: 'hover:border-amber-500/40',
+//         tag: 'Foundation',
+//         description:
+//             'Strategic land acquisition and development across high-growth corridors. We identify, evaluate, and secure land assets for industrial, agricultural, and infrastructure purposes — backed by geospatial intelligence and rigorous due diligence.',
+//         features: ['Geospatial Analysis', 'Due Diligence & Valuation', 'Regulatory Clearances', 'Industrial Zones', 'Agricultural Land', 'Infrastructure Corridors'],
+//         img: 'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?q=80&w=1200',
+//     },
+//     {
+//         id: '03',
+//         title: 'Mining & Minerals',
+//         short: 'Resource Extraction',
+//         icon: '⛏️',
+//         accent: 'from-orange-500 to-red-600',
+//         glow: 'bg-orange-500/15',
+//         border: 'hover:border-orange-500/40',
+//         tag: 'Resources',
+//         description:
+//             'Responsible exploration and extraction of critical minerals powering the modern world — from rare earths and lithium to industrial aggregates. We integrate digital surveying, ESG compliance frameworks, and community-first operating models.',
+//         features: ['Mineral Exploration', 'ESG-Compliant Ops', 'Critical Minerals', 'Digital Surveying', 'Processing & Refining', 'Community Engagement'],
+//         img: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?q=80&w=1200',
+//     },
+//     {
+//         id: '04',
+//         title: 'Power & Energy',
+//         short: 'Clean Energy',
+//         icon: '⚡',
+//         accent: 'from-yellow-400 to-orange-500',
+//         glow: 'bg-yellow-500/15',
+//         border: 'hover:border-yellow-400/40',
+//         tag: 'Sustainability',
+//         description:
+//             'Developing scalable energy infrastructure for a decarbonised future — solar farms, wind projects, battery storage systems, and smart grid solutions. We partner with governments and enterprises to accelerate the energy transition at scale.',
+//         features: ['Solar & Wind Projects', 'Battery Storage Systems', 'Smart Grid Solutions', 'Energy Trading', 'Carbon Credits', 'EPC Partnerships'],
+//         img: 'https://images.unsplash.com/photo-1466611653911-95081537e5b7?q=80&w=1200',
+//     },
+//     {
+//         id: '05',
+//         title: 'Organic Farming',
+//         short: 'Agri & Food Tech',
+//         icon: '🌿',
+//         accent: 'from-emerald-400 to-green-600',
+//         glow: 'bg-emerald-500/15',
+//         border: 'hover:border-emerald-500/40',
+//         tag: 'Regenerative',
+//         description:
+//             'Cultivating the future of food through regenerative organic agriculture — from large-scale certified organic farms to precision agri-tech platforms that optimise yield, water use, and soil health. We grow what the planet needs, the way it deserves.',
+//         features: ['Certified Organic Farms', 'Precision Agriculture', 'Soil Health Monitoring', 'Water Optimisation', 'Farm-to-Market Supply', 'Agri-Tech Integration'],
+//         img: 'https://images.unsplash.com/photo-1625246333195-78d9c38ad449?q=80&w=1200',
+//     },
+// ];
 
 /* ─────────────────────────────────────────
    SCROLL FADE-UP WRAPPER
@@ -372,10 +373,10 @@ const VentureCard = ({ venture, index }) => {
                         <div className="flex flex-wrap gap-2 mb-8">
                             {venture.features.map((f) => (
                                 <span
-                                    key={f}
+                                    key={f.name}
                                     className="px-3 py-1.5 rounded-full border border-zinc-200 bg-white text-xs text-zinc-600 font-medium shadow-sm"
                                 >
-                                    {f}
+                                    {f.name}
                                 </span>
                             ))}
                         </div>
@@ -549,10 +550,10 @@ const FutureVenturesPage = () => {
             <HeroBanner />
 
             {/* 2 ── PHILOSOPHY STRIP */}
-            <VisionStrip />
+            {/* <VisionStrip /> */}
 
             {/* 3 ── OVERVIEW GRID */}
-            <OverviewGrid />
+            {/* <OverviewGrid /> */}
 
             {/* 4 ── INDIVIDUAL VENTURE SECTIONS */}
             {VENTURES.map((venture, index) => (
