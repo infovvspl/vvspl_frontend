@@ -37,7 +37,7 @@ const MissionVision = ({ innerRef, isPage = false }) => {
                 containerRef.current = el;
                 if (innerRef) innerRef.current = el;
             }}
-            className={`${isPage ? 'relative py-20 md:py-32' : 'absolute inset-0 opacity-0'} flex items-center bg-[#fafafa] text-zinc-900 overflow-hidden min-h-screen`}
+            className={`${isPage ? 'relative py-20 md:py-26' : 'absolute inset-0 opacity-0'} flex items-center bg-[#fafafa] text-zinc-900 overflow-hidden min-h-screen`}
         >
             {/* ================= BACKGROUND SYSTEM ================= */}
             <div className="absolute inset-0 z-0 pointer-events-none">
@@ -63,7 +63,7 @@ const MissionVision = ({ innerRef, isPage = false }) => {
             </div>
 
             {/* ================= CONTENT ================= */}
-            <div className="relative z-10 w-full max-w-[1300px] mx-auto px-5 mt-20 sm:px-6 md:px-12 lg:px-20">
+            <div className="relative z-10 w-full max-w-[1300px] mx-auto px-5 sm:px-6 md:px-12 lg:px-20">
 
                 {/* Header Section */}
                 <div ref={headerRef} className="mb-4 sm:mb-6 md:mb-24 flex flex-col items-center lg:items-start text-center lg:text-left space-y-4">
