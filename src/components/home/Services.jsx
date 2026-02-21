@@ -64,7 +64,7 @@ const Services = ({ innerRef, isPage = false }) => {
                             Capabilities
                         </span>
                     </div> */}
-                    <h3 className="text-4xl md:text-6xl lg:text-8xl text-zinc-900 font-black uppercase italic tracking-tighter leading-none mb-6">
+                    <h3 className="text-4xl md:text-7xl text-zinc-900 font-black uppercase italic tracking-tighter leading-none mb-6">
                         Our<span className="text-transparent" style={{ WebkitTextStroke: "1px rgba(24, 24, 27, 1)" }}> Expertise</span>
                     </h3>
                     <div className="w-16 sm:w-20 md:w-24 h-[4px] rounded-full bg-gradient-to-r from-indigo-600 to-cyan-500" />

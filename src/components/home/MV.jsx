@@ -7,6 +7,8 @@ const MissionVision = ({ innerRef, isPage = false }) => {
     const headerRef = useRef(null);
     const cardsRef = useRef(null);
 
+    const bgImage = "https://images.unsplash.com/photo-1644088379091-d574269d422f?q=80&w=1693&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
+
     useEffect(() => {
         let ctx = gsap.context(() => {
             const tl = gsap.timeline({
@@ -37,29 +39,31 @@ const MissionVision = ({ innerRef, isPage = false }) => {
                 containerRef.current = el;
                 if (innerRef) innerRef.current = el;
             }}
-            className={`${isPage ? 'relative py-20 md:py-26' : 'absolute inset-0 opacity-0'} flex items-center bg-[#fafafa] text-zinc-900 overflow-hidden min-h-screen`}
+            className={`${isPage ? 'relative py-20 md:py-26' : 'absolute inset-0 opacity-0'} flex items-center bg-zinc-950 text-white overflow-hidden min-h-screen`}
         >
-            {/* ================= BACKGROUND SYSTEM ================= */}
+            {/* ================= BACKGROUND SYSTEM (DARK OVERLAP) ================= */}
             <div className="absolute inset-0 z-0 pointer-events-none">
-                {/* 1. Tech Logic Grid (Light Mode) */}
-                <div
-                    className="absolute inset-0 opacity-[0.4]"
-                    style={{
-                        backgroundImage: `linear-gradient(rgba(0,0,0,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.03) 1px, transparent 1px)`,
-                        backgroundSize: '100px 100px'
-                    }}
+                {/* 1. Base Image Layer */}
+                <div 
+                    className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-transform duration-[20000ms] scale-110 group-hover:scale-100"
+                    style={{ backgroundImage: `url(${bgImage})` }}
                 />
+                
+                {/* 2. DARK OVERLAY - Creating that deep "Command Center" look */}
+                <div className="absolute inset-0 bg-gradient-to-b from-zinc-950/70 via-zinc-950/30 to-zinc-950/85" />
+
+                {/* 3. High-Tech Grid (Light lines on dark bg) */}
                 <div
-                    className="absolute inset-0 opacity-[0.2]"
+                    className="absolute inset-0 opacity-[0.1]"
                     style={{
-                        backgroundImage: `linear-gradient(rgba(0,0,0,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.02) 1px, transparent 1px)`,
-                        backgroundSize: '20px 20px'
+                        backgroundImage: `linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px)`,
+                        backgroundSize: '80px 80px'
                     }}
                 />
 
-                {/* 2. Soft Ambient Glows */}
-                <div className="absolute top-[-20%] left-[20%] w-[60%] h-[60%] bg-indigo-500/5 blur-[120px] rounded-full" />
-                <div className="absolute bottom-[-20%] right-[10%] w-[70%] h-[70%] bg-cyan-500/5 blur-[150px] rounded-full animate-pulse" />
+                {/* 4. Vivid Glows for Contrast */}
+                <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-indigo-500/20 blur-[120px] rounded-full opacity-50" />
+                <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-cyan-500/20 blur-[150px] rounded-full animate-pulse opacity-50" />
             </div>
 
             {/* ================= CONTENT ================= */}
@@ -67,17 +71,17 @@ const MissionVision = ({ innerRef, isPage = false }) => {
 
                 {/* Header Section */}
                 <div ref={headerRef} className="mb-4 sm:mb-6 md:mb-24 flex flex-col items-center lg:items-start text-center lg:text-left space-y-4">
-                    <h3 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-black uppercase leading-[1.05] tracking-tight text-zinc-900">
+                    <h3 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-black uppercase leading-[1.05] tracking-tight text-white">
                         The{" "}
                         <span
                             className="text-transparent"
-                            style={{ WebkitTextStroke: "1px rgba(24, 24, 27, 1)" }}
+                            style={{ WebkitTextStroke: "1px rgb(255, 255, 255)" }}
                         >
                             Blueprint
                         </span>
                     </h3>
 
-                    <div className="w-16 sm:w-20 md:w-24 h-[4px] rounded-full bg-gradient-to-r from-indigo-600 to-cyan-500" />
+                    <div className="w-16 sm:w-20 md:w-24 h-[4px] rounded-full bg-gradient-to-r from-indigo-500 to-cyan-400 shadow-[0_0_15px_rgba(99,102,241,0.5)]" />
                 </div>
 
                 {/* Cards Grid */}
@@ -139,16 +143,14 @@ const MissionVision = ({ innerRef, isPage = false }) => {
                     </div>
 
                 </div>
-
+                
                 {/* Bottom Decorative Element */}
                 <div className="mt-14 sm:mt-20 flex justify-center lg:justify-start">
-                    <div className="w-full max-w-xs h-[1px] bg-gradient-to-r from-transparent via-zinc-300 to-transparent lg:from-zinc-300 lg:to-transparent relative">
-                        <div className="absolute top-1/2 right-0 -translate-y-1/2 w-2 h-2 bg-indigo-600 rounded-full blur-[1px] animate-pulse" />
+                    <div className="w-full max-w-xs h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent lg:from-white/20 lg:to-transparent relative">
+                        <div className="absolute top-1/2 right-0 -translate-y-1/2 w-2 h-2 bg-cyan-400 rounded-full blur-[2px] animate-pulse" />
                     </div>
                 </div>
-
             </div>
-
         </section>
     );
 };

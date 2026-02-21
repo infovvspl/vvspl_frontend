@@ -78,7 +78,7 @@ const Team = ({ innerRef, isPage = true }) => {
                         Meet the Founders
                     </h2>
 
-                    <h3 className="text-3xl sm:text-4xl md:text-6xl font-black leading-[1.1] tracking-tight">
+                    <h3 className="text-4xl sm:text-4xl md:text-7xl font-black leading-[1.1] tracking-tight">
                         The {""}
                         <span
                             className="text-transparent"
@@ -127,7 +127,7 @@ const Team = ({ innerRef, isPage = true }) => {
                 <div ref={buttonRef} className="flex justify-center">
                     <Link
                         to="/team"
-                        className="group relative px-8 py-4 bg-transparent overflow-hidden rounded-full border border-white/20 transition-all duration-300 hover:border-indigo-400"
+                        className="group relative px-8 py-4 bg-transparent overflow-hidden rounded-full border border-cyan-600 transition-all duration-300"
                     >
                         <span className="relative z-10 text-sm font-bold uppercase tracking-widest text-white transition-colors duration-300">
                             More about them

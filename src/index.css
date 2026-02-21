@@ -21,3 +21,8 @@ body.loaded {
   padding-top: 100px;
   color: white;
 }
+@property --border-angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}

@@ -292,7 +292,7 @@ const ServiceCard = ({ service, index }) => {
     }, [isEven]);
 
     return (
-        <div ref={ref} className="relative py-20 md:py-28">
+        <div ref={ref} className="relative py-20 md:py-18">
             <div className="absolute inset-x-0 top-0 h-[1px] bg-zinc-200" />
 
             <div className="max-w-[1300px] mx-auto px-6 md:px-12 lg:px-20">
@@ -303,23 +303,26 @@ const ServiceCard = ({ service, index }) => {
                         ref={textRef}
                         className={`flex flex-col ${isEven ? 'lg:order-1' : 'lg:order-2'}`}
                     >
-                        <div className="flex items-center gap-4 mb-6">
+                        {/* <div className="flex items-center gap-4 mb-6">
                             <span className={`text-5xl font-black bg-gradient-to-r ${service.accent} bg-clip-text text-transparent opacity-20 leading-none`}>
                                 {service.id}
                             </span>
                             <span className={`px-3 py-1 rounded-full text-[10px] tracking-[0.3em] uppercase font-bold bg-gradient-to-r ${service.accent} bg-clip-text text-transparent border border-zinc-200`}>
                                 {service.tag}
                             </span>
-                        </div>
+                        </div> */}
 
-                        <div className="flex items-center gap-3 mb-3">
+                        {/* <div className="flex items-center gap-3 mb-3">
                             <span className="text-3xl">{service.icon}</span>
                             <p className={`text-[10px] tracking-[0.5em] uppercase font-bold bg-gradient-to-r ${service.accent} bg-clip-text text-transparent`}>
                                 {service.short}
                             </p>
-                        </div>
+                        </div> */}
 
                         <h2 className="text-3xl md:text-5xl font-black leading-[1.1] tracking-tight mb-5 text-zinc-900">
+                             <span className={`text-5xl font-black bg-gradient-to-r ${service.accent} bg-clip-text text-transparent opacity-20 leading-none`}>
+                                {service.id}
+                            </span> {""}
                             {service.title}
                         </h2>
 
@@ -340,12 +343,12 @@ const ServiceCard = ({ service, index }) => {
                             ))}
                         </div>
 
-                        <Link
+                        {/* <Link
                             to={`/services/${service.id}`}
                             className={`self-start px-7 py-3.5 rounded-full bg-gradient-to-r ${service.accent} text-white font-semibold text-sm tracking-wider hover:opacity-85 transition-all duration-300 shadow-lg hover:scale-105`}
                         >
                             Learn More — Explore {service.short}
-                        </Link>
+                        </Link> */}
                     </div>
 
                     {/* IMAGE */}
@@ -438,7 +441,7 @@ const ServiceGrid = () => {
     CTA SECTION
 ───────────────────────────────────────── */
 const CTASection = () => (
-    <section className="relative py-28 md:py-40 overflow-hidden bg-zinc-900">
+    <section className="relative py-18 md:py-30 overflow-hidden bg-zinc-900">
         <div className="absolute inset-0 z-0">
             <div className="absolute inset-0 bg-gradient-to-br from-indigo-950/60 via-zinc-900 to-zinc-900" />
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-indigo-600/10 rounded-full blur-3xl" />
@@ -473,13 +476,13 @@ const CTASection = () => (
                 </Link>
 
                 <Link
-                    to="/blogs"
+                    to="/about"
                     className="px-8 py-4 text-center rounded-full 
                border border-white/20 text-white 
                font-semibold text-sm tracking-wider 
                hover:bg-white/5 transition-colors duration-300"
                 >
-                    View Case Studies
+                    About Us
                 </Link>
 
             </div>

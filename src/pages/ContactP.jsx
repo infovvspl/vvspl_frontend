@@ -2,6 +2,16 @@ import React, { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Navbar from '../components/Navbar';
+import {
+    FaMapMarkerAlt,
+    FaEnvelope,
+    FaPhoneAlt,
+    FaFacebookF,
+    FaLinkedin,
+    FaWhatsapp,
+    FaInstagram,
+    FaYoutube
+} from "react-icons/fa";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -85,12 +95,12 @@ const ContactPage = () => {
     const faqs = [
         { q: 'How quickly do you respond to enquiries?', a: 'We aim to respond to all enquiries within 24 hours on business days. Urgent matters can be flagged in your message subject.' },
         { q: 'Do you work with international clients?', a: 'Absolutely. We work with clients across 15+ countries and are experienced in managing remote collaboration, time zones, and cross-border engagements.' },
-        { q: 'Can I schedule a call before committing to a project?', a: 'Yes — we offer a free 30-minute discovery call to understand your needs and see if were a good fit, with zero obligation.' },
+        { q: 'Can I schedule a call before committing to a project?', a: 'Yes —  we offer a free, no obligation 30-minute discovery call to understand your needs and see if we are a good fit.' },
         { q: 'How do engagements typically start?', a: 'After an initial consultation, we prepare a scoped proposal with timelines and deliverables. Projects typically kick off within 1–2 weeks of agreement.' },
     ];
 
     return (
-        <div ref={mainRef} className="bg-zinc-50 text-zinc-900 font-sans selection:bg-indigo-100">
+        <div ref={mainRef} className="bg-white text-zinc-900 font-sans selection:bg-indigo-100">
             <Navbar />
 
             {/* 1 ── HERO BANNER */}
@@ -118,28 +128,99 @@ const ContactPage = () => {
             </section>
 
             {/* 2 ── INFO CARDS */}
-            <section className="py-16 border-b border-zinc-200 bg-white">
+            <section className="py-16  bg-white">
                 <div className="max-w-[1300px] mx-auto px-6 md:px-12 lg:px-20">
-                    <div className="info-grid grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5">
-                        {[
-                            { icon: '📍', label: 'Our Office', lines: ['Block-309/310, ODYSSA Business Center, Rasulgarh, Bhubaneswar, 751010'], color: 'from-indigo-500 to-violet-500' },
-                            { icon: '✉️', label: 'Email Us', lines: ['info@vvspltech.com'], color: 'from-cyan-500 to-blue-500' },
-                            { icon: '📞', label: 'Call Us', lines: ['+91 78946 89818', 'Mon–Sat, 9am – 6pm GST'], color: 'from-indigo-400 to-cyan-400' },
-                            { icon: '🌐', label: 'Follow Us', lines: ['LinkedIn · Twitter / X', 'Instagram · YouTube'], color: 'from-violet-500 to-indigo-400' }
-                        ].map((c, i) => (
-                            <div key={i} className="info-card group relative p-6 rounded-2xl border border-zinc-200 bg-white hover:border-indigo-500/30 hover:bg-zinc-50 transition-all duration-500 shadow-sm">
-                                <div className={`absolute -top-px left-6 w-12 h-[2px] rounded-full bg-gradient-to-r ${c.color}`} />
-                                <span className="text-2xl mb-3 block">{c.icon}</span>
-                                <p className={`text-[10px] tracking-[0.4em] uppercase font-bold bg-gradient-to-r ${c.color} bg-clip-text text-transparent mb-2`}>{c.label}</p>
-                                {c.lines.map((l, idx) => <p key={idx} className="text-sm text-zinc-600 font-medium leading-relaxed">{l}</p>)}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5">
+
+                        {/* Office */}
+                        <a
+                            href="https://maps.google.com/?q=ODYSSA+Business+Center+Rasulgarh+Bhubaneswar"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="group relative p-6 rounded-2xl border border-zinc-200 bg-white hover:border-indigo-500/30 hover:bg-zinc-50 transition-all duration-500 shadow-sm"
+                        >
+                            <div className="absolute -top-px left-6 w-12 h-[2px] rounded-full bg-gradient-to-r from-indigo-500 to-violet-500" />
+
+                            {/* <FaMapMarkerAlt className="text-xl text-indigo-500 mb-3 transition-transform duration-300 group-hover:scale-110" /> */}
+
+                            <p className="text-[10px] tracking-[0.4em] uppercase font-bold bg-gradient-to-r from-indigo-500 to-violet-500 bg-clip-text text-transparent mb-2">
+                                Our Office
+                            </p>
+
+                            <p className="text-sm text-zinc-600 font-medium leading-relaxed">
+                                Block-309/310, ODYSSA Business Center, Rasulgarh, Bhubaneswar, 751010
+                            </p>
+                        </a>
+
+                        {/* Email */}
+                        <a
+                            href="mailto:info@vvspltech.com"
+                            className="group relative p-6 rounded-2xl border border-zinc-200 bg-white hover:border-cyan-500/30 hover:bg-zinc-50 transition-all duration-500 shadow-sm"
+                        >
+                            <div className="absolute -top-px left-6 w-12 h-[2px] rounded-full bg-gradient-to-r from-cyan-500 to-blue-500" />
+
+                            {/* <FaEnvelope className="text-xl text-cyan-500 mb-3 transition-transform duration-300 group-hover:scale-110" /> */}
+
+                            <p className="text-[10px] tracking-[0.4em] uppercase font-bold bg-gradient-to-r from-cyan-500 to-blue-500 bg-clip-text text-transparent mb-2">
+                                Email Us
+                            </p>
+
+                            <p className="text-sm text-zinc-600 font-medium">
+                                info@vvspltech.com
+                            </p>
+                        </a>
+
+                        {/* Phone */}
+                        <a
+                            href="tel:+917894689818"
+                            className="group relative p-6 rounded-2xl border border-zinc-200 bg-white hover:border-indigo-400/30 hover:bg-zinc-50 transition-all duration-500 shadow-sm"
+                        >
+                            <div className="absolute -top-px left-6 w-12 h-[2px] rounded-full bg-gradient-to-r from-indigo-400 to-cyan-400" />
+
+                            {/* <FaPhoneAlt className="text-xl text-indigo-400 mb-3 transition-transform duration-300 group-hover:scale-110" /> */}
+
+                            <p className="text-[10px] tracking-[0.4em] uppercase font-bold bg-gradient-to-r from-indigo-400 to-cyan-400 bg-clip-text text-transparent mb-2">
+                                Call Us
+                            </p>
+
+                            <p className="text-sm text-zinc-600 font-medium">
+                                +91 78946 89818
+                            </p>
+                            <p className="text-sm text-zinc-500">
+                                Mon–Sat, 9am – 6pm GST
+                            </p>
+                        </a>
+
+                        {/* Social */}
+                        <div className="group relative p-6 rounded-2xl border border-zinc-200 bg-white hover:border-violet-500/30 hover:bg-zinc-50 transition-all duration-500 shadow-sm">
+                            <div className="absolute -top-px left-6 w-12 h-[2px] rounded-full bg-gradient-to-r from-violet-500 to-indigo-400" />
+
+                            <p className="text-[10px] tracking-[0.4em] uppercase font-bold bg-gradient-to-r from-violet-500 to-indigo-400 bg-clip-text text-transparent mb-4">
+                                Follow Us
+                            </p>
+
+                            <div className="flex gap-5 text-xl">
+                                <a href="https://www.facebook.com/people/Veteran-Ventures/61587637222712/?rdid=aRhPjXPEbEqyOCaA&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1D4x5YWeff%2F" target="_blank" rel="noopener noreferrer" className="text-zinc-500 hover:text-blue-600 transition transform hover:scale-110">
+                                    <FaFacebookF />
+                                </a>
+                                <a href="https://wa.me/917894689818" target="_blank" rel="noopener noreferrer" className="text-zinc-500 hover:text-green-500 transition transform hover:scale-110">
+                                    <FaWhatsapp />
+                                </a>
+                                <a href="https://www.instagram.com/vvspltech?igsh=cjcyczloZWNuaGZx" target="_blank" rel="noopener noreferrer" className="text-zinc-500 hover:text-pink-500 transition transform hover:scale-110">
+                                    <FaInstagram />
+                                </a>
+                                {/* <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className="text-zinc-500 hover:text-red-500 transition transform hover:scale-110">
+                                    <FaYoutube />
+                                </a> */}
                             </div>
-                        ))}
+                        </div>
+
                     </div>
                 </div>
             </section>
 
             {/* 3 ── FORM + SIDEBAR */}
-            <section className="py-24 md:py-32">
+            <section className="py-20">
                 <div className="max-w-[1300px] mx-auto px-6 md:px-12 lg:px-20">
                     <div className="grid grid-cols-1 lg:grid-cols-[1fr_380px] gap-12 lg:gap-20 items-start">
 
@@ -211,7 +292,7 @@ const ContactPage = () => {
                                 <div className="absolute -top-8 -right-8 w-32 h-32 bg-indigo-500/5 rounded-full blur-2xl" />
                                 <p className="text-[10px] tracking-[0.4em] uppercase text-indigo-600 mb-4 font-bold">Why Work With Us</p>
                                 <ul className="flex flex-col gap-3">
-                                    {['✦ Dedicated project manager', '✦ Transparent pricing', '✦ Agile delivery', '✦ Post-launch support', '✦ NDA available'].map(item => (
+                                    {['✦ Dedicated project manager', '✦ Transparent pricing', '✦ Agile delivery', '✦ Post-launch support'].map(item => (
                                         <li key={item} className="text-sm text-zinc-600 font-medium">{item}</li>
                                     ))}
                                 </ul>

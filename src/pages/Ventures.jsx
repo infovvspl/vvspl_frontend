@@ -331,7 +331,7 @@ const VentureCard = ({ venture, index }) => {
     }, [isEven]);
 
     return (
-        <div ref={ref} className="relative py-20 md:py-28">
+        <div ref={ref} className="relative py-16 md:py-20">
             <div className="absolute inset-x-0 top-0 h-[1px] bg-zinc-200" />
 
             <div className="max-w-[1300px] mx-auto px-6 md:px-12 lg:px-20">
@@ -486,7 +486,7 @@ const OverviewGrid = () => {
    CTA
 ───────────────────────────────────────── */
 const CTASection = () => (
-    <section className="relative py-28 md:py-40 overflow-hidden bg-zinc-900">
+    <section className="relative py-20 md:py-24 overflow-hidden bg-zinc-900">
         <div className="absolute inset-0 z-0">
             <div className="absolute inset-0 bg-gradient-to-br from-emerald-950/40 via-zinc-900 to-zinc-900" />
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-emerald-600/8 rounded-full blur-3xl" />

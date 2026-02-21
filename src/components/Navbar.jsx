@@ -45,7 +45,7 @@ const Navbar = () => {
         { name: 'About', path: '/about' },
         { name: 'Services', path: '/services' },
         { name: 'Ventures', path: '/ventures' },
-        { name: 'Our Team', path: '/team' },
+        { name: 'Leadership', path: '/team' },
         // { name: 'Blogs', path: '/blogs' },
         { name: 'Contact', path: '/contact' },
     ];
@@ -63,7 +63,7 @@ const Navbar = () => {
                     <img
                         src={Logo}
                         alt="Veteran Venture"
-                        className="h-10 md:h-20 w-auto object-contain"
+                        className="h-16 md:h-20 w-auto object-contain"
                     />
                 </Link>
 
@@ -113,7 +113,7 @@ const Navbar = () => {
                         >
                             <span
                                 className={`
-                                    block text-5xl md:text-8xl font-black uppercase tracking-tighter
+                                    block text-5xl md:text-6xl font-black uppercase tracking-tighter
                                     text-white transition-all duration-700 transform
                                     ${isOpen ? 'translate-y-0 opacity-100' : 'translate-y-12 opacity-0'}
                                 `}

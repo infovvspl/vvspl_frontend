@@ -55,9 +55,9 @@ const ScrollBtn = () => {
         />
 
         {/* Inner Button */}
-        <div className="absolute inset-[2px] bg-zinc-900 rounded-full flex items-center justify-center">
+        <div className="absolute inset-[2px] bg-white rounded-full flex items-center justify-center">
           <FaChevronUp 
-            className="w-5 h-5 text-white transition-transform duration-500 group-hover:-translate-y-1"
+            className="w-5 h-5 text-black transition-transform duration-500 group-hover:-translate-y-1"
           />
         </div>
       </button>

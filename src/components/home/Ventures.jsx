@@ -125,7 +125,7 @@ const Ventures = ({ onNextClick }) => {
                 <h2 className="text-blue-500 font-mono text-[10px] sm:text-xs md:text-sm tracking-[0.3em] uppercase mb-2 font-bold">
                     Portfolio // 2026
                 </h2>
-                <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white tracking-tight">
+                <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold text-white tracking-tight">
                     Our <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-neutral-600">Vision</span>
                 </h1>
             </div>

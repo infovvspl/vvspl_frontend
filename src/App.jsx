@@ -1,9 +1,10 @@
-// App.jsx
 import React, { useState, useRef, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion"; // Animation engine
+import { Volume2, VolumeX } from "lucide-react"; // Sleek Icons
+
+// Pages & Components
 import Home from "./pages/Home";
-// import TunnelNav from "./components/Trackbar";
-// import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import ScrollToTop from "./components/ScrollToTop";
 import Loading from "./components/Loading";
@@ -25,11 +26,11 @@ function App() {
   const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef(null);
 
-  // Try autoplay after first user interaction
+  // Auto-play logic on first interaction
   useEffect(() => {
     const enableAudio = () => {
       if (audioRef.current) {
-        audioRef.current.volume = 0.3; // soft background volume
+        audioRef.current.volume = 0.3;
         audioRef.current.play().then(() => {
           setIsPlaying(true);
         }).catch(() => { });
@@ -43,13 +44,11 @@ function App() {
 
   const toggleMusic = () => {
     if (!audioRef.current) return;
-
     if (isPlaying) {
       audioRef.current.pause();
     } else {
       audioRef.current.play();
     }
-
     setIsPlaying(!isPlaying);
   };
 
@@ -57,28 +56,76 @@ function App() {
     <Router>
       <ScrollToTop />
 
-      {/* 🎵 Background Music */}
+      {/* 🎵 Background Music Element */}
       <audio ref={audioRef} loop>
         <source src="/bgm.mp3" type="audio/mpeg" />
       </audio>
 
-      {/* Music Toggle Button */}
-      <button
-        onClick={toggleMusic}
-        className="fixed bottom-5 left-5 z-[9999] bg-black text-white px-4 py-2 rounded-full shadow-lg"
-      >
-        {isPlaying ? "Pause Music" : "Play Music"}
-      </button>
-      {/* SHOW LOADER FIRST */}
+      {/* 🚀 WOW-FACTOR MUSIC TOGGLE */}
+      <div className="fixed bottom-8 left-8 z-[9999]">
+        <motion.button
+          onClick={toggleMusic}
+          initial={{ x: -100, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          className="relative flex items-center gap-4 px-6 py-3 bg-black/40 backdrop-blur-xl border border-white/10 rounded-full shadow-2xl group overflow-hidden"
+        >
+          {/* Animated Equalizer Bars */}
+          <div className="flex items-end gap-[3px] h-5 w-6">
+            {[0.6, 0.4, 0.8, 0.5].map((speed, i) => (
+              <motion.span
+                key={i}
+                animate={isPlaying ? {
+                  height: [2, 16, 4, 18, 2],
+                } : { height: 2 }}
+                transition={{
+                  repeat: Infinity,
+                  duration: speed,
+                  ease: "easeInOut",
+                }}
+                className={`w-[3px] rounded-full ${isPlaying ? "bg-cyan-400" : "bg-gray-500"}`}
+              />
+            ))}
+          </div>
+
+          {/* Icon with smooth flip transition */}
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={isPlaying ? "playing" : "muted"}
+              initial={{ rotate: -90, opacity: 0 }}
+              animate={{ rotate: 0, opacity: 1 }}
+              exit={{ rotate: 90, opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="text-white"
+            >
+              {isPlaying ? <Volume2 size={20} /> : <VolumeX size={20} />}
+            </motion.div>
+          </AnimatePresence>
+
+          {/* <span className="text-white text-xs font-bold tracking-widest uppercase">
+            {isPlaying ? "Live" : "Muted"}
+          </span> */}
+
+          {/* Pulse Glow Effect (Visible only when playing) */}
+          {isPlaying && (
+            <motion.div
+              animate={{ opacity: [0, 0.5, 0], scale: [1, 1.5, 2] }}
+              transition={{ repeat: Infinity, duration: 2 }}
+              className="absolute inset-0 bg-cyan-500/30 rounded-full -z-10"
+            />
+          )}
+        </motion.button>
+      </div>
+
+      {/* LOADER */}
       {!loadingDone && (
         <div className="fixed inset-0 z-[9999]">
           <Loading onComplete={() => setLoadingDone(true)} />
         </div>
       )}
-      <div className="flex flex-col">
-        {/* <TunnelNav activeIndex={activeIndex} /> */}
-        {/* <Navbar /> */}
 
+      <div className="flex flex-col">
         <main className="flex-1">
           <Routes>
             <Route path="/" element={<Home setActiveIndex={setActiveIndex} />} />

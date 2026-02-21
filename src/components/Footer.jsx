@@ -74,7 +74,7 @@ const Footer = () => {
                                     { name: "About", path: "/about" },
                                     { name: "Services", path: "/services" },
                                     { name: "Ventures", path: "/ventures" },
-                                    { name: "Leadership", path: "/cs" }
+                                    { name: "Leadership", path: "/team" }
                                 ].map((link) => (
                                     <li key={link.name}>
                                         <Link to={link.path} className="text-sm text-zinc-400 hover:text-cyan-400 transition-colors flex items-center group w-fit">
@@ -86,13 +86,21 @@ const Footer = () => {
                             </ul>
                         </div>
                         <div className="space-y-8">
-                            {/* <h4 className="text-[10px] font-bold uppercase tracking-[0.5em] text-indigo-400 font-mono">// Tech_Stacks</h4> */}
                             <ul className="space-y-4">
-                                {["AI / ML Ops", "Cyber Security", "Cloud Systems", "Web Apps", "Mobile Apps"].map((service) => (
-                                    <li key={service}>
-                                        <button className="text-sm text-zinc-400 hover:text-cyan-400 transition-colors text-left">
-                                            {service}
-                                        </button>
+                                {[
+                                    { name: "AI / ML Ops", path: "/services/01" },
+                                    { name: "Cyber Security", path: "/services/03" },
+                                    { name: "Cloud Systems", path: "/services/02" },
+                                    { name: "Web Apps", path: "/services/04" },
+                                    { name: "Mobile Apps", path: "/services/05" }
+                                ].map((service) => (
+                                    <li key={service.name}>
+                                        <Link
+                                            to={service.path}
+                                            className="text-sm text-zinc-400 hover:text-cyan-400 transition-colors text-left block"
+                                        >
+                                            {service.name}
+                                        </Link>
                                     </li>
                                 ))}
                             </ul>
@@ -143,14 +151,14 @@ const Footer = () => {
                 </div>
 
                 {/* ================= BOTTOM BAR ================= */}
-                <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-8">
+                <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-center items-center gap-8">
                     <div className="flex flex-wrap justify-center md:justify-start gap-6 items-center">
-                        <span className="text-[9px] font-mono text-zinc-200 uppercase tracking-widest">
+                        <span className="text-[12px] font-mono text-zinc-200 uppercase tracking-widest">
                             © {currentYear} Veteran Venture & Services Pvt. Ltd.
                         </span>
                         <div className="hidden md:block h-4 w-px bg-white/10" />
-                        <Link to="/privacy" className="text-[9px] font-mono text-zinc-500 hover:text-indigo-400 uppercase tracking-widest transition-colors">Privacy_Protocol</Link>
-                        <Link to="/terms" className="text-[9px] font-mono text-zinc-500 hover:text-indigo-400 uppercase tracking-widest transition-colors">Terms_of_Service</Link>
+                        {/* <Link to="/privacy" className="text-[9px] font-mono text-zinc-500 hover:text-indigo-400 uppercase tracking-widest transition-colors">Privacy_Protocol</Link>
+                        <Link to="/terms" className="text-[9px] font-mono text-zinc-500 hover:text-indigo-400 uppercase tracking-widest transition-colors">Terms_of_Service</Link> */}
                     </div>
                 </div>
             </div>
