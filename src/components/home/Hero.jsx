@@ -122,7 +122,7 @@ const Hero = ({ innerRef }) => {
             <h1 className="reveal-text text-[14vw] sm:text-6xl md:text-[7vw] font-black leading-[0.9] tracking-tighter uppercase text-white italic">
               Veteran <br />
               <span className="text-transparent" style={{ WebkitTextStroke: '1px rgba(255, 255, 255, 0.88)' }}>
-                Ventures
+                Ventures.
               </span>
             </h1>
 
