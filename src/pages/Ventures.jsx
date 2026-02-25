@@ -303,31 +303,53 @@ const VentureCard = ({ venture, index }) => {
     const isEven = index % 2 === 0;
 
     useEffect(() => {
-        const ctx = gsap.context(() => {
+        let mm = gsap.matchMedia();
+
+        mm.add({
+            // Desktop: Screens wider than 1024px
+            isDesktop: "(min-width: 1024px)",
+            // Mobile: Everything else
+            isMobile: "(max-width: 1023px)"
+        }, (context) => {
+            let { isDesktop } = context.conditions;
+
+            // TEXT ANIMATION
             gsap.fromTo(textRef.current,
-                { x: isEven ? -50 : 50, opacity: 0 },
                 {
-                    x: 0, opacity: 1, duration: 1.1, ease: 'power4.out',
+                    x: isDesktop ? (isEven ? -60 : 60) : 0, // No X move on mobile
+                    y: isDesktop ? 0 : 40,                  // Fade up instead on mobile
+                    opacity: 0
+                },
+                {
+                    x: 0, y: 0, opacity: 1, duration: 1.1, ease: 'power4.out',
                     scrollTrigger: {
                         trigger: ref.current,
-                        start: 'top 80%',
+                        start: 'top 85%',
                         toggleActions: 'play none none none',
                     },
                 }
             );
+
+            // IMAGE ANIMATION
             gsap.fromTo(imgRef.current,
-                { x: isEven ? 50 : -50, opacity: 0, scale: 0.95 },
                 {
-                    x: 0, opacity: 1, scale: 1, duration: 1.1, ease: 'power4.out', delay: 0.15,
+                    x: isDesktop ? (isEven ? 60 : -60) : 0, // No X move on mobile
+                    y: isDesktop ? 0 : 40,                  // Fade up instead on mobile
+                    opacity: 0,
+                    scale: 0.95
+                },
+                {
+                    x: 0, y: 0, opacity: 1, scale: 1, duration: 1.1, ease: 'power4.out', delay: 0.15,
                     scrollTrigger: {
                         trigger: ref.current,
-                        start: 'top 80%',
+                        start: 'top 85%',
                         toggleActions: 'play none none none',
                     },
                 }
             );
-        }, ref);
-        return () => ctx.revert();
+        });
+
+        return () => mm.revert(); // Clean up
     }, [isEven]);
 
     return (

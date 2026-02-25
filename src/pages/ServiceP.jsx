@@ -264,30 +264,57 @@ const ServiceCard = ({ service, index }) => {
     const isEven = index % 2 === 0;
 
     useEffect(() => {
+        const el = ref.current;
         const ctx = gsap.context(() => {
+            // Check if device is mobile (width < 1024px)
+            const isMobile = window.innerWidth < 1024;
+
+            // TEXT ANIMATION
             gsap.fromTo(textRef.current,
-                { x: isEven ? -50 : 50, opacity: 0 },
                 {
-                    x: 0, opacity: 1, duration: 1.1, ease: 'power4.out',
+                    x: isMobile ? 0 : (isEven ? -60 : 60), // No horizontal move on mobile
+                    y: isMobile ? 40 : 0,                 // Vertical move on mobile instead
+                    opacity: 0
+                },
+                {
+                    x: 0,
+                    y: 0,
+                    opacity: 1,
+                    duration: 1.1,
+                    ease: 'power4.out',
                     scrollTrigger: {
-                        trigger: ref.current,
-                        start: 'top 80%',
+                        trigger: el,
+                        start: 'top 85%', // Trigger a bit later for better mobile view
                         toggleActions: 'play none none none',
                     },
                 }
             );
+
+            // IMAGE ANIMATION
             gsap.fromTo(imgRef.current,
-                { x: isEven ? 50 : -50, opacity: 0, scale: 0.95 },
                 {
-                    x: 0, opacity: 1, scale: 1, duration: 1.1, ease: 'power4.out', delay: 0.15,
+                    x: isMobile ? 0 : (isEven ? 60 : -60), // No horizontal move on mobile
+                    y: isMobile ? 40 : 0,                 // Vertical move on mobile instead
+                    opacity: 0,
+                    scale: 0.95
+                },
+                {
+                    x: 0,
+                    y: 0,
+                    opacity: 1,
+                    scale: 1,
+                    duration: 1.1,
+                    ease: 'power4.out',
+                    delay: isMobile ? 0 : 0.15, // Remove delay on mobile for snappier feel
                     scrollTrigger: {
-                        trigger: ref.current,
-                        start: 'top 80%',
+                        trigger: el,
+                        start: 'top 85%',
                         toggleActions: 'play none none none',
                     },
                 }
             );
-        }, ref);
+        }, el);
+
         return () => ctx.revert();
     }, [isEven]);
 
@@ -320,7 +347,7 @@ const ServiceCard = ({ service, index }) => {
                         </div> */}
 
                         <h2 className="text-3xl md:text-5xl font-black leading-[1.1] tracking-tight mb-5 text-zinc-900">
-                             <span className={`text-5xl font-black bg-gradient-to-r ${service.accent} bg-clip-text text-transparent opacity-20 leading-none`}>
+                            <span className={`text-5xl font-black bg-gradient-to-r ${service.accent} bg-clip-text text-transparent opacity-20 leading-none`}>
                                 {service.id}
                             </span> {""}
                             {service.title}
