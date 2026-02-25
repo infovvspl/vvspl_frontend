@@ -99,11 +99,11 @@ const Hero = ({ innerRef }) => {
           loop
           muted
           playsInline
-          // preload="none"
-          // poster="/vido.webp"
+          preload="none"
+          poster="/vido.webp"
           className="w-full h-full object-cover opacity-100 grayscale-[0.4] will-change-transform"
         >
-          {/* <source src={VidWebm} type="image/webp" /> */}
+          <source src={VidWebm} type="image/webp" />
           <source src={VidMp4} type="video/mp4" />
         </video>
 
