@@ -99,13 +99,16 @@ const Hero = ({ innerRef }) => {
           loop
           muted
           playsInline
+          preload="none"
+          poster="/vido.webp"
           className="w-full h-full object-cover opacity-100 grayscale-[0.4] will-change-transform"
         >
           <source src={VidWebm} type="image/webp" />
           <source src={VidMp4} type="video/mp4" />
         </video>
-        {/* Adjusted Gradient for Mobile Stacking */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/90 via-black/70 to-black/90 md:bg-gradient-to-r md:from-black/90 md:via-black/40 md:to-transparent" />
+
+        {/* <audio src={Aud} autoPlay loop className="hidden" /> */}
+        <div className="absolute inset-0 bg-gradient-to-b md:bg-gradient-to-r from-black/90 via-black/40 to-transparent" />
       </div>
 
       {/* --- CONTENT LAYER --- */}
