@@ -11,6 +11,9 @@ export default function Loading({ onComplete }) {
   const animationId = useRef();
   const objects = useRef([]);
 
+  const [progress, setProgress] = React.useState(0);
+  const loadFinished = useRef(false);
+
   const conf = {
     color: 0xffffff,
     objectWidth: 12,
@@ -30,6 +33,32 @@ export default function Loading({ onComplete }) {
     return () => {
       document.body.style.overflow = "";
       window.removeEventListener("resize", onResize);
+      cancelAnimationFrame(animationId.current);
+      disposeScene();
+      renderer.current?.dispose();
+    };
+  }, []);
+
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+
+    const handleLoad = () => {
+      loadFinished.current = true;
+    };
+
+    if (document.readyState === "complete") {
+      loadFinished.current = true;
+    } else {
+      window.addEventListener("load", handleLoad);
+    }
+
+    init();
+    window.addEventListener("resize", onResize);
+
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("resize", onResize);
+      window.removeEventListener("load", handleLoad);
       cancelAnimationFrame(animationId.current);
       disposeScene();
       renderer.current?.dispose();
@@ -134,7 +163,7 @@ export default function Loading({ onComplete }) {
     }
 
     document.body.classList.add("loaded");
-    startAnim();
+    startProgressSimulation();
   }
 
   function startAnim() {
@@ -210,6 +239,28 @@ export default function Loading({ onComplete }) {
     return [width, height];
   }
 
+  function startProgressSimulation() {
+    let current = 0;
+
+    const interval = setInterval(() => {
+      if (!loadFinished.current) {
+        // Smooth fake increase until 90%
+        current += Math.random() * 5;
+        current = Math.min(current, 90);
+      } else {
+        // Once page fully loaded → go to 100%
+        current += 5;
+      }
+
+      setProgress(Math.min(current, 100));
+
+      if (current >= 100) {
+        clearInterval(interval);
+        startAnim(); // trigger 3D explosion only after 100%
+      }
+    }, 100);
+  }
+
   return (
     <>
       {/* <div id="page">
@@ -219,7 +270,74 @@ export default function Loading({ onComplete }) {
         </div>
       </div> */}
 
-      <canvas ref={canvasRef} id="reveal-effect" />
+      return (
+      <>
+        <canvas
+          ref={canvasRef}
+          id="reveal-effect"
+          style={{
+            position: "fixed",
+            inset: 0,
+            zIndex: 1,
+          }}
+        />
+
+        {/* Overlay */}
+        {progress < 100 && (
+          <div
+            style={{
+              position: "fixed",
+              inset: 0,
+              zIndex: 2,
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              color: "black",
+              fontFamily: "sans-serif",
+              pointerEvents: "none",
+              transition: "opacity 0.5s ease",
+            }}
+          >
+            {/* Bold Progress Bar */}
+            <div
+              style={{
+                width: "320px",
+                height: "10px",
+                background: "rgba(255,255,255,0.15)",
+                borderRadius: "6px",
+                overflow: "hidden",
+                marginBottom: "20px",
+              }}
+            >
+              <div
+                style={{
+                  height: "100%",
+                  width: `${progress}%`,
+                  background: "black",
+                  transition: "width 0.25s ease",
+                }}
+              />
+            </div>
+
+            {/* Large Percentage */}
+            <div
+              style={{
+                fontSize: "28px",
+                fontWeight: "bold",
+                letterSpacing: "2px",
+              }}
+            >
+              {Math.floor(progress)}%
+            </div>
+          </div>
+        )}
+      </>
+      );
+
+
+
+
     </>
   );
 }
