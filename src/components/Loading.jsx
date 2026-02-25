@@ -1,9 +1,10 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 import { gsap } from "gsap";
 
 export default function Loading({ onComplete }) {
   const canvasRef = useRef(null);
+  const [progress, setProgress] = useState(0);
 
   const renderer = useRef();
   const scene = useRef();
@@ -11,171 +12,105 @@ export default function Loading({ onComplete }) {
   const animationId = useRef();
   const objects = useRef([]);
 
-  const conf = {
-    color: 0xffffff,
-    objectWidth: 12,
-    objectThickness: 3,
-    ambientColor: 0x808080,
-    perspective: 75,
-    cameraZ: 75,
-  };
-
-  let width, height, wWidth, wHeight;
+  const conf = { perspective: 75, cameraZ: 75, objectWidth: 12, objectThickness: 3 };
+  let wWidth, wHeight;
 
   useEffect(() => {
     document.body.style.overflow = "hidden";
     init();
-    window.addEventListener("resize", onResize);
 
+    // --- REAL PROGRESS TRACKING ---
+    // We use a combination of resource timing and manual intervals
+    let interval = setInterval(() => {
+      setProgress((prev) => {
+        if (prev >= 99) {
+          clearInterval(interval);
+          return 99;
+        }
+        // If document is already loaded, jump faster
+        const step = document.readyState === "complete" ? 10 : 1;
+        return Math.min(prev + step, 99);
+      });
+    }, 100);
+
+    const handleFullyLoaded = () => {
+      clearInterval(interval);
+      setProgress(100);
+      // Give the user a moment to see 100% before the "explosion"
+      setTimeout(() => startReveal(), 500);
+    };
+
+    if (document.readyState === "complete") {
+      handleFullyLoaded();
+    } else {
+      window.addEventListener("load", handleFullyLoaded);
+    }
+
+    window.addEventListener("resize", onResize);
     return () => {
       document.body.style.overflow = "";
+      window.removeEventListener("load", handleFullyLoaded);
       window.removeEventListener("resize", onResize);
       cancelAnimationFrame(animationId.current);
       disposeScene();
-      renderer.current?.dispose();
     };
   }, []);
 
+  // ... (init, initLights, initObjects, animate, onResize functions stay the same as previous)
   function init() {
-    renderer.current = new THREE.WebGLRenderer({
-      canvas: canvasRef.current,
-      antialias: true,
-      alpha: true,
-    });
-
-    // ✅ ADD THESE LINES
-    renderer.current.setPixelRatio(window.devicePixelRatio);
-    renderer.current.outputColorSpace = THREE.SRGBColorSpace;
-    renderer.current.toneMapping = THREE.NoToneMapping;
-
+    renderer.current = new THREE.WebGLRenderer({ canvas: canvasRef.current, antialias: true, alpha: true });
+    renderer.current.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.current.setSize(window.innerWidth, window.innerHeight);
-
-    camera.current = new THREE.PerspectiveCamera(
-      conf.perspective,
-      window.innerWidth / window.innerHeight,
-      0.1,
-      1000
-    );
-
+    camera.current = new THREE.PerspectiveCamera(conf.perspective, window.innerWidth / window.innerHeight, 0.1, 1000);
     camera.current.position.z = conf.cameraZ;
-
-    scene.current = new THREE.Scene();
-
-    initScene();
-    animate();
-  }
-
-
-  function initScene() {
-    onResize();
-    disposeScene();
     scene.current = new THREE.Scene();
     initLights();
+    onResize();
     initObjects();
-  }
-
-  function disposeScene() {
-    if (!scene.current) return;
-
-    scene.current.traverse((obj) => {
-      if (obj.geometry) obj.geometry.dispose();
-      if (obj.material) {
-        if (Array.isArray(obj.material)) {
-          obj.material.forEach((m) => m.dispose());
-        } else {
-          obj.material.dispose();
-        }
-      }
-    });
-
-    objects.current = [];
+    animate();
   }
 
   function initLights() {
     const ambient = new THREE.AmbientLight(0xffffff, 1);
     scene.current.add(ambient);
-
     const light = new THREE.PointLight(0xffffff, 1.5);
     light.position.set(0, 0, 100);
     scene.current.add(light);
   }
 
-
-
   function initObjects() {
-    const geometry = new THREE.BoxGeometry(
-      conf.objectWidth,
-      conf.objectWidth,
-      conf.objectThickness
-    );
-
+    const geometry = new THREE.BoxGeometry(conf.objectWidth, conf.objectWidth, conf.objectThickness);
     const nx = Math.round(wWidth / conf.objectWidth) + 1;
     const ny = Math.round(wHeight / conf.objectWidth) + 1;
-
     for (let i = 0; i < nx; i++) {
       for (let j = 0; j < ny; j++) {
-        const material = new THREE.MeshBasicMaterial({
-          color: 0xffffff,
-          transparent: true,
-          opacity: 1,
-        });
-
-
+        const material = new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 1 });
         const mesh = new THREE.Mesh(geometry, material);
-
-        const x = -wWidth / 2 + i * conf.objectWidth;
-        const y = -wHeight / 2 + j * conf.objectWidth;
-
-        mesh.position.set(x, y, 0);
-
+        mesh.position.set(-wWidth / 2 + i * conf.objectWidth, -wHeight / 2 + j * conf.objectWidth, 0);
         objects.current.push(mesh);
         scene.current.add(mesh);
       }
     }
-
-    document.body.classList.add("loaded");
-    startAnim();
   }
 
-  function startAnim() {
-    document.body.classList.remove("revealed");
-
-    objects.current.forEach((mesh) => {
-      mesh.rotation.set(0, 0, 0);
-      mesh.material.opacity = 1;
-      mesh.position.z = 0;
-
-      const delay = THREE.MathUtils.randFloat(1, 2);
-      const rx = THREE.MathUtils.randFloatSpread(2 * Math.PI);
-      const ry = THREE.MathUtils.randFloatSpread(2 * Math.PI);
-      const rz = THREE.MathUtils.randFloatSpread(2 * Math.PI);
-
-      gsap.to(mesh.rotation, {
-        duration: 2,
-        x: rx,
-        y: ry,
-        z: rz,
-        delay,
-      });
-
-      gsap.to(mesh.position, {
-        duration: 2,
-        z: 80,
-        delay: delay + 0.5,
-        ease: "power1.out",
-      });
-
-      gsap.to(mesh.material, {
-        duration: 2,
-        opacity: 0,
-        delay: delay + 0.5,
-      });
+  function startReveal() {
+    const tl = gsap.timeline({
+      onComplete: () => {
+        // We call onComplete which sets loadingDone to true in App.jsx
+        if (onComplete) onComplete();
+      }
     });
 
-    setTimeout(() => {
-      document.body.classList.add("revealed");
-      if (onComplete) onComplete();
-    }, 4500);
+    // 1. Fade the text/progress bar first
+    tl.to(".loading-ui", { opacity: 0, duration: 0.4 });
+
+    // 2. Explode the cubes
+    objects.current.forEach((mesh) => {
+      const delay = THREE.MathUtils.randFloat(0, 0.4);
+      tl.to(mesh.rotation, { duration: 1.2, x: Math.random() * 5, y: Math.random() * 5, delay }, 0);
+      tl.to(mesh.position, { duration: 1.2, z: 150, ease: "power2.in", delay }, 0);
+      tl.to(mesh.material, { duration: 0.8, opacity: 0, delay: delay + 0.3 }, 0);
+    });
   }
 
   function animate() {
@@ -184,42 +119,33 @@ export default function Loading({ onComplete }) {
   }
 
   function onResize() {
-    width = window.innerWidth;
-    height = window.innerHeight;
-
-    camera.current.aspect = width / height;
+    if (!camera.current || !renderer.current) return;
+    camera.current.aspect = window.innerWidth / window.innerHeight;
     camera.current.updateProjectionMatrix();
-    renderer.current.setSize(width, height);
-
-    const size = getRendererSize();
-    wWidth = size[0];
-    wHeight = size[1];
+    renderer.current.setSize(window.innerWidth, window.innerHeight);
+    const vFOV = (camera.current.fov * Math.PI) / 180;
+    const h = 2 * Math.tan(vFOV / 2) * Math.abs(conf.cameraZ);
+    wWidth = h * camera.current.aspect;
+    wHeight = h;
   }
 
-  function getRendererSize() {
-    const cam = new THREE.PerspectiveCamera(
-      conf.perspective,
-      camera.current.aspect
-    );
-
-    const vFOV = (cam.fov * Math.PI) / 180;
-    const height =
-      2 * Math.tan(vFOV / 2) * Math.abs(conf.cameraZ);
-    const width = height * cam.aspect;
-
-    return [width, height];
+  function disposeScene() {
+    scene.current?.traverse(obj => {
+      if (obj.geometry) obj.geometry.dispose();
+      if (obj.material) Array.isArray(obj.material) ? obj.material.forEach(m => m.dispose()) : obj.material.dispose();
+    });
+    renderer.current?.dispose();
   }
 
   return (
-    <>
-      {/* <div id="page">
-        <div className="cover-container">
-          <h1>Simple 3D Reveal Effect</h1>
-          <button onClick={initScene}>Trigger</button>
+    <div className="fixed inset-0 z-[9999] pointer-events-none">
+      <canvas ref={canvasRef} className="absolute inset-0" />
+      <div className="loading-ui absolute inset-0 flex flex-col items-center justify-center">
+        <span className="text-black font-mono text-7xl font-bold mb-2">{progress}%</span>
+        <div className="w-48 h-1 bg-black/10">
+          <div className="h-full bg-black transition-all duration-200" style={{ width: `${progress}%` }} />
         </div>
-      </div> */}
-
-      <canvas ref={canvasRef} id="reveal-effect" />
-    </>
+      </div>
+    </div>
   );
 }
