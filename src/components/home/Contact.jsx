@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+import { useState } from "react";
 import { gsap } from 'gsap';
 import {
   Mail,
@@ -40,6 +41,50 @@ const Contact = ({ innerRef, isPage = false }) => {
 
     return () => ctx.revert();
   }, []);
+
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
+  });
+
+  const [loading, setLoading] = useState(false);
+  const [status, setStatus] = useState("");
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setStatus("");
+
+    try {
+      const res = await fetch("http://13.127.225.236:3001/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await res.json();
+
+      if (data.ok) {
+        setStatus("Message sent successfully ✅");
+        setFormData({ name: "", email: "", subject: "", message: "" });
+      } else {
+        setStatus("Failed to send message ❌");
+      }
+    } catch (error) {
+      setStatus("Server error ❌");
+    }
+
+    setLoading(false);
+  };
 
   return (
     <section
@@ -178,12 +223,16 @@ const Contact = ({ innerRef, isPage = false }) => {
           <div className="contact-form-box relative group">
             <div className="absolute -inset-1 bg-gradient-to-r from-indigo-500 to-cyan-500 rounded-3xl blur opacity-10 group-hover:opacity-20 transition duration-1000"></div>
             <div className="relative bg-zinc-900/40 border border-white/10 p-8 md:p-14 backdrop-blur-3xl rounded-3xl shadow-2xl">
-              <form className="space-y-8">
+              <form onSubmit={handleSubmit} className="space-y-8">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   <div className="space-y-2">
                     {/* <label className="text-[10px] font-mono text-indigo-400 uppercase tracking-widest px-1">Identity</label> */}
                     <input
                       type="text"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleChange}
+                      required
                       className="w-full bg-zinc-950/50 border border-white/5 rounded-xl px-6 py-4 outline-none focus:border-indigo-500/50 transition-colors text-white placeholder:text-zinc-400"
                       placeholder="Enter Name"
                     />
@@ -192,6 +241,10 @@ const Contact = ({ innerRef, isPage = false }) => {
                     {/* <label className="text-[10px] font-mono text-indigo-400 uppercase tracking-widest px-1">Access_Point</label> */}
                     <input
                       type="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      required
                       className="w-full bg-zinc-950/50 border border-white/5 rounded-xl px-6 py-4 outline-none focus:border-indigo-500/50 transition-colors text-white placeholder:text-zinc-400"
                       placeholder="Enter Email"
                     />
@@ -205,6 +258,10 @@ const Contact = ({ innerRef, isPage = false }) => {
                   <div className="relative">
                     <input
                       type="text"
+                      name="subject"
+                      value={formData.subject}
+                      onChange={handleChange}
+                      required
                       placeholder="Enter Subject"
                       className="w-full bg-zinc-950/50 border border-white/5 rounded-xl px-6 py-4 outline-none focus:border-indigo-500/50 transition-colors text-white placeholder-zinc-400"
                     />
@@ -216,19 +273,33 @@ const Contact = ({ innerRef, isPage = false }) => {
                   {/* <label className="text-[10px] font-mono text-indigo-400 uppercase tracking-widest px-1">Data_Packet</label> */}
                   <textarea
                     rows="4"
+                    name="message"
+                    value={formData.message}
+                    onChange={handleChange}
+                    required
                     className="w-full bg-zinc-950/50 border border-white/5 rounded-xl px-6 py-4 outline-none focus:border-indigo-500/50 transition-colors text-white placeholder:text-zinc-400 resize-none"
                     placeholder="Describe your objective..."
                   />
                 </div>
 
-                <button className="group relative w-full py-5 bg-gradient-to-r from-indigo-600 to-indigo-800 rounded-xl overflow-hidden transition-all duration-500 hover:scale-[1.02] active:scale-[0.98] shadow-lg shadow-indigo-500/20">
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className="group relative w-full py-5 bg-gradient-to-r from-indigo-600 to-indigo-800 rounded-xl overflow-hidden transition-all duration-500 hover:scale-[1.02] active:scale-[0.98] shadow-lg shadow-indigo-500/20 disabled:opacity-50"
+                >
                   <div className="relative z-10 flex items-center justify-center gap-3">
-                    <span className="text-[11px] font-black text-white uppercase tracking-[0.6em]">Send Message</span>
+                    <span className="text-[11px] font-black text-white uppercase tracking-[0.6em]">
+                      {loading ? "Sending..." : "Send Message"}
+                    </span>
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                   </div>
-                  <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-indigo-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 </button>
               </form>
+              {status && (
+                <p className="text-center text-sm mt-4 text-cyan-400">
+                  {status}
+                </p>
+              )}
             </div>
           </div>
 
