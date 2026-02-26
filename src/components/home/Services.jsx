@@ -38,6 +38,12 @@ const Services = ({ innerRef, isPage = false }) => {
             img: "https://images.unsplash.com/photo-1558655146-6c222b05fce4?q=80&w=764&auto=format&fit=crop",
             link: "/services/05"
         },
+        {
+            title: "E-Commerce",
+            desc: "Scalable online stores designed to maximize conversions, streamline operations, and deliver seamless shopping experiences.",
+            img: "https://images.unsplash.com/photo-1658297063569-162817482fb6?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+            link: "/services/06"
+        },
     ];
 
     return (
@@ -45,20 +51,20 @@ const Services = ({ innerRef, isPage = false }) => {
             ref={(el) => {
                 if (innerRef) innerRef.current = el;
             }}
-            className="relative w-full bg-[#fafafa] py-16 md:py-24 lg:py-32 overflow-hidden"
+            className="relative w-full bg-[#fafafa] py-16 md:py-26 overflow-hidden"
         >
             {/* ... Background System Code stays the same ... */}
 
             <div className="relative z-30 max-w-[1400px] mx-auto px-6 sm:px-12 md:px-24">
                 {/* Header Section */}
                 <div className="mb-12 md:mb-20">
-                    <div className="opacity-0 flex items-center gap-4 mb-4">
+                    {/* <div className="opacity-0 flex items-center gap-4 mb-4">
                         <div className="w-8 lg:w-12 h-[2px] bg-indigo-600" />
                         <span className="text-indigo-600 font-mono text-[10px] tracking-[0.4em] uppercase font-bold">
                             Capabilities
                         </span>
-                    </div>
-                    <h3 className="text-4xl md:text-6xl lg:text-8xl text-zinc-900 font-black uppercase italic tracking-tighter leading-none mb-6">
+                    </div> */}
+                    <h3 className="text-4xl md:text-7xl text-zinc-900 font-black uppercase italic tracking-tighter leading-none mb-6">
                         Our<span className="text-transparent" style={{ WebkitTextStroke: "1px rgba(24, 24, 27, 1)" }}> Expertise</span>
                     </h3>
                     <div className="w-16 sm:w-20 md:w-24 h-[4px] rounded-full bg-gradient-to-r from-indigo-600 to-cyan-500" />

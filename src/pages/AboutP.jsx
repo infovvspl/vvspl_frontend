@@ -151,10 +151,14 @@ const AboutPage = () => {
                             </h2>
                             <div className="w-20 h-[3px] rounded-full bg-gradient-to-r from-indigo-500 to-cyan-500 mb-6" />
                             <p className="text-zinc-600 text-base md:text-lg leading-relaxed mb-4">
-                                Founded on the conviction that great technology should be invisible — seamlessly woven into people's lives — we've spent years perfecting the art of purposeful engineering.
+                                Founded on the belief that powerful technology should operate seamlessly in the
+                                background, Veteran Ventures Services Pvt. Ltd. builds intelligent, secure, and
+                                scalable digital ecosystems that drive measurable impact.
                             </p>
                             <p className="text-zinc-500 text-sm md:text-base leading-relaxed">
-                                From early-stage startups to enterprise transformations, we pair deep technical expertise with genuine curiosity.
+                                From emerging ventures to enterprise and mission-critical environments, we
+                                combine deep technical expertise with disciplined execution to deliver resilient,
+                                future-ready platforms that power smarter decisions and sustainable growth.
                             </p>
                         </div>
                         <div className="reveal-up relative hidden lg:block">
@@ -163,7 +167,7 @@ const AboutPage = () => {
                             </div>
                             <div className="absolute -bottom-6 -left-6 bg-indigo-600 rounded-2xl px-5 py-4 shadow-xl">
                                 <p className="text-xs text-indigo-100 uppercase mb-1">Est.</p>
-                                <p className="text-3xl font-black text-white">2026</p>
+                                <p className="text-3xl font-black text-white">2025</p>
                             </div>
                         </div>
                     </div>
@@ -171,7 +175,7 @@ const AboutPage = () => {
             </section>
 
             {/* 3 ── STATS */}
-            <section className="py-20 border-y border-zinc-200 bg-zinc-50/50">
+            {/* <section className="py-20 border-y border-zinc-200 bg-zinc-50/50">
                 <div className="max-w-[1300px] mx-auto px-6">
                     <div className="stats-grid grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
                         {[
@@ -187,7 +191,7 @@ const AboutPage = () => {
                         ))}
                     </div>
                 </div>
-            </section>
+            </section> */}
 
             {/* 4 ── MISSION & VISION */}
             <section className="relative py-24 md:py-36 overflow-hidden bg-white">
@@ -199,13 +203,21 @@ const AboutPage = () => {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                         <div className="reveal-up h-full p-8 md:p-10 rounded-3xl border border-zinc-100 bg-zinc-50/50 relative overflow-hidden shadow-sm">
                             <p className="text-[10px] tracking-[0.4em] uppercase text-indigo-600 mb-4 font-bold">Mission</p>
-                            <h3 className="text-2xl md:text-3xl font-black mb-4">To simplify complexity.</h3>
-                            <p className="text-zinc-600 leading-relaxed">We exist to make powerful technology accessible — stripping away the noise to deliver intelligent, scalable systems.</p>
+                            <h3 className="text-2xl md:text-3xl font-black mb-4">Driving Smarter Growth Through Practical Innovation.</h3>
+                            <p className="text-zinc-600 leading-relaxed">Our mission is to transform operational complexity into measurable performance. We
+                                design secure, intelligent, and scalable digital solutions that close gaps, accelerate
+                                productivity, and strengthen decision-making. By aligning technology with strategic
+                                objectives, we deliver resilient systems that create clarity, control, and sustained
+                                competitive advantage.</p>
                         </div>
                         <div className="reveal-up h-full p-8 md:p-10 rounded-3xl border border-zinc-100 bg-zinc-50/50 relative overflow-hidden shadow-sm">
                             <p className="text-[10px] tracking-[0.4em] uppercase text-cyan-600 mb-4 font-bold">Vision</p>
-                            <h3 className="text-2xl md:text-3xl font-black mb-4">A world shaped by design.</h3>
-                            <p className="text-zinc-600 leading-relaxed">We envision a future where digital infrastructure is as natural as breathing — unlocking full human potential.</p>
+                            <h3 className="text-2xl md:text-3xl font-black mb-4">Architecting the Digital Backbone of Tomorrow</h3>
+                            <p className="text-zinc-600 leading-relaxed">Our vision is to be the trusted force behind future-ready transformation. We empower
+                                enterprises and institutions with resilient, transparent, and high-performance digital
+                                foundations that unlock sustainable growth. Through continuous innovation and
+                                strategic partnership, we enable organizations to operate confidently, competitively,
+                                and prepared for what’s next.</p>
                         </div>
                     </div>
                 </div>
@@ -220,12 +232,12 @@ const AboutPage = () => {
                     </div>
                     <div className="stagger-container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                         {[
-                            { icon: "⚡", title: "Speed Without Compromise", desc: "We move fast but never at the cost of quality. Iteration and excellence coexist." },
-                            { icon: "🧠", title: "Intelligence First", desc: "Every decision is data-informed, every system is designed to learn." },
-                            { icon: "🔐", title: "Security by Design", desc: "Privacy and resilience are built in from day one — not bolted on." },
-                            { icon: "🤝", title: "Partnership Over Transactions", desc: "We succeed only when our clients succeed. Long-term define us." },
-                            { icon: "🌍", title: "Global Perspective", desc: "With clients on multiple continents, we bring a broad lens to challenges." },
-                            { icon: "🔁", title: "Continuous Evolution", desc: "We never stop improving — our tools and teams are always growing." }
+                            { icon: "⚡", title: "Impact-First Engineering", desc: "We design solutions with purpose — not just features. Every system delivers tangible results that move businesses forward." },
+                            { icon: "🧠", title: "Insight-Driven Decisions", desc: "Data isn’t just collected — it’s leveraged. We turn complexity into actionable intelligence that guides confident, strategic choices." },
+                            { icon: "🔐", title: "Built-in Trust", desc: "Security, reliability, and compliance aren’t afterthoughts — they’re integral. Our systems protect people, processes, and data at every level." },
+                            { icon: "🤝", title: "Future-Ready Innovation", desc: "Our platforms aren’t just functional today; they adapt and grow with emerging challenges, new opportunities, and evolving business needs." },
+                            { icon: "🌍", title: "Augmented Collaboration", desc: "Technology amplifies human potential. We design systems that empower teams, enhance expertise, and foster smarter collaboration." },
+                            { icon: "🔁", title: "Continuous Evolution", desc: "Staying ahead requires constant refinement. We iterate, optimize, and innovate relentlessly to ensure clients always benefit from cutting-edge solutions." }
                         ].map((val, i) => (
                             <div key={i} className="stagger-card group p-8 rounded-2xl border border-zinc-200 bg-white hover:border-indigo-500/40 hover:bg-zinc-50 transition-all duration-500 shadow-sm">
                                 <div className="text-3xl mb-4">{val.icon}</div>
@@ -280,9 +292,9 @@ const AboutPage = () => {
                             Start a Project
                         </Link>
 
-                        <Link to="/cs" className="px-8 py-4 rounded-full border border-white/20 font-semibold text-sm text-white hover:bg-white/5 transition-colors duration-300 text-center"
+                        <Link to="/services" className="px-8 py-4 rounded-full border border-white/20 font-semibold text-sm text-white hover:bg-white/5 transition-colors duration-300 text-center"
                         >
-                            Explore Our Work
+                            Explore Services
                         </Link>
 
                     </div>

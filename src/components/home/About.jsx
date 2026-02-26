@@ -68,7 +68,7 @@ const About = ({ innerRef, isPage = false }) => {
                             About Us
                         </h2>
 
-                        <h3 className="text-3xl sm:text-4xl md:text-6xl font-black leading-[1.1] tracking-tight">
+                        <h3 className="text-4xl sm:text-4xl md:text-6xl font-black leading-[1.1] tracking-tight">
                             We don't just use technology:
                             <br />
                             <span
@@ -81,14 +81,14 @@ const About = ({ innerRef, isPage = false }) => {
 
                         <div className="w-20 md:w-24 h-[3px] md:h-[4px] rounded-full bg-gradient-to-r from-indigo-500 to-cyan-500" />
 
-                        <p className="text-lg md:text-2xl text-zinc-300 leading-snug font-light italic max-w-lg lg:max-w-none">
+                        <p className="text-xl md:text-2xl text-zinc-300 leading-snug font-light italic max-w-lg lg:max-w-none">
                             "Innovation means nothing without impact —
                             <span className="text-white font-medium not-italic">
                                 {" "}we deliver both.
                             </span>"
                         </p>
 
-                        <p className="text-sm md:text-lg text-zinc-400 leading-relaxed max-w-xl">
+                        <p className="text-md md:text-lg text-zinc-300 leading-relaxed max-w-xl">
                             We believe innovation should be practical, scalable, and purposeful. From AI-driven systems and intelligent automation to secure, resilient digital infrastructures, we engineer solutions that simplify complexity. Our approach is the simple way to solve complete digital problems.
                         </p>
                     </div>

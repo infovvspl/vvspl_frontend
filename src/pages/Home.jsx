@@ -13,6 +13,8 @@ import FoundingMembers from '../components/home/Founders';
 import MissionVision from '../components/home/MV';
 import ScrollBtn from '../components/Scrollbtn';
 import Navbar from "../components/Navbar";
+import Team from '../components/home/TeamSec';
+import VideoHero from '../components/home/VidBg';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -21,10 +23,12 @@ function Home({ setActiveIndex }) {
   const heroRef = useRef(null);
   const aboutRef = useRef(null);
   const mvRef = useRef(null);
+  const vidRef = useRef(null);
   const servicesRef = useRef(null);
   const whyRef = useRef(null);
   const futureRef = useRef(null);
   const foundersRef = useRef(null);
+  const teamRef = useRef(null);
   const blogsRef = useRef(null);
   const contactRef = useRef(null);
 
@@ -34,12 +38,17 @@ function Home({ setActiveIndex }) {
         { ref: heroRef, index: 0 },
         { ref: aboutRef, index: 1 },
         { ref: mvRef, index: 2 },
-        { ref: servicesRef, index: 3 },
-        { ref: whyRef, index: 4 },
-        { ref: futureRef, index: 5 },
-        { ref: foundersRef, index: 6 },
-        { ref: blogsRef, index: 7 },
-        { ref: contactRef, index: 8 }
+        { ref: vidRef, index: 3 },
+        { ref: servicesRef, index: 4 },
+        { ref: whyRef, index: 5 },
+        { ref: futureRef, index: 6 },
+        { ref: teamRef, index: 7 },
+        // { ref: blogsRef, index: 7 },
+        { ref: contactRef, index: 7 }
+        // { ref: foundersRef, index: 6 },
+        // { ref: teamRef, index: 7 },
+        // { ref: blogsRef, index: 8 },
+        // { ref: contactRef, index: 9 }
       ];
 
       // 1. Navigation Sync (Update setActiveIndex on scroll)
@@ -90,11 +99,13 @@ function Home({ setActiveIndex }) {
       <Hero innerRef={heroRef} />
       <About innerRef={aboutRef} isPage={true} />
       <MissionVision innerRef={mvRef} isPage={true} />
+      <VideoHero innerRef={vidRef} isPage={true} />
       <Services innerRef={servicesRef} isPage={true} />
       <WhyChooseUs innerRef={whyRef} isPage={true} />
       <FutureVentures innerRef={futureRef} isPage={true} />
-      <FoundingMembers innerRef={foundersRef} isPage={true} />
-      <Blogs innerRef={blogsRef} isPage={true} />
+      {/* <FoundingMembers innerRef={foundersRef} isPage={true} /> */}
+      <Team innerRef={teamRef} isPage={true} />
+      {/* <Blogs innerRef={blogsRef} isPage={true} /> */}
       <Contact innerRef={contactRef} isPage={true} />
       <ScrollBtn />
     </div>

@@ -1,0 +1,133 @@
+import React, { useState, useEffect } from 'react';
+import { Link, NavLink, useLocation } from 'react-router-dom';
+import Logo from "../assets/logo2.png";
+
+const Navbar = () => {
+    const [isOpen, setIsOpen] = useState(false);
+    const [isLightBg, setIsLightBg] = useState(false);
+    const location = useLocation();
+
+    useEffect(() => {
+        document.body.style.overflow = isOpen ? 'hidden' : 'unset';
+    }, [isOpen]);
+
+    const handleLinkClick = (path) => {
+        setIsOpen(false);
+        if (location.pathname === path) {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    };
+
+    useEffect(() => {
+        const handleScroll = () => {
+            setIsLightBg(window.scrollY > 600);
+        };
+        window.addEventListener("scroll", handleScroll);
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
+
+    const navLinks = [
+        { name: 'Home', path: '/' },
+        { name: 'About', path: '/about' },
+        { name: 'Services', path: '/services' },
+        { name: 'Ventures', path: '/ventures' },
+        { name: 'Our Team', path: '/team' },
+        { name: 'Contact', path: '/contact' },
+    ];
+
+    return (
+        <nav className="fixed top-0 left-0 w-full z-[200] h-24 bg-transparent">
+            <div className="max-w-[1440px] mx-auto h-full px-8 md:px-12 flex items-center justify-between">
+                
+                {/* LOGO */}
+                <Link to="/" onClick={() => handleLinkClick("/")} className="relative z-[210]">
+                    <img src={Logo} alt="Logo" className="h-10 md:h-20 w-auto object-contain" />
+                </Link>
+
+                {/* THE BUTTON */}
+                <button
+                    onClick={() => setIsOpen(!isOpen)}
+                    className={`relative z-[210] flex items-center gap-4 px-6 py-3 rounded-full transition-all duration-500 overflow-hidden
+                        ${isLightBg ? "bg-black text-white" : "bg-white/10 backdrop-blur-md text-white border border-white/20"}
+                    `}
+                >
+                    <span className="text-[10px] font-bold uppercase tracking-[0.3em] relative z-10">
+                        {isOpen ? "Close" : "Menu"}
+                    </span>
+                    <div className="flex flex-col gap-1.5 items-end relative z-10">
+                        <div className={`h-[2px] w-6 transition-all duration-500 ${isOpen ? "rotate-45 translate-y-[4px] bg-white" : "bg-white"}`} />
+                        <div className={`h-[2px] transition-all duration-500 ${isOpen ? "w-6 -rotate-45 -translate-y-[4px] bg-white" : "w-3 bg-white"}`} />
+                    </div>
+                </button>
+            </div>
+
+            {/* FULL SCREEN CREATIVE OVERLAY */}
+            <div className={`
+                fixed inset-0 z-[205] flex items-center justify-center
+                transition-all duration-[1000ms] cubic-bezier(0.85, 0, 0.15, 1)
+                ${isOpen ? 'clip-path-circle-open' : 'clip-path-circle-closed'}
+                bg-zinc-950
+            `}>
+                
+                {/* Background Decor - Floating Text */}
+                <div className="absolute inset-0 overflow-hidden opacity-5 pointer-events-none select-none">
+                    <h1 className="text-[20vw] font-black text-white absolute -bottom-10 -left-10 whitespace-nowrap">
+                        VETERAN VENTURES
+                    </h1>
+                </div>
+
+                <div className="flex flex-col items-center gap-4 md:gap-8">
+                    {navLinks.map((link, index) => (
+                        <NavLink
+                            key={link.name}
+                            to={link.path}
+                            onClick={() => handleLinkClick(link.path)}
+                            className="group relative"
+                        >
+                            {/* Numbering (e.g., 01, 02) */}
+                            <span className="absolute -left-8 md:-left-12 top-2 text-xs md:text-sm font-mono text-zinc-500">
+                                0{index + 1}
+                            </span>
+
+                            <span
+                                className={`
+                                    block text-5xl md:text-8xl font-black uppercase tracking-tighter
+                                    text-transparent bg-clip-text bg-gradient-to-r from-white to-zinc-500
+                                    transition-all duration-700 transform
+                                    group-hover:scale-110 group-hover:tracking-normal
+                                    ${isOpen ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0'}
+                                `}
+                                style={{ 
+                                    transitionDelay: `${index * 100 + 300}ms`,
+                                    WebkitTextStroke: '1px rgba(255,255,255,0.1)'
+                                }}
+                            >
+                                {link.name}
+                            </span>
+                            
+                            {/* Hover Line */}
+                            <div className="w-0 h-1 bg-white mx-auto transition-all duration-500 group-hover:w-full mt-2" />
+                        </NavLink>
+                    ))}
+                </div>
+            </div>
+
+            <style>{`
+                /* Circular Reveal from Top Right */
+                .clip-path-circle-closed {
+                    clip-path: circle(0% at 90% 5%);
+                }
+                .clip-path-circle-open {
+                    clip-path: circle(150% at 90% 5%);
+                }
+
+                /* Smooth Bezier for the reveal */
+                .cubic-bezier {
+                    transition-timing-function: cubic-bezier(0.85, 0, 0.15, 1);
+                }
+            `}</style>
+        </nav>
+    );
+};
+
+export default Navbar;

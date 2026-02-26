@@ -3,98 +3,100 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
+import { SERVICES } from '../data/servicesData';
 
 gsap.registerPlugin(ScrollTrigger);
 
 /* ─────────────────────────────────────────
     SERVICES DATA
 ───────────────────────────────────────── */
-const SERVICES = [
-    {
-        id: '01',
-        title: 'AI / ML Solutions',
-        short: 'Artificial Intelligence',
-        icon: '🤖',
-        accent: 'from-indigo-500 to-violet-500',
-        glow: 'bg-indigo-600/20',
-        border: 'hover:border-indigo-500/40',
-        tag: 'Intelligence',
-        description:
-            'We design and deploy production-ready AI and machine learning systems — from predictive analytics and NLP pipelines to computer vision and generative AI integrations that transform raw data into competitive advantage.',
-        features: ['Predictive Analytics', 'Natural Language Processing', 'Computer Vision', 'GenAI Integration', 'Model Fine-tuning', 'MLOps & Monitoring'],
-        img: 'https://images.unsplash.com/photo-1677442135703-1787eea5ce01?q=80&w=1200',
-    },
-    {
-        id: '02',
-        title: 'Cloud Infrastructure',
-        short: 'Cloud & DevOps',
-        icon: '☁️',
-        accent: 'from-cyan-500 to-blue-500',
-        glow: 'bg-cyan-500/20',
-        border: 'hover:border-cyan-500/40',
-        tag: 'Scalability',
-        description:
-            'Architect resilient, auto-scaling cloud environments across AWS, GCP, and Azure. We handle everything from multi-cloud strategy and cost optimisation to CI/CD pipelines and zero-downtime deployments.',
-        features: ['Multi-Cloud Architecture', 'Kubernetes & Docker', 'CI/CD Pipelines', 'Cost Optimisation', 'Disaster Recovery', 'Infrastructure as Code'],
-        img: 'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?q=80&w=1200',
-    },
-    {
-        id: '03',
-        title: 'Cyber Security',
-        short: 'Security & Compliance',
-        icon: '🔐',
-        accent: 'from-rose-500 to-orange-500',
-        glow: 'bg-rose-500/15',
-        border: 'hover:border-rose-500/40',
-        tag: 'Protection',
-        description:
-            'End-to-end security posture management — penetration testing, threat modelling, SOC setup, and compliance readiness (ISO 27001, GDPR, SOC 2). We harden your systems before attackers find the cracks.',
-        features: ['Penetration Testing', 'Threat Modelling', 'SOC Implementation', 'GDPR & ISO 27001', 'Zero-Trust Architecture', 'Incident Response'],
-        img: 'https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?q=80&w=1200',
-    },
-    {
-        id: '04',
-        title: 'Web Applications',
-        short: 'Web Development',
-        icon: '🌐',
-        accent: 'from-emerald-500 to-teal-500',
-        glow: 'bg-emerald-500/15',
-        border: 'hover:border-emerald-500/40',
-        tag: 'Experience',
-        description:
-            'Full-stack web applications built for speed, scale, and conversion. From React and Next.js frontends to robust Node, Python, or Go backends — we ship products that feel as good as they perform.',
-        features: ['React / Next.js', 'Node & Python APIs', 'Performance Optimisation', 'PWA & Offline-first', 'CMS Integration', 'A/B Testing & Analytics'],
-        img: 'https://images.unsplash.com/photo-1547658719-da2b51169166?q=80&w=1200',
-    },
-    {
-        id: '05',
-        title: 'Mobile Apps',
-        short: 'iOS & Android',
-        icon: '📱',
-        accent: 'from-amber-500 to-yellow-400',
-        glow: 'bg-amber-500/15',
-        border: 'hover:border-amber-500/40',
-        tag: 'Mobile-first',
-        description:
-            'Native and cross-platform mobile experiences that users love to open. React Native and Flutter for cross-platform reach; Swift and Kotlin for maximum native performance — shipped with rigorous QA.',
-        features: ['React Native & Flutter', 'Swift & Kotlin Native', 'Offline Sync', 'Push Notifications', 'App Store Optimisation', 'Performance Profiling'],
-        img: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?q=80&w=1200',
-    },
-    {
-        id: '06',
-        title: 'E-Commerce',
-        short: 'Commerce Platforms',
-        icon: '🛒',
-        accent: 'from-pink-500 to-fuchsia-500',
-        glow: 'bg-pink-500/15',
-        border: 'hover:border-pink-500/40',
-        tag: 'Revenue',
-        description:
-            'High-converting commerce experiences built on Shopify, custom headless stacks, or bespoke platforms. From catalogue management and payment integrations to personalisation engines and inventory automation.',
-        features: ['Headless Commerce', 'Shopify & Custom', 'Payment Gateways', 'Personalisation Engine', 'Inventory Automation', 'Conversion Optimisation'],
-        img: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=80&w=1200',
-    },
-];
+// const SERVICES = [
+//     {
+//         id: '01',
+//         title: 'AI / ML Solutions',
+//         short: 'Artificial Intelligence',
+//         icon: '🤖',
+//         accent: 'from-indigo-500 to-violet-500',
+//         glow: 'bg-indigo-600/20',
+//         border: 'hover:border-indigo-500/40',
+//         tag: 'Intelligence',
+//         description:
+//             'We design and deploy production-ready AI and machine learning systems — from predictive analytics and computer vision to Human Centric AI Collaborative Intelligence and generative AI integrations - transform raw data into actionable insights and sustainable competitive advantage for businesses.',
+//         features: ['Predictive Analytics', 'Natural Language Processing', 'Computer Vision', 'GenAI Integration', 'Model Fine-tuning', 'MLOps & Monitoring'],
+//         img: 'https://images.unsplash.com/photo-1677442135703-1787eea5ce01?q=80&w=1200',
+//     },
+//     {
+//         id: '02',
+//         title: 'Cloud Infrastructure',
+//         short: 'Cloud & DevOps',
+//         icon: '☁️',
+//         accent: 'from-cyan-500 to-blue-500',
+//         glow: 'bg-cyan-500/20',
+//         border: 'hover:border-cyan-500/40',
+//         tag: 'Scalability',
+//         description:
+//             'Architect resilient, auto-scaling cloud environments across AWS, GCP, and Azure. We handle everything from multi-cloud strategy and cost optimisation to CI/CD pipelines and zero-downtime deployments.',
+//         features: ['Multi-Cloud Architecture', 'Kubernetes & Docker', 'CI/CD Pipelines', 'Cost Optimisation', 'Disaster Recovery', 'Infrastructure as Code'],
+//         img: 'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?q=80&w=1200',
+//     },
+//     {
+//         id: '03',
+//         title: 'Cyber Security',
+//         short: 'Security & Compliance',
+//         icon: '🔐',
+//         accent: 'from-rose-500 to-orange-500',
+//         glow: 'bg-rose-500/15',
+//         border: 'hover:border-rose-500/40',
+//         tag: 'Protection',
+//         description:
+//             'End-to-end security posture management — penetration testing, threat modelling, SOC setup, and compliance readiness (ISO 27001, GDPR, SOC 2). We harden your systems before attackers find the cracks.',
+//         features: ['Penetration Testing', 'Threat Modelling', 'SOC Implementation', 'GDPR & ISO 27001', 'Zero-Trust Architecture', 'Incident Response'],
+//         img: 'https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?q=80&w=1200',
+//     },
+//     {
+//         id: '04',
+//         title: 'Web Applications',
+//         short: 'Web Development',
+//         icon: '🌐',
+//         accent: 'from-emerald-500 to-teal-500',
+//         glow: 'bg-emerald-500/15',
+//         border: 'hover:border-emerald-500/40',
+//         tag: 'Experience',
+//         description:
+//             'Full-stack web applications built for speed, scale, and conversion. From React and Next.js frontends to robust Node, Python, or Go backends — we ship products that feel as good as they perform.',
+//         features: ['React / Next.js', 'Node & Python APIs', 'Performance Optimisation', 'PWA & Offline-first', 'CMS Integration', 'A/B Testing & Analytics'],
+//         img: 'https://images.unsplash.com/photo-1547658719-da2b51169166?q=80&w=1200',
+//     },
+//     {
+//         id: '05',
+//         title: 'Mobile Apps',
+//         short: 'iOS & Android',
+//         icon: '📱',
+//         accent: 'from-amber-500 to-yellow-400',
+//         glow: 'bg-amber-500/15',
+//         border: 'hover:border-amber-500/40',
+//         tag: 'Mobile-first',
+//         description:
+//             'Native and cross-platform mobile experiences that users love to open. React Native and Flutter for cross-platform reach; Swift and Kotlin for maximum native performance — shipped with rigorous QA.',
+//         features: ['React Native & Flutter', 'Swift & Kotlin Native', 'Offline Sync', 'Push Notifications', 'App Store Optimisation', 'Performance Profiling'],
+//         img: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?q=80&w=1200',
+//     },
+//     {
+//         id: '06',
+//         title: 'E-Commerce',
+//         short: 'Commerce Platforms',
+//         icon: '🛒',
+//         accent: 'from-pink-500 to-fuchsia-500',
+//         glow: 'bg-pink-500/15',
+//         border: 'hover:border-pink-500/40',
+//         tag: 'Revenue',
+//         description:
+//             'High-converting commerce experiences built on Shopify, custom headless stacks, or bespoke platforms. From catalogue management and payment integrations to personalisation engines and inventory automation.',
+//         features: ['Headless Commerce', 'Shopify & Custom', 'Payment Gateways', 'Personalisation Engine', 'Inventory Automation', 'Conversion Optimisation'],
+//         img: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=80&w=1200',
+//     },
+// ];
+
 
 /* ─────────────────────────────────────────
     SCROLL FADE-UP WRAPPER
@@ -262,35 +264,62 @@ const ServiceCard = ({ service, index }) => {
     const isEven = index % 2 === 0;
 
     useEffect(() => {
+        const el = ref.current;
         const ctx = gsap.context(() => {
+            // Check if device is mobile (width < 1024px)
+            const isMobile = window.innerWidth < 1024;
+
+            // TEXT ANIMATION
             gsap.fromTo(textRef.current,
-                { x: isEven ? -50 : 50, opacity: 0 },
                 {
-                    x: 0, opacity: 1, duration: 1.1, ease: 'power4.out',
+                    x: isMobile ? 0 : (isEven ? -60 : 60), // No horizontal move on mobile
+                    y: isMobile ? 40 : 0,                 // Vertical move on mobile instead
+                    opacity: 0
+                },
+                {
+                    x: 0,
+                    y: 0,
+                    opacity: 1,
+                    duration: 1.1,
+                    ease: 'power4.out',
                     scrollTrigger: {
-                        trigger: ref.current,
-                        start: 'top 80%',
+                        trigger: el,
+                        start: 'top 85%', // Trigger a bit later for better mobile view
                         toggleActions: 'play none none none',
                     },
                 }
             );
+
+            // IMAGE ANIMATION
             gsap.fromTo(imgRef.current,
-                { x: isEven ? 50 : -50, opacity: 0, scale: 0.95 },
                 {
-                    x: 0, opacity: 1, scale: 1, duration: 1.1, ease: 'power4.out', delay: 0.15,
+                    x: isMobile ? 0 : (isEven ? 60 : -60), // No horizontal move on mobile
+                    y: isMobile ? 40 : 0,                 // Vertical move on mobile instead
+                    opacity: 0,
+                    scale: 0.95
+                },
+                {
+                    x: 0,
+                    y: 0,
+                    opacity: 1,
+                    scale: 1,
+                    duration: 1.1,
+                    ease: 'power4.out',
+                    delay: isMobile ? 0 : 0.15, // Remove delay on mobile for snappier feel
                     scrollTrigger: {
-                        trigger: ref.current,
-                        start: 'top 80%',
+                        trigger: el,
+                        start: 'top 85%',
                         toggleActions: 'play none none none',
                     },
                 }
             );
-        }, ref);
+        }, el);
+
         return () => ctx.revert();
     }, [isEven]);
 
     return (
-        <div ref={ref} className="relative py-20 md:py-28">
+        <div ref={ref} className="relative py-20 md:py-18">
             <div className="absolute inset-x-0 top-0 h-[1px] bg-zinc-200" />
 
             <div className="max-w-[1300px] mx-auto px-6 md:px-12 lg:px-20">
@@ -301,23 +330,26 @@ const ServiceCard = ({ service, index }) => {
                         ref={textRef}
                         className={`flex flex-col ${isEven ? 'lg:order-1' : 'lg:order-2'}`}
                     >
-                        <div className="flex items-center gap-4 mb-6">
+                        {/* <div className="flex items-center gap-4 mb-6">
                             <span className={`text-5xl font-black bg-gradient-to-r ${service.accent} bg-clip-text text-transparent opacity-20 leading-none`}>
                                 {service.id}
                             </span>
                             <span className={`px-3 py-1 rounded-full text-[10px] tracking-[0.3em] uppercase font-bold bg-gradient-to-r ${service.accent} bg-clip-text text-transparent border border-zinc-200`}>
                                 {service.tag}
                             </span>
-                        </div>
+                        </div> */}
 
-                        <div className="flex items-center gap-3 mb-3">
+                        {/* <div className="flex items-center gap-3 mb-3">
                             <span className="text-3xl">{service.icon}</span>
                             <p className={`text-[10px] tracking-[0.5em] uppercase font-bold bg-gradient-to-r ${service.accent} bg-clip-text text-transparent`}>
                                 {service.short}
                             </p>
-                        </div>
+                        </div> */}
 
                         <h2 className="text-3xl md:text-5xl font-black leading-[1.1] tracking-tight mb-5 text-zinc-900">
+                            <span className={`text-5xl font-black bg-gradient-to-r ${service.accent} bg-clip-text text-transparent opacity-20 leading-none`}>
+                                {service.id}
+                            </span> {""}
                             {service.title}
                         </h2>
 
@@ -330,20 +362,20 @@ const ServiceCard = ({ service, index }) => {
                         <div className="flex flex-wrap gap-2 mb-8">
                             {service.features.map((f) => (
                                 <span
-                                    key={f}
+                                    key={f.name}
                                     className="px-3 py-1.5 rounded-full border border-zinc-200 bg-white text-xs text-zinc-600 font-medium shadow-sm"
                                 >
-                                    {f}
+                                    {f.name}
                                 </span>
                             ))}
                         </div>
 
-                        <Link
+                        {/* <Link
                             to={`/services/${service.id}`}
                             className={`self-start px-7 py-3.5 rounded-full bg-gradient-to-r ${service.accent} text-white font-semibold text-sm tracking-wider hover:opacity-85 transition-all duration-300 shadow-lg hover:scale-105`}
                         >
                             Learn More — Explore {service.short}
-                        </Link>
+                        </Link> */}
                     </div>
 
                     {/* IMAGE */}
@@ -436,7 +468,7 @@ const ServiceGrid = () => {
     CTA SECTION
 ───────────────────────────────────────── */
 const CTASection = () => (
-    <section className="relative py-28 md:py-40 overflow-hidden bg-zinc-900">
+    <section className="relative py-18 md:py-30 overflow-hidden bg-zinc-900">
         <div className="absolute inset-0 z-0">
             <div className="absolute inset-0 bg-gradient-to-br from-indigo-950/60 via-zinc-900 to-zinc-900" />
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-indigo-600/10 rounded-full blur-3xl" />
@@ -471,13 +503,13 @@ const CTASection = () => (
                 </Link>
 
                 <Link
-                    to="/blogs"
+                    to="/about"
                     className="px-8 py-4 text-center rounded-full 
                border border-white/20 text-white 
                font-semibold text-sm tracking-wider 
                hover:bg-white/5 transition-colors duration-300"
                 >
-                    View Case Studies
+                    About Us
                 </Link>
 
             </div>
@@ -494,7 +526,7 @@ const ServicesPage = () => {
         <div className="bg-zinc-50 text-zinc-900 font-sans selection:bg-indigo-100">
             <Navbar />
             <HeroBanner />
-            <ServiceGrid />
+            {/* <ServiceGrid /> */}
             {SERVICES.map((service, index) => (
                 <ServiceCard key={service.id} service={service} index={index} />
             ))}
