@@ -62,7 +62,7 @@ const Contact = ({ innerRef, isPage = false }) => {
       [e.target.name]: e.target.value,
     });
   };
-  
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -79,7 +79,10 @@ const Contact = ({ innerRef, isPage = false }) => {
       const res = await fetch("http://13.127.225.236:3001/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          ...formData,
+          cfToken: token,
+        }),
       });
 
       const data = await res.json();
