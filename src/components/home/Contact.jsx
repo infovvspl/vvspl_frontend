@@ -69,11 +69,11 @@ const Contact = ({ innerRef, isPage = false }) => {
     setLoading(true);
     setStatus("");
 
-    if (!token) {
-      alert("Please complete the verification");
-      setLoading(false);
-      return;
-    }
+    // if (!token) {
+    //   alert("Please complete the verification");
+    //   setLoading(false);
+    //   return;
+    // }
 
     try {
       const res = await fetch("http://13.127.225.236:3001/api/contact", {
