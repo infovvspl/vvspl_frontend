@@ -1,16 +1,11 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from "react";
 import { useState } from "react";
-import { gsap } from 'gsap';
-import {
-  Mail,
-  Phone,
-  MapPin,
-  ArrowRight
-} from "lucide-react";
+import { gsap } from "gsap";
+import { Mail, Phone, MapPin, ArrowRight } from "lucide-react";
 import { Facebook, Instagram } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
-import Turnstile from 'react-turnstile';
-import { a } from 'framer-motion/client';
+import Turnstile from "react-turnstile";
+import { a } from "framer-motion/client";
 
 const Contact = ({ innerRef, isPage = false }) => {
   const containerRef = useRef(null);
@@ -19,25 +14,28 @@ const Contact = ({ innerRef, isPage = false }) => {
   useEffect(() => {
     let ctx = gsap.context(() => {
       const tl = gsap.timeline({
-        defaults: { ease: "power4.out", duration: 1.2 }
+        defaults: { ease: "power4.out", duration: 1.2 },
       });
 
-      tl.fromTo(headerRef.current.children,
+      tl.fromTo(
+        headerRef.current.children,
         { y: 30, opacity: 0 },
         { y: 0, opacity: 1, stagger: 0.2 },
-        0.2
+        0.2,
       );
 
-      tl.fromTo(".contact-info-item",
+      tl.fromTo(
+        ".contact-info-item",
         { x: -30, opacity: 0 },
         { x: 0, opacity: 1, stagger: 0.1 },
-        "-=0.8"
+        "-=0.8",
       );
 
-      tl.fromTo(".contact-form-box",
+      tl.fromTo(
+        ".contact-form-box",
         { scale: 0.95, opacity: 0 },
         { scale: 1, opacity: 1, duration: 1.5 },
-        "-=1"
+        "-=1",
       );
     }, containerRef);
 
@@ -62,7 +60,6 @@ const Contact = ({ innerRef, isPage = false }) => {
       [e.target.name]: e.target.value,
     });
   };
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -89,7 +86,13 @@ const Contact = ({ innerRef, isPage = false }) => {
 
       if (data.ok) {
         setStatus("Message sent successfully ✅");
-        setFormData({ name: "", email: "", subject: "", message: "", cfToken: "" });
+        setFormData({
+          name: "",
+          email: "",
+          subject: "",
+          message: "",
+          cfToken: "",
+        });
         setToken("");
       } else {
         setStatus("Failed to send message ❌");
@@ -127,14 +130,16 @@ const Contact = ({ innerRef, isPage = false }) => {
           className="absolute inset-0 opacity-[0.2]"
           style={{
             backgroundImage: `linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px)`,
-            backgroundSize: '80px 80px'
+            backgroundSize: "80px 80px",
           }}
         />
       </div>
 
-      <div id="contact-content" className="relative z-10 w-full max-w-7xl mx-auto pt-10">
+      <div
+        id="contact-content"
+        className="relative z-10 w-full max-w-7xl mx-auto pt-10"
+      >
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
-
           {/* LEFT: Heading & Info */}
           <div className="space-y-10 md:space-y-16">
             <div ref={headerRef}>
@@ -144,7 +149,10 @@ const Contact = ({ innerRef, isPage = false }) => {
 
               <h2 className="text-4xl md:text-5xl lg:text-6xl font-black uppercase italic tracking-tighter leading-none text-white">
                 Start Your <br />
-                <span className="text-transparent" style={{ WebkitTextStroke: '1px rgba(255,255,255,0.6)' }}>
+                <span
+                  className="text-transparent"
+                  style={{ WebkitTextStroke: "1px rgba(255,255,255,0.6)" }}
+                >
                   Journey.
                 </span>
               </h2>
@@ -158,7 +166,10 @@ const Contact = ({ innerRef, isPage = false }) => {
                   <Mail className="w-4 h-4 md:w-5 md:h-5 text-indigo-400" />
                 </div>
                 <div className="flex-1">
-                  <a href="mailto:info@vvspltech.com" className="block truncate">
+                  <a
+                    href="mailto:info@vvspltech.com"
+                    className="block truncate"
+                  >
                     <h4 className="text-lg md:text-xl lg:text-2xl font-bold text-white group-hover:text-cyan-400 transition-colors cursor-pointer overflow-hidden text-ellipsis">
                       info@vvspltech.com
                     </h4>
@@ -193,7 +204,8 @@ const Contact = ({ innerRef, isPage = false }) => {
                     rel="noopener noreferrer"
                     className="text-lg md:text-xl lg:text-2xl font-bold text-white leading-snug group-hover:text-cyan-400 transition-colors cursor-pointer break-words"
                   >
-                    Block-309/310, ODYSSA Business Center, <br className="hidden md:block" />
+                    Block-309/310, ODYSSA Business Center,{" "}
+                    <br className="hidden md:block" />
                     Rasulgarh, Bhubaneswar, 751010
                   </a>
                 </div>
@@ -211,7 +223,7 @@ const Contact = ({ innerRef, isPage = false }) => {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <Facebook className="w-5 h-5 text-zinc-400 hover:text-cyan-400 transition-all cursor-pointer transform hover:-translate-y-1" />
+                    <Facebook className="w-5 h-5 text-zinc-400 hover:text-[#1877F2] transition-all duration-300 cursor-pointer transform hover:-translate-y-1" />
                   </a>
 
                   <a
@@ -219,7 +231,7 @@ const Contact = ({ innerRef, isPage = false }) => {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <Instagram className="w-5 h-5 text-zinc-400 hover:text-cyan-400 transition-all cursor-pointer transform hover:-translate-y-1" />
+                    <Instagram className="w-5 h-5 text-zinc-400 hover:text-[#E4405F] transition-all duration-300 cursor-pointer transform hover:-translate-y-1" />
                   </a>
 
                   <a
@@ -227,7 +239,7 @@ const Contact = ({ innerRef, isPage = false }) => {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <FaWhatsapp className="w-5 h-5 text-zinc-300 hover:text-cyan-400 transition-all cursor-pointer transform hover:-translate-y-1" />
+                    <FaWhatsapp className="w-5 h-5 text-zinc-400 hover:text-[#25D366] transition-all duration-300 cursor-pointer transform hover:-translate-y-1" />
                   </a>
                 </div>
               </div>
@@ -283,7 +295,6 @@ const Contact = ({ innerRef, isPage = false }) => {
                   </div>
                 </div>
 
-
                 <div className="space-y-2">
                   {/* <label className="text-[10px] font-mono text-indigo-400 uppercase tracking-widest px-1">Data_Packet</label> */}
                   <textarea
@@ -302,9 +313,9 @@ const Contact = ({ innerRef, isPage = false }) => {
                     setToken(token);
                   }}
                   options={{
-                    theme: 'light',
-                    size: 'normal',
-                    retry: 'auto',
+                    theme: "light",
+                    size: "normal",
+                    retry: "auto",
                   }}
                 />
 
@@ -328,7 +339,6 @@ const Contact = ({ innerRef, isPage = false }) => {
               )}
             </div>
           </div>
-
         </div>
       </div>
     </section>

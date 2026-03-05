@@ -4,6 +4,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import { SERVICES } from '../data/servicesData';
+import Bro from "../assets/VVSPL_BROCHURE_V3.pdf";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -518,6 +519,39 @@ const CTASection = () => (
     </section>
 );
 
+/* -----------------------------------------
+    BROCHURE DOWNLOAD SECTION
+----------------------------------------- */
+const BrochureSection = () => (
+    <section className="py-12 md:py-16 bg-zinc-50">
+        <div className="max-w-[1300px] mx-auto px-6 md:px-12 lg:px-20">
+            <ScrollSection className="rounded-3xl border border-zinc-200 bg-white p-6 md:p-10 shadow-sm">
+                <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+                    <div>
+                        <p className="text-[10px] md:text-xs tracking-[0.45em] uppercase font-bold bg-gradient-to-r from-indigo-600 to-cyan-600 bg-clip-text text-transparent mb-2">
+                            Detailed Brochure
+                        </p>
+                        <h3 className="text-2xl md:text-3xl font-black tracking-tight text-zinc-900 mb-2">
+                            Download Our Company Brochure
+                        </h3>
+                        <p className="text-sm md:text-base text-zinc-600">
+                            Get complete details on our services, process, and technology stack.
+                        </p>
+                    </div>
+
+                    <a
+                        href={Bro}
+                        download
+                        className="inline-flex items-center justify-center px-7 py-3.5 rounded-full bg-gradient-to-r from-indigo-600 to-cyan-600 text-white font-semibold text-sm tracking-wide hover:opacity-90 transition-opacity duration-300 shadow-[0_0_30px_-10px_rgba(99,102,241,0.7)]"
+                    >
+                        Download Brochure
+                    </a>
+                </div>
+            </ScrollSection>
+        </div>
+    </section>
+);
+
 /* ─────────────────────────────────────────
     MAIN SERVICES PAGE
 ───────────────────────────────────────── */
@@ -530,6 +564,7 @@ const ServicesPage = () => {
             {SERVICES.map((service, index) => (
                 <ServiceCard key={service.id} service={service} index={index} />
             ))}
+            <BrochureSection />
             <CTASection />
         </div>
     );

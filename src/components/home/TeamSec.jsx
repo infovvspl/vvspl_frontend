@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Link } from 'react-router-dom'; // Added this
+import { Linkedin } from 'lucide-react';
 import H1 from "../../assets/img1.jpeg";
 import H2 from "../../assets/img2.jpeg";
 import H3 from "../../assets/img3.jpeg";
@@ -16,10 +17,10 @@ const Team = ({ innerRef, isPage = true }) => {
     const buttonRef = useRef(null); // Ref for button animation
 
     const founders = [
-        { name: "LT. Col. Anil Tripathi, Sena Medal (Retd.)", role: "Chairman cum Founder Director", img: H1 },
-        { name: "Ankit Tripathi", role: "Additional Director", img: H2 },
-        { name: "Dattavi Jariwala Tripathi", role: "Founder Director", img: H3 },
-        { name: "Priyanka Tripathi Kriech", role: "Executive Director", img: H4 },
+        { name: "LT. Col. Anil Tripathi, Sena Medal (Retd.)", role: "Chairman cum Founder Director", img: H1, linkedin: "https://in.linkedin.com/in/anil-tripathi-13887819?utm_source=share&utm_medium=member_mweb&utm_campaign=share_via&utm_content=profile" },
+        { name: "Ankit Tripathi", role: "Additional Director", img: H2, linkedin: "https://www.linkedin.com/" },
+        { name: "Dattavi Jariwala Tripathi", role: "Founder Director", img: H3, linkedin: "https://in.linkedin.com/in/dattavii?utm_source=share&utm_medium=member_mweb&utm_campaign=share_via&utm_content=profile" },
+        { name: "Priyanka Tripathi Kriech", role: "Executive Director", img: H4, linkedin: "https://ch.linkedin.com/in/priyankatripathi91?utm_source=share&utm_medium=member_mweb&utm_campaign=share_via&utm_content=profile" },
     ];
 
     useEffect(() => {
@@ -117,6 +118,16 @@ const Team = ({ innerRef, isPage = true }) => {
                                 <p className="mt-2 text-xs tracking-widest text-indigo-400 uppercase">
                                     {founder.role}
                                 </p>
+
+                                <a
+                                    href={founder.linkedin}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    aria-label={`${founder.name} LinkedIn`}
+                                    className="mt-4 inline-flex items-center justify-center w-10 h-10 rounded-full border border-white/15 text-zinc-300 hover:text-white hover:border-cyan-400/60 hover:bg-cyan-500/10 transition-colors duration-300"
+                                >
+                                    <Linkedin size={18} />
+                                </a>
                             </div>
 
                         </div>
