@@ -242,7 +242,7 @@ const Contact = ({ innerRef, isPage = false }) => {
                     <FaWhatsapp className="w-5 h-5 text-zinc-400 hover:text-[#25D366] transition-all duration-300 cursor-pointer transform hover:-translate-y-1" />
                   </a>
                   <a
-                    href="https://www.instagram.com/vvspltech?igsh=cjcyczloZWNuaGZx"
+                    href="https://www.linkedin.com/company/112707331/admin/dashboard/"
                     target="_blank"
                     rel="noopener noreferrer"
                   >

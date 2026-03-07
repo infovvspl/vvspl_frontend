@@ -286,7 +286,7 @@ const ContactPage = () => {
                   <FaInstagram />
                 </a>
                 <a
-                  href="https://www.instagram.com/vvspltech?igsh=cjcyczloZWNuaGZx"
+                  href="https://www.linkedin.com/company/112707331/admin/dashboard/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-zinc-500 hover:text-[#0A66C2] transition transform hover:scale-110"

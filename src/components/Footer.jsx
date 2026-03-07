@@ -29,7 +29,7 @@ const Footer = () => {
         {
             name: "LinkedIn",
             icon: <FaLinkedinIn size={18} />,
-            href: "https://www.linkedin.com/company/your-profile", 
+            href: "https://www.linkedin.com/company/112707331/admin/dashboard/", 
             hoverClass: "hover:bg-[#0A66C2] hover:border-[#0A66C2] hover:shadow-[0_0_15px_rgba(10,102,194,0.5)]"
         },
     ];
