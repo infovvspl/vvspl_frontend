@@ -49,12 +49,12 @@ const Contact = ({ innerRef, isPage = false }) => {
     email: "",
     subject: "",
     message: "",
-    cfToken: "",
+    // cfToken: "",
   });
 
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState("");
-  const [token, setToken] = useState("");
+  // const [token, setToken] = useState("");
 
   const handleChange = (e) => {
     setFormData({
@@ -76,12 +76,11 @@ const Contact = ({ innerRef, isPage = false }) => {
     // }
 
     try {
-      const res = await fetch("http://13.127.225.236:3001/api/contact", {
+      const res = await fetch("http://13.127.225.236/:3001/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           ...formData,
-          cfToken: token,
         }),
       });
 
@@ -89,8 +88,7 @@ const Contact = ({ innerRef, isPage = false }) => {
 
       if (data.ok) {
         setStatus("Message sent successfully ✅");
-        setFormData({ name: "", email: "", subject: "", message: "", cfToken: "" });
-        setToken("");
+        setFormData({ name: "", email: "", subject: "", message: "" });
       } else {
         setStatus("Failed to send message ❌");
       }
@@ -296,21 +294,10 @@ const Contact = ({ innerRef, isPage = false }) => {
                     placeholder="Describe your objective..."
                   />
                 </div>
-                <Turnstile
-                  sitekey="0x4AAAAAACj2kl19IMAhxy8o"
-                  onVerify={(token) => {
-                    setToken(token);
-                  }}
-                  options={{
-                    theme: 'light',
-                    size: 'normal',
-                    retry: 'auto',
-                  }}
-                />
 
                 <button
                   type="submit"
-                  disabled={!token || loading}
+                  // disabled={!token || loading}
                   className="group relative w-full py-5 bg-gradient-to-r from-indigo-600 to-indigo-800 rounded-xl overflow-hidden transition-all duration-500 hover:scale-[1.02] active:scale-[0.98] shadow-lg shadow-indigo-500/20 disabled:opacity-50"
                 >
                   <div className="relative z-10 flex items-center justify-center gap-3">
