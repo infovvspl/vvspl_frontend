@@ -1,11 +1,38 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowUpRight, Mail, Phone, MapPin, ShieldCheck } from 'lucide-react';
-import { Facebook, Instagram } from "lucide-react";
-import { FaWhatsapp } from "react-icons/fa";
+import { ArrowUpRight, Mail, Phone, MapPin, Facebook, Instagram } from 'lucide-react';
+import { FaWhatsapp, FaLinkedinIn } from "react-icons/fa";
 
 const Footer = () => {
     const currentYear = new Date().getFullYear();
+
+    const socialLinks = [
+        {
+            name: "Facebook",
+            icon: <Facebook size={18} />,
+            href: "https://www.facebook.com/share/1D4x5YWeff/",
+            // Using Tailwind arbitrary values for exact brand matching
+            hoverClass: "hover:bg-[#1877F2] hover:border-[#1877F2] hover:shadow-[0_0_15px_rgba(24,119,242,0.5)]"
+        },
+        {
+            name: "Instagram",
+            icon: <Instagram size={18} />,
+            href: "https://www.instagram.com/vvspltech?igsh=cjcyczloZWNuaGZx",
+            hoverClass: "hover:bg-[#E4405F] hover:border-[#E4405F] hover:shadow-[0_0_15px_rgba(228,64,95,0.5)]"
+        },
+        {
+            name: "WhatsApp",
+            icon: <FaWhatsapp size={18} />,
+            href: "https://wa.me/7894689818",
+            hoverClass: "hover:bg-[#25D366] hover:border-[#25D366] hover:shadow-[0_0_15px_rgba(37,211,102,0.5)]"
+        },
+        {
+            name: "LinkedIn",
+            icon: <FaLinkedinIn size={18} />,
+            href: "https://www.linkedin.com/company/your-profile", 
+            hoverClass: "hover:bg-[#0A66C2] hover:border-[#0A66C2] hover:shadow-[0_0_15px_rgba(10,102,194,0.5)]"
+        },
+    ];
 
     return (
         <footer className="relative bg-zinc-950 text-white pt-24 pb-12 overflow-hidden border-t border-white/5">
@@ -37,26 +64,14 @@ const Footer = () => {
                         </p>
 
                         <div className="flex gap-4">
-                            {[
-                                {
-                                    icon: <Facebook size={18} />,
-                                    href: "https://www.facebook.com/share/1D4x5YWeff/",
-                                },
-                                {
-                                    icon: <Instagram size={18} />,
-                                    href: "https://www.instagram.com/vvspltech?igsh=cjcyczloZWNuaGZx",
-                                },
-                                {
-                                    icon: <FaWhatsapp size={18} />,
-                                    href: "https://wa.me/7894689818",
-                                },
-                            ].map((social, i) => (
+                            {socialLinks.map((social, i) => (
                                 <a
                                     key={i}
                                     href={social.href}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-zinc-400 hover:bg-indigo-600 hover:text-white hover:border-indigo-600 transition-all duration-500 hover:-translate-y-1"
+                                    aria-label={social.name}
+                                    className={`w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-zinc-400 hover:text-white transition-all duration-500 hover:-translate-y-1 ${social.hoverClass}`}
                                 >
                                     {social.icon}
                                 </a>
@@ -67,7 +82,6 @@ const Footer = () => {
                     {/* Section 2: Navigation Links */}
                     <div className="lg:col-span-5 grid grid-cols-2 gap-8">
                         <div className="space-y-8">
-                            {/* <h4 className="text-[10px] font-bold uppercase tracking-[0.5em] text-indigo-400 font-mono">// Core_Navigation</h4> */}
                             <ul className="space-y-4">
                                 {[
                                     { name: "Home", path: "/" },
@@ -109,11 +123,10 @@ const Footer = () => {
 
                     {/* Section 3: Connectivity */}
                     <div className="lg:col-span-3 space-y-8">
-                        {/* <h4 className="text-[10px] font-bold uppercase tracking-[0.5em] text-indigo-400 font-mono">// Terminal_Contact</h4> */}
                         <ul className="space-y-6">
                             <li className="flex items-start gap-4 text-sm text-zinc-400 group">
                                 <a
-                                    href="https://www.google.com/maps/search/?api=1&query=Block-309/310+ODYSSA+Business+Center+Rasulgarh+Bhubaneswar+751010"
+                                    href="https://www.google.com/maps/search/?api=1&query=Odyssa+Business+Center+Bhubaneswar"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="flex items-start gap-4 transition-colors hover:text-zinc-200"
@@ -122,7 +135,7 @@ const Footer = () => {
                                         size={18}
                                         className="text-cyan-500 shrink-0 mt-1 group-hover:animate-pulse"
                                     />
-                                    <span className="leading-relaxed cursor-pointer">
+                                    <span className="leading-relaxed">
                                         Block-309/310, ODYSSA Business Center, Rasulgarh, Bhubaneswar, 751010
                                     </span>
                                 </a>
@@ -132,6 +145,7 @@ const Footer = () => {
                                 <Mail size={18} className="text-cyan-500 shrink-0 group-hover:animate-pulse" />
                                 <a href="mailto:info@vvspltech.com" className="hover:text-white transition-colors">info@vvspltech.com</a>
                             </li>
+                            
                             <li className="flex items-center gap-4 text-sm text-zinc-400 group">
                                 <a
                                     href="tel:+917894689818"
@@ -141,10 +155,9 @@ const Footer = () => {
                                         size={18}
                                         className="text-cyan-500 shrink-0 group-hover:animate-pulse"
                                     />
-                                    <span className="cursor-pointer">+91 78946 89818</span>
+                                    <span>+91 78946 89818</span>
                                 </a>
                             </li>
-
                         </ul>
                     </div>
 
@@ -153,12 +166,10 @@ const Footer = () => {
                 {/* ================= BOTTOM BAR ================= */}
                 <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-center items-center gap-8">
                     <div className="flex flex-wrap justify-center md:justify-start gap-6 items-center">
-                        <span className="text-[12px] font-mono text-zinc-200 uppercase tracking-widest">
+                        <span className="text-[12px] font-mono text-zinc-200 uppercase tracking-widest text-center">
                             © {currentYear} Veteran Venture & Services Pvt. Ltd.
                         </span>
                         <div className="hidden md:block h-4 w-px bg-white/10" />
-                        {/* <Link to="/privacy" className="text-[9px] font-mono text-zinc-500 hover:text-indigo-400 uppercase tracking-widest transition-colors">Privacy_Protocol</Link>
-                        <Link to="/terms" className="text-[9px] font-mono text-zinc-500 hover:text-indigo-400 uppercase tracking-widest transition-colors">Terms_of_Service</Link> */}
                     </div>
                 </div>
             </div>

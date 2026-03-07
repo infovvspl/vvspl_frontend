@@ -19,6 +19,7 @@ import BlogsPage from "./pages/BlogsPage";
 import BlogDetails from "./pages/details_page/BlogDetails";
 import GalleryPage from "./pages/Gallery";
 import TeamPage from "./pages/Team";
+import AwardsPage from "./pages/AwardsPage";
 
 function App() {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -136,6 +137,7 @@ function App() {
             <Route path="/team" element={<TeamPage />} />
             <Route path="/contact" element={<ContactPage />} />
             <Route path="/blogs" element={<BlogsPage />} />
+            <Route path="/awards" element={<AwardsPage />} />
             <Route path="/services/:id" element={<ServiceDetails />} />
             <Route path="/ventures/:id" element={<VentureDetails />} />
             <Route path="/blogs/:id" element={<BlogDetails />} />
