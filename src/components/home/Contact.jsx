@@ -3,7 +3,7 @@ import { useState } from "react";
 import { gsap } from "gsap";
 import { Mail, Phone, MapPin, ArrowRight } from "lucide-react";
 import { Facebook, Instagram } from "lucide-react";
-import { FaWhatsapp } from "react-icons/fa";
+import { FaWhatsapp, FaLinkedinIn } from "react-icons/fa";
 import Turnstile from "react-turnstile";
 import { a } from "framer-motion/client";
 
@@ -240,6 +240,13 @@ const Contact = ({ innerRef, isPage = false }) => {
                     rel="noopener noreferrer"
                   >
                     <FaWhatsapp className="w-5 h-5 text-zinc-400 hover:text-[#25D366] transition-all duration-300 cursor-pointer transform hover:-translate-y-1" />
+                  </a>
+                  <a
+                    href="https://www.instagram.com/vvspltech?igsh=cjcyczloZWNuaGZx"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <FaLinkedinIn className="w-5 h-5 text-zinc-400 hover:text-[#0A66C2] transition-all duration-300 cursor-pointer transform hover:-translate-y-1" />
                   </a>
                 </div>
               </div>

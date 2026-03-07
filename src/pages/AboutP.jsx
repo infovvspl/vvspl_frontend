@@ -140,7 +140,7 @@ const AboutPage = () => {
             </section>
 
             {/* 2 ── WHO WE ARE */}
-            <section className="relative py-24 md:py-36 overflow-hidden bg-white">
+            <section className="relative py-24 overflow-hidden bg-white">
                 <div className="absolute top-0 left-1/3 w-[400px] h-[400px] bg-indigo-500/5 rounded-full blur-3xl pointer-events-none" />
                 <div className="relative z-10 max-w-[1300px] mx-auto px-6 md:px-12 lg:px-20">
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-28 items-center">
@@ -194,7 +194,7 @@ const AboutPage = () => {
             </section> */}
 
             {/* 4 ── MISSION & VISION */}
-            <section className="relative py-24 md:py-36 overflow-hidden bg-white">
+            <section className="relative py-24 overflow-hidden bg-white">
                 <div className="max-w-[1300px] mx-auto px-6">
                     <div className="reveal-up text-center mb-16">
                         <p className="text-[10px] tracking-[0.5em] uppercase font-semibold text-indigo-600 mb-4">Our Direction</p>
@@ -224,7 +224,7 @@ const AboutPage = () => {
             </section>
 
             {/* 5 ── VALUES */}
-            <section className="py-24 md:py-32 bg-zinc-50/50">
+            <section className="py-24 bg-zinc-50/50">
                 <div className="max-w-[1300px] mx-auto px-6">
                     <div className="reveal-up mb-14 text-center">
                         <p className="text-[10px] tracking-[0.5em] uppercase font-semibold text-indigo-600 mb-4">What Drives Us</p>
@@ -277,7 +277,7 @@ const AboutPage = () => {
             </section> */}
 
             {/* 7 ── CTA */}
-            <section className="reveal-up relative py-28 md:py-40 overflow-hidden bg-zinc-900 text-white">
+            <section className="reveal-up relative py-28 overflow-hidden bg-zinc-900 text-white">
                 <div className="absolute inset-0 z-0 bg-gradient-to-br from-indigo-950/60 via-zinc-900 to-zinc-900" />
                 <div className="relative z-10 text-center px-6 max-w-3xl mx-auto">
                     <p className="text-[10px] tracking-[0.5em] uppercase font-semibold text-indigo-400 mb-6">Ready to Build Together?</p>

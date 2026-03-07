@@ -11,6 +11,7 @@ import {
   FaWhatsapp,
   FaInstagram,
   FaYoutube,
+  FaLinkedinIn,
 } from "react-icons/fa";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -284,6 +285,14 @@ const ContactPage = () => {
                 >
                   <FaInstagram />
                 </a>
+                <a
+                  href="https://www.instagram.com/vvspltech?igsh=cjcyczloZWNuaGZx"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-zinc-500 hover:text-[#0A66C2] transition transform hover:scale-110"
+                >
+                  <FaLinkedinIn />
+                </a>
                 {/* <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className="text-zinc-500 hover:text-red-500 transition transform hover:scale-110">
                                     <FaYoutube />
                                 </a> */}
@@ -294,7 +303,7 @@ const ContactPage = () => {
       </section>
 
       {/* 3 ── FORM + SIDEBAR */}
-      <section className="py-20">
+      <section className="py-16">
         <div className="max-w-[1300px] mx-auto px-6 md:px-12 lg:px-20">
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_380px] gap-12 lg:gap-20 items-start">
             {/* LEFT: FORM */}
@@ -306,7 +315,7 @@ const ContactPage = () => {
                 Tell us about{" "}
                 <span
                   className="text-transparent"
-                  style={{ WebkitTextStroke: "1px rgba(9, 9, 11, 0.4)" }}
+                  style={{ WebkitTextStroke: "1px rgba(9, 9, 11, 0.82)" }}
                 >
                   your project.
                 </span>
@@ -373,44 +382,16 @@ const ContactPage = () => {
                     </div>
                     <div className="flex flex-col gap-2">
                       <label className="text-[10px] tracking-widest uppercase text-zinc-500 font-bold">
-                        Company
+                        Subject*
                       </label>
                       <input
-                        name="company"
+                        name="subject"
+                        required
                         onChange={handleChange}
                         className="w-full bg-zinc-100 border border-zinc-200 rounded-xl px-5 py-3.5 text-sm focus:bg-white outline-none transition-all"
-                        placeholder="Your Company Ltd."
+                        placeholder="How can we help?"
                       />
                     </div>
-                  </div>
-                  <div className="flex flex-col gap-2">
-                    <label className="text-[10px] tracking-widest uppercase text-zinc-500 font-bold">
-                      I'm interested in*
-                    </label>
-                    <select
-                      name="service"
-                      required
-                      onChange={handleChange}
-                      className="w-full bg-zinc-100 border border-zinc-200 rounded-xl px-5 py-3.5 text-sm outline-none cursor-pointer"
-                    >
-                      <option value="">Select a service...</option>
-                      {services.map((s) => (
-                        <option key={s} value={s}>
-                          {s}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                  <div className="flex flex-col gap-2">
-                    <label className="text-[10px] tracking-widest uppercase text-zinc-500 font-bold">
-                      Subject*
-                    </label>
-                    <input
-                      name="subject"
-                      onChange={handleChange}
-                      className="w-full bg-zinc-100 border border-zinc-200 rounded-xl px-5 py-3.5 text-sm focus:bg-white outline-none transition-all"
-                      placeholder="How can we help?"
-                    />
                   </div>
                   <div className="flex flex-col gap-2">
                     <label className="text-[10px] tracking-widest uppercase text-zinc-500 font-bold">
@@ -521,7 +502,7 @@ const ContactPage = () => {
                 Before you{" "}
                 <span
                   className="text-transparent"
-                  style={{ WebkitTextStroke: "1px rgba(9, 9, 11, 0.4)" }}
+                  style={{ WebkitTextStroke: "1px rgba(9, 9, 11, 0.8)" }}
                 >
                   reach out.
                 </span>
@@ -569,7 +550,7 @@ const ContactPage = () => {
             Book a free{" "}
             <span
               className="text-transparent"
-              style={{ WebkitTextStroke: "1.5px rgba(255,255,255,0.38)" }}
+              style={{ WebkitTextStroke: "1.5px rgba(255, 255, 255, 0.74)" }}
             >
               30-min discovery call.
             </span>
